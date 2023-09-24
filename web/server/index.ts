@@ -1,16 +1,21 @@
-import type { TLSWebSocketServeOptions } from 'bun'
+import type { WebSocketServeOptions } from 'bun'
+import * as c from '../common'
+
+c.l('green', 'Hello from the server!')
+c.showDebugLogs(true)
+c.trace('debug', 'hi from trace')
 
 interface SocketInitData {
   userId: string
   room: string
 }
 
-const serverInitData: TLSWebSocketServeOptions<SocketInitData> =
+const serverInitData: WebSocketServeOptions<SocketInitData> =
   {
     port: 5054,
     async fetch(req, server) {
       const url = new URL(req.url)
-      console.log('req', url.pathname, url.searchParams)
+      c.l('req', url.pathname, url.searchParams)
 
       if (url.pathname === '/ld54/test')
         return generateResponse(Bun.file('./test.html'))
@@ -40,14 +45,14 @@ const serverInitData: TLSWebSocketServeOptions<SocketInitData> =
 
       open(ws) {
         const msg = `${ws.data.userId} has joined ${ws.data.room}`
-        console.log(msg)
+        c.l(msg)
         ws.subscribe(ws.data.room)
         ws.publish(ws.data.room, msg)
         ws.send('welcome!')
       },
 
       message(ws, message) {
-        console.log(`${ws.data.userId}: ${message}`)
+        c.l(`${ws.data.userId}: ${message}`)
         ws.publish(
           ws.data.room,
           `${ws.data.userId}: ${message}`,
@@ -57,7 +62,7 @@ const serverInitData: TLSWebSocketServeOptions<SocketInitData> =
 
       close(ws) {
         const msg = `${ws.data.userId} has left ${ws.data.room}`
-        console.log(msg)
+        c.l(msg)
         server.publish(ws.data.room, msg)
         ws.unsubscribe(ws.data.room)
       },
@@ -84,14 +89,5 @@ const applyCors = (res: Response) => {
   )
 }
 
-// if (process.env.NODE_ENV === 'production') {
-//   serverInitData.tls = {
-//     key: Bun.file('/etc/letsencrypt/live/p.jasperstephenson.com/privkey.pem'),
-//     cert: Bun.file('/etc/letsencrypt/live/p.jasperstephenson.com/fullchain.pem'),
-//   }
-// }
-
 const server = Bun.serve<SocketInitData>(serverInitData)
-console.log(
-  `Listening on ${server.hostname}:${server.port}`,
-)
+c.l(`Listening on ${server.hostname}:${server.port}`)
