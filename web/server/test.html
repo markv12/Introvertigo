@@ -1,0 +1,41 @@
+<html>
+  <head> </head>
+  <body>
+    hi
+    <div id="test"></div>
+
+    <script>
+      const id = `test${Math.floor(Math.random() * 1000)}`
+      document.getElementById('test').innerHTML = id
+
+      const host = 'p.jasperstephenson.com/ld54' //'localhost:3000'
+      fetch(`http://${host}`)
+        .then(async (response) => {
+          console.log('GET:', await response.text())
+        })
+        .catch((error) => {
+          console.log('GET error:', error)
+        })
+
+      let webSocket = new WebSocket(
+        `ws://${host}/ws?userId=${id}`,
+      )
+      webSocket.onopen = (event) => {
+        console.log('WebSocket is connected.')
+        webSocket.send('Hello from web!')
+      }
+      webSocket.onmessage = (event) => {
+        console.log(
+          'WebSocket message received:',
+          event.data,
+        )
+      }
+      webSocket.onclose = (event) => {
+        console.log('WebSocket is closed.')
+      }
+      webSocket.onerror = (event) => {
+        console.log('WebSocket error:', event)
+      }
+    </script>
+  </body>
+</html>
