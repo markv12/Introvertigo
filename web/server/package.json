@@ -4,9 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "bun --watch .",
-    "golive": "git push && ssh root@p.jasperstephenson.com '. /etc/profile; cd ~/LD54/web/server && git pull && source ~/.bashrc && npm run dev'",
-    "build": "bun build",
-    "start": "bun start"
+    "golive": "git push && ssh root@p.jasperstephenson.com '. /etc/profile; cd ~/LD54/web/server && git pull",
+    "logs": "ssh root@p.jasperstephenson.com 'source ~/.bashrc && pm2 logs'"
   },
   "devDependencies": {
     "bun-types": "latest"
