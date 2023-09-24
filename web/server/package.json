@@ -2,6 +2,12 @@
   "name": "test",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "dev": "bun --watch .",
+    "golive": "git push && ssh root@p.jasperstephenson.com '. /etc/profile; cd ~/LD54/web/server && git pull && source ~/.bashrc && bun run dev",
+    "build": "bun build",
+    "start": "bun start"
+  },
   "devDependencies": {
     "bun-types": "latest"
   },

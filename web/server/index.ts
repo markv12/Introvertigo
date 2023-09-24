@@ -1,9 +1,8 @@
 import type { WebSocketServeOptions } from 'bun'
 import * as c from '../common'
 
-c.l('green', 'Hello from the server!')
-c.showDebugLogs(true)
-c.trace('debug', 'hi from trace')
+c.l('green', 'Server started')
+const startedAt = Date.now()
 
 interface SocketInitData {
   userId: string
@@ -37,7 +36,10 @@ const serverInitData: WebSocketServeOptions<SocketInitData> =
           )
       }
 
-      return generateResponse('index')
+      return generateResponse(
+        c.msToTimeString(Date.now() - startedAt) +
+          ' since server started',
+      )
     },
 
     websocket: {
