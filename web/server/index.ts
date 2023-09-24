@@ -1,8 +1,11 @@
 import type { WebSocketServeOptions } from 'bun'
 import * as c from '../common'
 
-c.l('green', 'Server started')
 const startedAt = Date.now()
+c.l(
+  'green',
+  `Server started at ${new Date(startedAt).toDateString()}`,
+)
 
 interface SocketInitData {
   userId: string
