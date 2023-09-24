@@ -4,7 +4,11 @@ import * as c from '../common'
 const startedAt = Date.now()
 c.l(
   'green',
-  `Server started at ${new Date(startedAt).toDateString()}`,
+  `Server started at ${new Date(
+    startedAt,
+  ).toLocaleTimeString()} ${new Date(
+    startedAt,
+  ).toDateString()}`,
 )
 
 interface SocketInitData {
