@@ -138,6 +138,18 @@ export function trace(
 export function error(...args: any[]) {
   log(`red`, ...args)
 }
+export function info(...args: any[]) {
+  log(`blue`, ...args)
+}
+export function warn(...args: any[]) {
+  log(`yellow`, ...args)
+}
+export function success(...args: any[]) {
+  log(`green`, ...args)
+}
+export function sub(...args: any[]) {
+  log(`gray`, ...args)
+}
 
 export function showDebugLogs(shouldShow: boolean) {
   showingDebugLogs = Boolean(shouldShow)
