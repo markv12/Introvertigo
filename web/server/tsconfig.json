@@ -1,5 +1,5 @@
 {
-  "include": ["./**/*", "../common/**/*"],
+  "include": ["./src/*", "./@types/*", "../common/**/*"],
   "compilerOptions": {
     "rootDir": "../",
     "lib": ["ESNext"],

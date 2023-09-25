@@ -8,8 +8,13 @@
       const id = `test${Math.floor(Math.random() * 1000)}`
       document.getElementById('test').innerHTML = id
 
-      const host = 'p.jasperstephenson.com/ld54' //'localhost:3000'
-      fetch(`https://${host}/`)
+      const live = false
+
+      const prototcol = live ? 's' : ''
+      const host = live
+        ? 'p.jasperstephenson.com/ld54'
+        : 'localhost:5054/ld54'
+      fetch(`http${prototcol}://${host}/`)
         .then(async (response) => {
           console.log('GET:', await response.text())
         })
@@ -18,7 +23,7 @@
         })
 
       let webSocket = new WebSocket(
-        `wss://${host}/ws?userId=${id}`,
+        `ws${prototcol}://${host}/ws?userId=${id}`,
       )
       webSocket.onopen = (event) => {
         console.log('WebSocket is connected.')
