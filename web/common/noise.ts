@@ -1,12 +1,5 @@
-/* eslint-disable */
-
-//
-// Perlin noise module.
-//
-// Written by Thom Chiovoloni, dedicated into the public domain (as explained at
-// http://creativecommons.org/publicdomain/zero/1.0/).
-//
-
+import { clamp, randomBetween } from './math'
+import { shuffleArray } from './misc'
 function gen() {
   function buildTable(randFunc?: Function) {
     if (!randFunc) {
@@ -14,27 +7,27 @@ function gen() {
     }
     // @NOTE(thom): could optimize this for allocations, but it
     // shouldn't be near anybody's fast path...
-    let arr = new Array(256).map((v, i) => {
-      return i
-    })
-    // shuffle numbers 0 through 255
-    for (let i = arr.length - 1; i > 0; --i) {
-      let r = Math.floor(randFunc() * (i + 1))
-      let t = arr[r]
-      arr[r] = arr[i]
-      arr[i] = t
+    let arr: number[] = []
+    for (let i = 0; i < 256; ++i) {
+      arr.push(i)
     }
+    arr = shuffleArray(arr)
     return arr
   }
 
   let gradBasis = [
-    1, 1, 0, -1, 1, 0, 1, -1, 0, -1, -1, 0, 1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0,
-    -1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, -1, -1,
+    1, 1, 0, -1, 1, 0, 1, -1, 0, -1, -1, 0, 1, 0, 1, -1, 0,
+    1, 1, 0, -1, -1, 0, -1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0,
+    -1, -1,
   ]
 
-  function initTables(tab, permTable, gradTable) {
-    if (tab == null || typeof tab === `function`) {
-      tab = buildTable()
+  function initTables(
+    tab: number[] | Function | undefined,
+    permTable,
+    gradTable,
+  ) {
+    if (!tab || typeof tab === `function`) {
+      tab = buildTable(tab)
     } else if (tab.length !== 256) {
       tab = buildTable()
     }
@@ -76,10 +69,14 @@ function gen() {
   // The array argument provided in case you want to provide a specific permutation table.
   //
 
-  function create(tab) {
+  function create(tab?: number[] | Function) {
     let ab = new ArrayBuffer(totalSize)
     let permTable = new Uint8Array(ab, 0, permTableSize)
-    let gradTable = new Int8Array(ab, permTableSize, gradTableSize)
+    let gradTable = new Int8Array(
+      ab,
+      permTableSize,
+      gradTableSize,
+    )
     initTables(tab, permTable, gradTable)
 
     function noise(
@@ -206,69 +203,34 @@ function gen() {
   // seeded is the one from the `stb_perlin.h` library.
   //
   let noise = create([
-    23, 125, 161, 52, 103, 117, 70, 37, 247, 101, 203, 169, 124, 126, 44, 123,
-    152, 238, 145, 45, 171, 114, 253, 10, 192, 136, 4, 157, 249, 30, 35, 72,
-    175, 63, 77, 90, 181, 16, 96, 111, 133, 104, 75, 162, 93, 56, 66, 240, 8,
-    50, 84, 229, 49, 210, 173, 239, 141, 1, 87, 18, 2, 198, 143, 57, 225, 160,
-    58, 217, 168, 206, 245, 204, 199, 6, 73, 60, 20, 230, 211, 233, 94, 200, 88,
-    9, 74, 155, 33, 15, 219, 130, 226, 202, 83, 236, 42, 172, 165, 218, 55, 222,
-    46, 107, 98, 154, 109, 67, 196, 178, 127, 158, 13, 243, 65, 79, 166, 248,
-    25, 224, 115, 80, 68, 51, 184, 128, 232, 208, 151, 122, 26, 212, 105, 43,
-    179, 213, 235, 148, 146, 89, 14, 195, 28, 78, 112, 76, 250, 47, 24, 251,
-    140, 108, 186, 190, 228, 170, 183, 139, 39, 188, 244, 246, 132, 48, 119,
-    144, 180, 138, 134, 193, 82, 182, 120, 121, 86, 220, 209, 3, 91, 241, 149,
-    85, 205, 150, 113, 216, 31, 100, 41, 164, 177, 214, 153, 231, 38, 71, 185,
-    174, 97, 201, 29, 95, 7, 92, 54, 254, 191, 118, 34, 221, 131, 11, 163, 99,
-    234, 81, 227, 147, 156, 176, 17, 142, 69, 12, 110, 62, 27, 255, 0, 194, 59,
-    116, 242, 252, 19, 21, 187, 53, 207, 129, 64, 135, 61, 40, 167, 237, 102,
-    223, 106, 159, 197, 189, 215, 137, 36, 32, 22, 5,
+    23, 125, 161, 52, 103, 117, 70, 37, 247, 101, 203, 169,
+    124, 126, 44, 123, 152, 238, 145, 45, 171, 114, 253, 10,
+    192, 136, 4, 157, 249, 30, 35, 72, 175, 63, 77, 90, 181,
+    16, 96, 111, 133, 104, 75, 162, 93, 56, 66, 240, 8, 50,
+    84, 229, 49, 210, 173, 239, 141, 1, 87, 18, 2, 198, 143,
+    57, 225, 160, 58, 217, 168, 206, 245, 204, 199, 6, 73,
+    60, 20, 230, 211, 233, 94, 200, 88, 9, 74, 155, 33, 15,
+    219, 130, 226, 202, 83, 236, 42, 172, 165, 218, 55, 222,
+    46, 107, 98, 154, 109, 67, 196, 178, 127, 158, 13, 243,
+    65, 79, 166, 248, 25, 224, 115, 80, 68, 51, 184, 128,
+    232, 208, 151, 122, 26, 212, 105, 43, 179, 213, 235,
+    148, 146, 89, 14, 195, 28, 78, 112, 76, 250, 47, 24,
+    251, 140, 108, 186, 190, 228, 170, 183, 139, 39, 188,
+    244, 246, 132, 48, 119, 144, 180, 138, 134, 193, 82,
+    182, 120, 121, 86, 220, 209, 3, 91, 241, 149, 85, 205,
+    150, 113, 216, 31, 100, 41, 164, 177, 214, 153, 231, 38,
+    71, 185, 174, 97, 201, 29, 95, 7, 92, 54, 254, 191, 118,
+    34, 221, 131, 11, 163, 99, 234, 81, 227, 147, 156, 176,
+    17, 142, 69, 12, 110, 62, 27, 255, 0, 194, 59, 116, 242,
+    252, 19, 21, 187, 53, 207, 129, 64, 135, 61, 40, 167,
+    237, 102, 223, 106, 159, 197, 189, 215, 137, 36, 32, 22,
+    5,
   ])
 
   return {
-    create: create,
-    noise: noise,
+    create,
+    noise,
   }
 }
 
 export const noise = gen().noise
-
-const memoedStars = new Map<string, [number, number, number][]>()
-export function getStars(
-  x: number,
-  y: number,
-  density = 10,
-): [number, number, number][] {
-  x = Math.floor(x)
-  y = Math.floor(y)
-  const key = `${x},${y}`
-  if (memoedStars.has(key)) {
-    return memoedStars.get(key) || []
-  }
-
-  const stars: [number, number, number][] = []
-  const densityMod = noise(x / 100, y / 100, 0.05) //(x + 3.41) * 0.23, (y + 1.23) * 0.41)
-  const starCount = Math.floor(density * densityMod ** 2)
-
-  for (let i = 0; i < starCount; i++) {
-    let starZeroedX = noise(
-      (i + 3.41) * 0.23 * x,
-      (i + 1.23) * 0.41 * y,
-      x * 0.14 + y * 2.13 + 4.33,
-    )
-    let starZeroedY = noise(
-      (i + 4.32) * 0.14 * y,
-      (i + 2.14) * 0.32 * x,
-      x * 0.14 + y * 2.13 + 1.11,
-    )
-    let starZ = noise(
-      (i + 5.42) * 1.24 * y,
-      (i + 3.12) * 1.35 * x,
-      x * 1.23 + y * 3.41 + 2.31,
-    )
-    stars.push([x + starZeroedX, y + starZeroedY, starZ])
-  }
-
-  memoedStars.set(key, stars)
-
-  return stars
-}

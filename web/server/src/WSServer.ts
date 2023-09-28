@@ -41,7 +41,11 @@ export class WSServer {
     {
       fetch: async (req, server) => {
         const url = new URL(req.url)
-        c.sub('req', url.pathname, url.searchParams)
+        c.sub(
+          'Received request to',
+          url.pathname,
+          url.searchParams,
+        )
 
         if (url.pathname.endsWith('/test'))
           return generateHTTPResponse(
@@ -59,8 +63,12 @@ export class WSServer {
           const success = server.upgrade(req, {
             data: { userId },
           })
-          if (success) return undefined
-          else
+          if (success) {
+            c.sub(
+              `Upgraded ${userId} to websocket connection`,
+            )
+            return undefined
+          } else
             return generateHTTPResponse(
               'WebSocket upgrade error',
               400,

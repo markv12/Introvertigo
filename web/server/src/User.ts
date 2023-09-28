@@ -2,10 +2,14 @@ import { ServerWebSocket } from 'bun'
 import * as c from '../../common'
 import { MessageFromServerToUnity } from './MessageFromServerToUnity'
 
+const pingIntervalMs = 1000 * 45
+
 export class User {
   id: string
   rooms: Set<string> = new Set()
   webSocket: ServerWebSocket<SocketUserSessionData>
+
+  pingInterval: ReturnType<typeof setInterval>
 
   constructor(
     id: string,
@@ -13,6 +17,19 @@ export class User {
   ) {
     this.id = id
     this.webSocket = webSocket
+
+    this.pingInterval = setInterval(
+      () => this.ping(),
+      pingIntervalMs,
+    )
+  }
+
+  ping() {
+    if (!this.webSocketIsConnected) {
+      clearInterval(this.pingInterval)
+      return
+    }
+    this.webSocket.ping()
   }
 
   joinRoom(room: string, notifyOthers: boolean = true) {
@@ -23,8 +40,7 @@ export class User {
 
     this.rooms.add(room)
     this.webSocket.subscribe(room)
-    const msg = `${this.id} has joined room ${room}`
-    c.sub(msg)
+    c.sub(`${this.id} has joined room ${room}`)
     if (notifyOthers)
       this.sendToRoom({
         room,
@@ -50,11 +66,10 @@ export class User {
 
     this.webSocket.unsubscribe(room)
 
-    const msg = `${this.id} has left room ${room}`
-    c.sub(msg)
+    c.sub(`${this.id} has left room ${room}`)
     this.sendToRoom({
       room,
-      content: msg,
+      content: 'left',
     })
   }
 
@@ -64,6 +79,7 @@ export class User {
   }
 
   onBeforeRemove() {
+    clearInterval(this.pingInterval)
     this.leaveAllRooms()
     this.webSocket.close()
   }

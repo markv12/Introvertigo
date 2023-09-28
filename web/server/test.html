@@ -1,19 +1,24 @@
 <html>
   <head> </head>
   <body>
-    hi
-    <div id="test"></div>
+    <div id="id"></div>
+    <br />
+    <div id="status"></div>
+    <br />
+    <div id="messages"></div>
+    <br />
+    <div id="time"></div>
 
     <script>
-      const id = `test${Math.floor(Math.random() * 1000)}`
-      document.getElementById('test').innerHTML = id
-
       const live = false
 
+      let openedAt = 0
       const prototcol = live ? 's' : ''
       const host = live
         ? 'p.jasperstephenson.com/ld54'
         : 'localhost:5054/ld54'
+      const id = `test${Math.floor(Math.random() * 1000)}`
+      document.getElementById('id').innerHTML = id
       fetch(`http${prototcol}://${host}/`)
         .then(async (response) => {
           console.log('GET:', await response.text())
@@ -28,19 +33,40 @@
       webSocket.onopen = (event) => {
         console.log('WebSocket is connected.')
         webSocket.send('Hello from web!')
+        openedAt = Date.now()
+        document.getElementById('status').innerHTML =
+          'connected'
       }
       webSocket.onmessage = (event) => {
         console.log(
           'WebSocket message received:',
           event.data,
         )
+        document.getElementById('messages').innerHTML +=
+          event.data + '<br>'
       }
       webSocket.onclose = (event) => {
         console.log('WebSocket is closed.')
+        document.getElementById('status').innerHTML =
+          'disconnected'
+        openedAt = 0
       }
       webSocket.onerror = (event) => {
         console.log('WebSocket error:', event)
+        document.getElementById('status').innerHTML =
+          'error'
+        openedAt = 0
       }
+
+      setInterval(() => {
+        if (!openedAt)
+          document.getElementById('time').innerHTML = ''
+        else
+          document.getElementById('time').innerHTML =
+            'Live for ' +
+            Math.round((Date.now() - openedAt) / 1000) +
+            's'
+      }, 1000)
     </script>
   </body>
 </html>
