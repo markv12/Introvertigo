@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "bun --watch .",
-    "golive": "git push && ssh root@p.jasperstephenson.com '. /etc/profile; cd ~/LD54/web/server && git pull && source ~/.bashrc && pm2 logs'",
+    "golive": "git push && ssh root@p.jasperstephenson.com '. /etc/profile; cd ~/LD54/web/server && git pull && source ~/.bashrc && pm2 start \"ld54 bun server\" && pm2 logs'",
+    "stoplive": "ssh root@p.jasperstephenson.com '. /etc/profile; cd ~/LD54/web/server &&source ~/.bashrc && pm2 stop \"ld54 bun server\"'",
+    "restartlive": "ssh root@p.jasperstephenson.com '. /etc/profile; cd ~/LD54/web/server && git pull && source ~/.bashrc && pm2 stop \"ld54 bun server\" && pm2 start \"ld54 bun server\" && pm2 logs'",
     "logs": "ssh root@p.jasperstephenson.com 'source ~/.bashrc && pm2 logs'"
   },
   "devDependencies": {

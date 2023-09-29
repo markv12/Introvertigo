@@ -102,7 +102,6 @@ export class User {
       new MessageFromServerToUnity({
         type,
         content,
-        user: this,
       }).toJSON(),
     )
   }
@@ -131,7 +130,7 @@ export class User {
       new MessageFromServerToUnity({
         type,
         content,
-        user: this,
+        sender: this,
         room,
       }).toJSON(),
     )

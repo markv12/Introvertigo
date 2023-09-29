@@ -9,7 +9,7 @@ interface MessageFromServerToUnityTypeMap {
 
 interface MessageFromServerToUnityMetadata {
   timestamp: number
-  user?: {
+  sender?: {
     id: string
   }
   room?: string

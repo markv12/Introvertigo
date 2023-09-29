@@ -11,12 +11,12 @@ export class MessageFromServerToUnity<
   constructor({
     type,
     content,
-    user,
+    sender,
     room,
   }: {
     type?: T
     content: MessageFromServerToUnityTypeMap[T]
-    user?: User
+    sender?: User
     room?: string
   }) {
     this.type = type || 'debug'
@@ -24,9 +24,9 @@ export class MessageFromServerToUnity<
     this.meta = {
       timestamp: Date.now(),
     }
-    if (user)
-      this.meta.user = {
-        id: user.id,
+    if (sender)
+      this.meta.sender = {
+        id: sender.id,
       }
     if (room) this.meta.room = room
   }
