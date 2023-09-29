@@ -28,7 +28,7 @@ export class UserManager {
     const user = new User(ws.data.userId, ws)
     this.connectedUsers[ws.data.userId] = user
     c.l(
-      `${ws.data.userId} connected (${
+      `👋 ${ws.data.userId} connected (${
         Object.keys(this.connectedUsers).length
       } total connected users)`,
     )
@@ -41,7 +41,7 @@ export class UserManager {
     this.connectedUsers[userId].onBeforeRemove()
     delete this.connectedUsers[userId]
     c.sub(
-      `${userId} disconnected (${
+      `🚪 ${userId} disconnected (${
         Object.keys(this.connectedUsers).length
       } total connected users)`,
     )

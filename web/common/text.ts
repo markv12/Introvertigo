@@ -48,6 +48,7 @@ class LanguageFilter {
           : word
       })
       .join(this.splitRegex.exec(string)?.[0] || ``)
+      .trim()
   }
 }
 
@@ -216,7 +217,7 @@ export function startsWithVowel(
 }
 
 const filter = new LanguageFilter()
-export function sanitize(string: string = ``) {
+export function sanitize(string: string | null = ``) {
   if (!string) string = ``
   string = string.replace(/\n\r\t`/g, ``).trim()
   const withoutURLs = string.replace(

@@ -53,7 +53,8 @@ export class WSServer {
           )
 
         if (url.pathname.endsWith('/ws')) {
-          const userId = url.searchParams.get('userId')
+          let userId = url.searchParams.get('userId')
+          userId = c.sanitize(userId).result
           if (!userId)
             return generateHTTPResponse(
               'Missing userId',
@@ -65,7 +66,7 @@ export class WSServer {
           })
           if (success) {
             c.sub(
-              `Upgraded ${userId} to websocket connection`,
+              `🦾 Upgraded ${userId} to websocket connection`,
             )
             return undefined
           } else
@@ -118,7 +119,7 @@ export class WSServer {
           }
 
           c.sub(
-            `${
+            `  💬 ${
               ws.data.userId
             }: "${message}" -> ${c.printList(
               Array.from(user.rooms),
