@@ -9,7 +9,15 @@ export default async function getGameResponse(
   if (latestMessage.role !== 'user')
     return { error: 'latest message is not user' }
 
-  c.log(`generating based on messages:`, body)
+  // c.log(`generating based on messages:`, body)
+
+  // if last system message is more than 2 messages ago, we'll add a new one
+  if (
+    body.findLastIndex((m) => m.role === 'system') <
+    body.length - 2
+  ) {
+    body.push()
+  }
 
   // const sanitizedMessage = c.sanitize(latestMessage.content)
   // latestMessage.content = sanitizedMessage.result
@@ -18,7 +26,14 @@ export default async function getGameResponse(
   while (attempts < maxAttempts) {
     attempts++
 
-    const response = await getGptResponse(body)
+    const response = await getGptResponse([
+      ...body,
+      // * we toss in a reminder for the prompt that doesn't get added to the official message list
+      {
+        content: `Don't forget to respond to every message in the three-line format.`,
+        role: 'system',
+      },
+    ])
     if (!response) return { error: 'no response' }
 
     const regexResult = /(.*)\n[^:]*?:? ?(.*)\n(.*)/gi.exec(
