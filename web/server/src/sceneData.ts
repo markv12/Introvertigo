@@ -137,7 +137,7 @@ export function getInitialMessages(key: SceneKey) {
       )} are mentioned you will get very excited, but you won't bring them up yourself.
 
 You MUST respond to every message in this three-line format:
-- (answer with Yes, No, or Meh) Was the user's response rude?
+- (answer with Yes, No, or Meh) Was the user's response rude or nonsensical?
 - (answer with Yes, No, or Meh) ${
         sceneData[key].ratingCondition
       }
