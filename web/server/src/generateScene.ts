@@ -28,7 +28,7 @@ function getInitialMessages(key: SceneKey) {
   messages.push({
     content:
       sceneData[key].systemIntro +
-      ` Even if the conversation seems to falter, keep it going! Do not apologize for bothering them. If the topics of ${c.printList(
+      ` If the conversation seems to falter, keep the energy up! NEVER apologize for bothering them or back down. If the topics of ${c.printList(
         sceneData[key].hiddenTriggerWords,
         'or',
       )} are mentioned you will get very excited, but you won't bring them up yourself.

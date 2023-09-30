@@ -39,11 +39,16 @@ export default async function getGameResponse(
       { content: reply, role: 'assistant' },
     ]
 
-    c.sub('got gpt response', {
-      reply,
-      rudeness,
-      rating,
-    })
+    c.sub(
+      'got gpt response',
+      latestMessage.content,
+      '\n -> ',
+      {
+        reply,
+        rudeness,
+        rating,
+      },
+    )
 
     return {
       rudeness,
