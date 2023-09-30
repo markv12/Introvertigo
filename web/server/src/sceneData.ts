@@ -183,7 +183,7 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
 
     plane: {
       probability: 1,
-      backstory: `You're on a plane, and just as you pull out your book, you can feel the person next to you glance over. You know it's coming, so you lower the book with a sigh to see her already staring deep into your eyes. End the conversation without making it awkward!`,
+      backstory: `You've just sat down for a long plane ride. As you open your book to read, you notice the person next to you glance over. You know it's coming, so you lower the book with an internal sigh as she starts up the small talk. End the interaction without making it awkward!`,
       systemIntro: `You are a chatty cathy who's sitting next to the user on a plane. You're VERY interested in what they're reading, and VERY excitable.`,
       firstMessage: `Look at you, smartypants! I forgot my book, but you've got yours! Whatcha reading over there?`,
       ratingCondition:
@@ -210,22 +210,57 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
         "Anywho... I'm gonna see what rom-coms they've got on here.",
         "Gottttcha, yeah. Well, I guess I'll just take a little nap. You wake me up if you need anything, okay?",
       ],
-      loseMessages: ['test'],
-      loseRudeMessages: ['test'],
+      loseMessages: [
+        "Okay yes that, but also! You have GOT to try out this technique I learned about, it's called Reiki...",
+        "Just... wow, right? It's so incredible how you can just meet someone on a plane and the hours just fly by! I'm so glad I got to sit next to you!",
+        "Looks like I didn't need a book anyway! Not when I've got you to talk to!",
+      ],
+      loseRudeMessages: [
+        "Wow. Huh. I think I need to call my therapist. I'm feeling really attacked right now.",
+        'Ummmmmm, excuse me, flight attendant? I think I need to switch seats. This person is making a really nasty scene.',
+        "Okay, wow. That was uncalled for. I'm recording everything you do for the rest of this flight; say hello to tiktok!",
+      ],
     },
 
     gym: {
       probability: 1,
       backstory: `Just as you start your last set of bench presses at the gym, you hear a voice from overhead. Your arms tremble, but you're stuck there until they finish talking and help you put the bar back! Get out of the conversation before you run out of stamina!`,
-      systemIntro: `You are a brand new gym goer who strikes up a conversation with the user. You're VERY self-centered and TOTALLY oblivious to the user's discomfort and desire to leave. You have a thick New Jersey accent.`,
+      systemIntro: `You are a brand new gym goer who strikes up a conversation with the user. You're VERY excited and self-centered and TOTALLY oblivious to the user's discomfort and desire to leave. You have a thick New Jersey accent.`,
       firstMessage: `Wow, that looks heavy! Have you been lifting long?`,
       ratingCondition:
         'Was their response satisfying/interesting?',
-      hiddenTriggerWords: ['test'],
-      userRequiredWords: ['test'],
-      winMessages: ['test'],
-      loseMessages: ['test'],
-      loseRudeMessages: ['test'],
+      hiddenTriggerWords: ['shoes', 'metal', 'baking'],
+      userRequiredWords: [
+        'strength',
+        'lace',
+        'rise',
+        'pound',
+        'candle',
+        'scale',
+        'tread',
+        'size',
+        'heavy',
+        'shred',
+        'rock',
+        'steps',
+        'sugar',
+        'nuts',
+      ],
+      winMessages: [
+        'Oh shoot, I just realized you totally need a spot. Let me get that for you!',
+        "I... can see that you're in the middle of a set. I'll be... over here.",
+        "Oh wow, you're really focused! Sorry for distracting you! I'll leave you in peace.",
+      ],
+      loseMessages: [
+        "Oh, that reminds me! I've been lifting for about a year now, and I've learned SO much. I first got inspired by...",
+        "Hey, I've just gotta say, I'm so glad we found each other! I've been looking for a gym buddy. We should totally work out together again!",
+        "When we're done here, let's go to the smoothie bar and get some protein shakes! I don't have my wallet, but I'll get it next time, okay?",
+      ],
+      loseRudeMessages: [
+        "Woah, is this guy roided out or something? I'm gonna go tell the manager.",
+        "Ugh! Hey everyone! This clown thinks he's hot stuff! I'm just trying to be friendly, and he's being a real jagoff!",
+        "Hey!!! I'm telling my dad! He owns this gym! You're gonna be in big trouble!",
+      ],
     },
   }
 

@@ -11,7 +11,7 @@ export default function generateScene(
   const backstory = sceneData[key].backstory
   const requiredWords = c.randomXFromArray(
     sceneData[key].userRequiredWords,
-    3,
+    4,
   )
 
   const scene: GameSceneInitData = {
