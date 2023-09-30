@@ -1,4 +1,4 @@
-import * as c from '../../common'
+import * as c from '../../../common'
 import type { User } from './User'
 
 export class MessageFromServerToUnity<

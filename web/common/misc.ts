@@ -23,6 +23,28 @@ export function clearFunctions(obj: object) {
 export function randomFromArray<T>(array: T[]): T {
   return array[Math.floor(Math.random() * array.length)]
 }
+export function randomXFromArray<T>(
+  array: T[],
+  returnCount: number,
+): T[] {
+  const validOptions: T[] = [...array]
+  const toReturn: T[] = []
+  if (!validOptions.length) return toReturn
+  if (returnCount >= validOptions.length)
+    return validOptions
+  while (toReturn.length < returnCount) {
+    const index = Math.floor(
+      Math.random() * validOptions.length,
+    )
+
+    const toAdd = validOptions[index]
+    if (toReturn.includes(toAdd)) continue
+
+    toReturn.push(toAdd)
+    validOptions.splice(index, 1)
+  }
+  return toReturn
+}
 
 export function everyXthElementFromArray<T>(
   arr: T[],

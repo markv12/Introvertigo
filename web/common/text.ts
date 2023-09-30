@@ -224,7 +224,11 @@ export function sanitize(string: string | null = ``) {
     /(?:https?:\/\/)?(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,4}\b(?:[-a-zA-Z0-9@:%_+.~#?&//=]*)/gi,
     ``,
   )
-  const cleaned = filter.clean(withoutURLs)
+  const withoutEmojis = withoutURLs.replace(
+    /[\u{1F600}-\u{1F6FF}]/gu,
+    ``,
+  )
+  const cleaned = filter.clean(withoutEmojis)
   return {
     ok: string === cleaned,
     result: cleaned,

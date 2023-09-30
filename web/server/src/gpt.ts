@@ -7,35 +7,22 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 })
 
+let tokensUsedSinceStart = 0
+
 export default async function getGptResponse(
-  systemContext: string = '',
-  userMessage: string = '',
+  messages: ChatCompletionMessageParam[],
   maxTokens = 100,
 ): Promise<string | undefined> {
-  return getOutput(systemContext, userMessage, maxTokens)
+  return getOutput(messages, maxTokens)
 }
 
 async function getOutput(
-  systemContext: string,
-  userMessage: string,
+  messages: ChatCompletionMessageParam[],
   maxTokens = 100,
 ) {
   try {
     const tokens = maxTokens
-    c.sub(`getting gpt response`, { tokens })
-
-    const messages: ChatCompletionMessageParam[] = []
-    if (systemContext?.length)
-      messages.push({
-        content: systemContext,
-        role: `system`,
-      })
-    if (userMessage?.length)
-      messages.push({
-        content: userMessage,
-        role: `user`,
-      })
-    c.log(`GPT prompt:`, messages)
+    // c.sub(`getting gpt response`, { messages, tokens })
 
     // then, we get an actual response
     const response = await openai.chat.completions
@@ -68,12 +55,17 @@ async function getOutput(
       .replace(/"\./g, ``) // sometimes got ". which is wrong obv
       .trim()
 
-    c.log(
-      `GPT response:\n`,
-      text,
-      `\nparsed output:\n`,
-      output,
-    )
+    // c.log(
+    //   `GPT response:\n`,
+    //   text,
+    //   `\nparsed output:\n`,
+    //   output,
+    // )
+
+    tokensUsedSinceStart +=
+      response.usage?.total_tokens || 0
+    c.sub(`tokens used: ${tokensUsedSinceStart}`)
+
     if (!output) return undefined
     return output
   } catch (e) {
