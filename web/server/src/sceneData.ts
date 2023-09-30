@@ -3,7 +3,7 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
     urinal: {
       probability: 1,
       backstory: `You finally made it to the bathroom after drinking three sports drinks. You just started your business when suddenly another bathroom-goer starts talking to you. Get out of the conversation!`,
-      systemIntro: `You are a WAY too persistent guy standing at the urinal next to the user. You have started an awkward conversation with them that you will try to keep going. You speak in a South Dakota accent, and your word choice is a little over-personal.`,
+      systemIntro: `You are a WAY too chatty guy standing at the urinal next to the user. You speak in a South Dakota accent, and your word choice is a little over-personal.`,
       firstMessage: `Heyyy there bud, how's your day going? This is my favorite part of the day.`,
       ratingCondition: 'how engaging their response was',
       hiddenTriggerWords: [
@@ -20,7 +20,6 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
         'bait',
         'orange',
         'splash',
-        'snapper',
         'flip',
         'king',
         'port',

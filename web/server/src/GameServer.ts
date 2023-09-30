@@ -37,11 +37,7 @@ export class GameServer {
   serverInitData: ServeOptions = {
     fetch: async (req, server) => {
       const url = new URL(req.url)
-      c.sub(
-        'Received request to',
-        url.pathname,
-        url.searchParams,
-      )
+      c.sub(req.method + ' ' + url.pathname)
 
       if (url.pathname.endsWith('/ping'))
         return generateHTTPResponse(`pong`)
@@ -59,9 +55,9 @@ export class GameServer {
         req.method === 'POST' &&
         url.pathname.endsWith('/response')
       ) {
-        const stream = req.body as ReadableStream<
-          GameMessage[]
-        >
+        const stream = req.body as ReadableStream<{
+          messages: GameMessage[]
+        }>
         let bodyAsText = await Bun.readableStreamToText(
           stream,
         )
@@ -74,12 +70,13 @@ export class GameServer {
 
         c.log(`got body`, bodyAsText)
         try {
-          let body: GameMessage[] | undefined =
-            JSON.parse(bodyAsText)
+          let body:
+            | { messages: GameMessage[] }
+            | undefined = JSON.parse(bodyAsText)
 
           c.log(`parsed body`, body)
 
-          if (!body?.length) {
+          if (!body?.messages?.length) {
             return generateHTTPResponse(
               `invalid body value`,
               400,
@@ -87,7 +84,9 @@ export class GameServer {
           }
 
           return generateHTTPResponse(
-            JSON.stringify(await getGameResponse(body)),
+            JSON.stringify(
+              await getGameResponse(body?.messages),
+            ),
           )
         } catch (e) {
           c.error(e, await Bun.readableStreamToText(stream))
