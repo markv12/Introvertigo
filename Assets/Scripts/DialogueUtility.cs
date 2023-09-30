@@ -167,4 +167,9 @@ public static class DialogueUtility {
         float vOffset = -0.2f * (((float)ICON_SIZE_MULT - 100) / 100f);
         return $"<voffset={vOffset}em><size={ICON_SIZE_MULT}%><sprite index=\"{spriteIndex}\"></size></voffset>";
     }
+
+    private static readonly char[] delimiters = new char[] { ' ', '\r', '\n' };
+    public static int WordCount(string text) {
+        return text.Split(delimiters, StringSplitOptions.RemoveEmptyEntries).Length;
+    }
 }

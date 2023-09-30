@@ -6,6 +6,9 @@ using System.Collections;
 using System.Text;
 
 public class DialogueSystem : MonoBehaviour {
+    public string sceneKey;
+    public SceneAnimator sceneAnimator;
+
     public TMP_InputField mainInputField;
     public TMP_Text outputDialogue;
     public TMP_Text whatYouSaidText;
@@ -23,7 +26,7 @@ public class DialogueSystem : MonoBehaviour {
         dvaWhatYouSaid = new DialogueVertexAnimator(whatYouSaidText, null, PlayTalkSound);
         enterButton.onClick.AddListener(Enter);
         backstoryBeginButton.onClick.AddListener(BackstoryBegin);
-        GameRequestManager.Instance.GetGameScenario(() => {
+        GameRequestManager.Instance.GetGameScenario(sceneKey, () => {
             GameScenario gameScenario = GameRequestManager.CurrentScenario;
             if(gameScenario != null) {
                 currentRequiredWords.Clear();
@@ -38,9 +41,10 @@ public class DialogueSystem : MonoBehaviour {
     }
 
     private bool hasRequiredWord = false;
-    private void InputValueChanged(string value) {
-        hasRequiredWord = HasRequiredWord(value, out string indicatorText);
-        enterButton.gameObject.SetActive(hasRequiredWord);
+    private void InputValueChanged(string newText) {
+        hasRequiredWord = HasRequiredWord(newText, out string indicatorText);
+        int wordCount = DialogueUtility.WordCount(newText);
+        enterButton.gameObject.SetActive(wordCount >= 6 && hasRequiredWord);
         requiredWordsText.text = indicatorText;
     }
 
@@ -53,10 +57,10 @@ public class DialogueSystem : MonoBehaviour {
             bool hasRequiredWord = false;
             builder.Clear();
             string matchValue = value.ToLower();
-            builder.Append("Use at least one of these words:  ");
+            builder.Append("You must use one of these words:  ");
             for (int i = 0; i < currentRequiredWords.Count; i++) {
                 string word = currentRequiredWords[i];
-                bool wordUsed = matchValue.Contains(word.ToLower());
+                bool wordUsed = !hasRequiredWord && matchValue.Contains(word.ToLower());
                 if (wordUsed) { hasRequiredWord = true; }
                 builder.Append("<color=" + (wordUsed ? "green" : "black") + ">");
                 builder.Append(word);
@@ -93,12 +97,12 @@ public class DialogueSystem : MonoBehaviour {
             for (int i = 0; i < currentRequiredWords.Count; i++) {
                 if (inputText.ToLower().Contains(currentRequiredWords[i].ToLower())){
                     currentRequiredWords.RemoveAt(i);
-                    i--;
+                    break;
                 }
             }
             mainInputField.text = "";
             StartCoroutine(SayRoutine());
-            GameRequestManager.Instance.SubmitNextMessage(inputText, (RequestResponse rr) => {
+            GameRequestManager.Instance.SubmitNextMessage(inputText, (GPTResponse rr) => {
                 StartCoroutine(ResponseRoutine(rr));
             });
         }
@@ -109,11 +113,12 @@ public class DialogueSystem : MonoBehaviour {
             while (subRoutine.MoveNext() && (!dialogueFinished || Time.time < stopTime)) yield return subRoutine.Current;
         }
 
-        IEnumerator ResponseRoutine(RequestResponse rr) {
+        IEnumerator ResponseRoutine(GPTResponse gptResponse) {
             while (!dialogueFinished || Time.time < stopTime) {
                 yield return null;
             }
-            EnemyTalk(rr.reply);
+            sceneAnimator.HandleResponse(gptResponse);
+            EnemyTalk(gptResponse.reply);
         }
     }
 
