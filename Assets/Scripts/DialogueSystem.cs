@@ -16,26 +16,42 @@ public class DialogueSystem : MonoBehaviour {
         dvaOutput = new DialogueVertexAnimator(outputDialogue, null, PlayTalkSound);
         dvaWhatYouSaid = new DialogueVertexAnimator(whatYouSaidText, null, PlayTalkSound);
         enterButton.onClick.AddListener(Enter);
+        GameRequestManager.Instance.GetGameScenario((GameScenario gameScenario) => {
+            if(gameScenario != null) {
+                outputDialogue.text = gameScenario.backstory;
+            }
+        });
     }
 
     private Coroutine typeRoutine;
     private void Enter() {
+        bool dialogueFinished = false;
+        float stopTime = 0;
         this.EnsureCoroutineStopped(ref typeRoutine);
-        typeRoutine = StartCoroutine(EnterRoutine());
 
-        IEnumerator EnterRoutine() {
-            string inputText = mainInputField.text;
+        string inputText = mainInputField.text.Trim();
+        if(!string.IsNullOrWhiteSpace(inputText) && inputText.Length <= 100) {
             mainInputField.text = "";
+            StartCoroutine(SayRoutine());
+            GameRequestManager.Instance.SubmitNextMessage(inputText, (RequestResponse rr) => {
+                StartCoroutine(ResponseRoutine(rr));
+            });
+        }
 
-            bool dialogueFinished = false;
-            float stopTime = 0;
+        IEnumerator SayRoutine() {
             List<DialogueCommand> commands = DialogueUtility.ProcessInputString(inputText, out string processedMessage);
             IEnumerator subRoutine = dvaWhatYouSaid.AnimateTextIn(commands, processedMessage, 1, () => { dialogueFinished = true; stopTime = Time.time + 1f; });
             while (subRoutine.MoveNext() && (!dialogueFinished || Time.time < stopTime)) yield return subRoutine.Current;
+        }
 
-            commands = DialogueUtility.ProcessInputString(inputText, out processedMessage);
-            subRoutine = dvaOutput.AnimateTextIn(commands, processedMessage, 1, null);
-            while (subRoutine.MoveNext()) yield return subRoutine.Current;
+        IEnumerator ResponseRoutine(RequestResponse rr) {
+            while (!dialogueFinished || Time.time < stopTime) {
+                yield return null;
+            }
+            dialogueFinished = false;
+            List<DialogueCommand> commands = DialogueUtility.ProcessInputString(rr.reply, out string processedMessage);
+            IEnumerator subRoutine = dvaOutput.AnimateTextIn(commands, processedMessage, 1, () => { dialogueFinished = true; stopTime = Time.time + 1f; });
+            while (subRoutine.MoveNext() && (!dialogueFinished || Time.time < stopTime)) yield return subRoutine.Current;
         }
     }
 
