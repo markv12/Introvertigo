@@ -78,7 +78,9 @@ export class GameServer {
 
           return generateHTTPResponse(
             JSON.stringify(
-              await getGameResponse(body.messages),
+              '{' +
+                (await getGameResponse(body.messages)) +
+                '}',
             ),
           )
         } catch (e) {
