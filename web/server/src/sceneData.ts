@@ -141,7 +141,7 @@ You MUST respond to every message in this three-line format:
 - (answer with Yes, No, or Meh) ${
         sceneData[key].ratingCondition
       }
-- Respond in 1-2 sentences.
+- Finally, write a leading response (1-2 sentences)
 
 Example Response:
 Meh
