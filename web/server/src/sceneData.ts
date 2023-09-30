@@ -1,3 +1,5 @@
+import * as c from '../../common'
+
 const sceneData: { [key in SceneKey]: SceneGeneratorData } =
   {
     urinal: {
@@ -37,8 +39,7 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
       backstory: `A random coworker is giving you a lift to work. It's a long drive, and as soon as you set off he starts diving deep into his personal life. Get out of the conversation without destroying your professional relationship!`,
       systemIntro: `You are a coworker of the user, and you are driving them to work. You are WAY too open about your marital problems, and that's all you're interested in talking about, no matter what. You speak in a New York accent.`,
       firstMessage: `Hey pal, can I tell you something in confidence? I'm having trouble with my partner.`,
-      ratingCondition:
-        'Was their response emotionally satisfying?',
+      ratingCondition: 'Is their response caring?',
       hiddenTriggerWords: ['India', 'sushi', 'gaming'],
       userRequiredWords: [
         'chicken',
@@ -124,3 +125,33 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
   }
 
 export default sceneData
+
+export function getInitialMessages(key: SceneKey) {
+  const messages: GameMessage[] = []
+  messages.push({
+    content:
+      sceneData[key].systemIntro +
+      ` Always keep the energy up and keep asking questions! NEVER apologize for bothering them or back down. If the topics of ${c.printList(
+        sceneData[key].hiddenTriggerWords,
+        'or',
+      )} are mentioned you will get very excited, but you won't bring them up yourself.
+
+You MUST respond to every message in this three-line format:
+- (answer with Yes, No, or Meh) Was the user's response rude?
+- (answer with Yes, No, or Meh) ${
+        sceneData[key].ratingCondition
+      }
+- Finally, respond in 1-2 sentences.
+
+EXAMPLE RESPONSE:
+Meh
+Yes
+(sentence text)`,
+    role: `system`,
+  })
+  messages.push({
+    content: sceneData[key].firstMessage,
+    role: `assistant`,
+  })
+  return messages
+}

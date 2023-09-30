@@ -42,7 +42,7 @@ export default async function getGameResponse(
     ]
 
     c.sub(
-      `"${latestMessage.content}" (rudeness: ${rudenessString}, rating: ${ratingString})
+      `"${latestMessage.content}" (rudeness: ${rudeness}, rating: ${rating})
   -> "${reply}"`,
     )
 

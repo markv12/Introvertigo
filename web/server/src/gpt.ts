@@ -8,6 +8,10 @@ const openai = new OpenAI({
 })
 
 let tokensUsedSinceStart = 0
+function tokensToCost(tokens: number) {
+  const costPerToken = 0.0015 / 1000
+  return c.r2(tokens * costPerToken, 2)
+}
 
 export default async function getGptResponse(
   messages: ChatCompletionMessageParam[],
@@ -27,8 +31,7 @@ async function getOutput(
     // then, we get an actual response
     const response = await openai.chat.completions
       .create({
-        //     messages:
-        model: `gpt-3.5-turbo`, // `text-${useLowQualityGeneration ? `curie-001` : `davinci-003`}`,
+        model: `gpt-3.5-turbo`,
         messages,
         // eslint-disable-next-line
         max_tokens: tokens,
@@ -64,7 +67,11 @@ async function getOutput(
 
     tokensUsedSinceStart +=
       response.usage?.total_tokens || 0
-    c.sub(`tokens used: ${tokensUsedSinceStart}`)
+    c.sub(
+      `tokens used since server start: ${tokensUsedSinceStart} ($${tokensToCost(
+        tokensUsedSinceStart,
+      )})`,
+    )
 
     if (!output) return undefined
     return output
