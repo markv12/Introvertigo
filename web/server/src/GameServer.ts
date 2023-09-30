@@ -46,7 +46,7 @@ export class GameServer {
       if (url.pathname.endsWith('/ping'))
         return generateHTTPResponse(`pong`)
 
-      if (url.pathname.endsWith('/getscene'))
+      if (url.pathname.endsWith('/getscenario'))
         return generateHTTPResponse(
           JSON.stringify(await generateScene()),
         )
