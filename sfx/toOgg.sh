@@ -11,5 +11,6 @@ do
     filename="${filename%.*}"
     echo "Converting $filename to .ogg..."
     
-    ffmpeg -i "$file" -filter:a "loudnorm" -acodec libvorbis -aq 5 -y "$output_dir/$filename.ogg"
+    # amplify up to 0db and save as ogg
+    sox "$file" -C 5 "$output_dir/$filename.ogg" gain -n -1
 done

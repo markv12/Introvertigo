@@ -8,7 +8,8 @@ public class AudioManager : MonoBehaviour
 	{
 		get
 		{
-			if (instance == null) {
+			if (instance == null)
+			{
 				GameObject audioManagerObject = (GameObject)Resources.Load(AUDIO_MANAGER_PATH);
 				GameObject instantiated = Instantiate(audioManagerObject);
 				DontDestroyOnLoad(instantiated);
@@ -18,18 +19,22 @@ public class AudioManager : MonoBehaviour
 		}
 	}
 
-    [Header("Sound Effects")]
+	[Header("Sound Effects")]
 	public AudioSource[] audioSources;
 
 	private int audioSourceIndex = 0;
 
 	public AudioClip talk;
 
-	public void PlayTalkSound(float intensity, float pitchCenter) {
-		PlaySFX(talk, 1.0f * Random.Range(0.5f, 1.5f) * intensity, Random.Range(0.6f, 1.4f) * pitchCenter);
+	public void PlayTalkSound(float intensity, float pitchCenter, float pitchVarianceMultiplier = 1)
+	{
+		float basePitchVariance = 0.4f;
+		float pitchVarianceToUse = basePitchVariance * pitchVarianceMultiplier;
+		PlaySFX(talk, 1.0f * Random.Range(0.5f, 1.5f) * intensity, Random.Range(1.0f - pitchVarianceToUse, 1.0f + pitchVarianceToUse) * pitchCenter);
 	}
 
-	public void PlaySFX(AudioClip clip, float volume, float pitch = 1) {
+	public void PlaySFX(AudioClip clip, float volume, float pitch = 1)
+	{
 		AudioSource source = GetNextAudioSource();
 		source.volume = volume/* * SettingsManager.SFXVolume*/;
 		source.pitch = pitch;

@@ -2,6 +2,7 @@ import type { ServeOptions } from 'bun'
 import * as c from '../../common'
 import generateScene from './generateScene'
 import getGameResponse from './getGameResponse'
+import sceneData from './sceneData'
 
 export class GameServer {
   id: string
@@ -41,6 +42,11 @@ export class GameServer {
 
       if (url.pathname.endsWith('/ping'))
         return generateHTTPResponse(`pong`)
+
+      if (url.pathname.endsWith('/keys'))
+        return generateHTTPResponse(
+          Object.keys(sceneData).join(','),
+        )
 
       if (url.pathname.includes('/getscenario')) {
         const key = url.searchParams.get('key') as
