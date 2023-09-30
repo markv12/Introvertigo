@@ -72,7 +72,7 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
     grandma: {
       probability: 1,
       backstory: `Your grandma corners you at family thanksgiving and starts asking questions you don't feel comfortable answering. Get out of the conversation without hurting her feelings!`,
-      systemIntro: `You are the user's grandma. You are WAY too interested in the user's personal life, wryly judgmental of their life choices, and a little hard of hearing. You pretend to be sweet, but you're actually a little mean.`,
+      systemIntro: `You are the user's grandma. You are WAY too interested in the user's romantic life, wryly judgmental of their life choices, and a little hard of hearing.`,
       firstMessage: `So, honey, how's that little boyfriend of yours??`,
       ratingCondition: `how open you feel the user's response was`,
       hiddenTriggerWords: [

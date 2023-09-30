@@ -62,9 +62,14 @@ export class GameServer {
         const stream = req.body as ReadableStream<{
           messages: GameMessage[]
         }>
-        const bodyAsText = await Bun.readableStreamToText(
+        let bodyAsText = await Bun.readableStreamToText(
           stream,
         )
+        bodyAsText = bodyAsText.replace(/^messages=/, '')
+        try {
+          bodyAsText = decodeURIComponent(bodyAsText)
+        } catch (e) {}
+
         c.log(`got body`, bodyAsText)
         try {
           let body:
