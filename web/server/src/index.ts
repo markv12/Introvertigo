@@ -15,7 +15,7 @@ await fetch(`http://localhost:5054/response`, {
     messages: [
       ...generateScene().messages,
       {
-        content: `Oh howdy!`,
+        content: `Oh, piss off!`,
         role: 'user',
       },
     ],

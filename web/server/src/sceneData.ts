@@ -3,14 +3,13 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
     urinal: {
       probability: 1,
       backstory: `You finally made it to the bathroom after drinking three sports drinks. You just started your business when suddenly another bathroom-goer starts talking to you. Get out of the conversation!`,
-      systemIntro: `You are a WAY too chatty guy standing at the urinal next to the user. You speak in a South Dakota accent, and your word choice is a little over-personal.`,
+      systemIntro: `You are a WAY-too-chatty guy standing at the urinal next to the user. You speak in a South Dakota accent, and you're overly familiar in your tone.`,
       firstMessage: `Heyyy there bud, how's your day going? This is my favorite part of the day.`,
-      ratingCondition: 'how engaging their response was',
+      ratingCondition: 'Was their response engaging?',
       hiddenTriggerWords: [
         'gymnastics',
         'Latin',
         'fishing',
-        'crossword puzzles',
       ],
       userRequiredWords: [
         'bar',
@@ -36,16 +35,11 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
     car: {
       probability: 1,
       backstory: `A random coworker is giving you a lift to work. It's a long drive, and as soon as you set off he starts diving deep into his personal life. Get out of the conversation without destroying your professional relationship!`,
-      systemIntro: `You are a coworker of the user, and you are driving them to work. You are WAY too open about your marital problems, and that's all you're interested in talking about. You speak in a New York accent.`,
+      systemIntro: `You are a coworker of the user, and you are driving them to work. You are WAY too open about your marital problems, and that's all you're interested in talking about, no matter what. You speak in a New York accent.`,
       firstMessage: `Hey pal, can I tell you something in confidence? I'm having trouble with my partner.`,
       ratingCondition:
-        'how emotionally satisfied their response made you feel',
-      hiddenTriggerWords: [
-        'India',
-        'sushi',
-        'spreadsheets',
-        'gaming',
-      ],
+        'Was their response emotionally satisfying?',
+      hiddenTriggerWords: ['India', 'sushi', 'gaming'],
       userRequiredWords: [
         'chicken',
         'roll',
@@ -71,11 +65,10 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
     grandma: {
       probability: 1,
       backstory: `Your grandma corners you at family thanksgiving and starts asking questions you don't feel comfortable answering. Get out of the conversation without hurting her feelings!`,
-      systemIntro: `You are the user's grandma. You are WAY too interested in the user's romantic life, wryly judgmental of their life choices, and a little hard of hearing.`,
+      systemIntro: `You are the user's grandma. You are WAY too interested in the user's romantic life, wryly judgmental of their life choices, and a little hard of hearing. You continually steer the conversation towards the user's love life. You speak in a Southern accent.`,
       firstMessage: `So, honey, how's that little boyfriend of yours??`,
-      ratingCondition: `how open you feel the user's response was`,
+      ratingCondition: `Was their response satisfyingly open?`,
       hiddenTriggerWords: [
-        'hiking',
         'singing',
         'Clark Gable',
         'the Mediterranean Sea',
@@ -103,10 +96,9 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
       backstory: `You're taking a train across town. Your headphones are on; you're grooving.Suddenly, a stranger comes into your field of view. He doesn't seem to blink, and he seems to be expecting a response from you. Reluctantly, you take off your headphones. Put an end to the conversation!`,
       systemIntro: `You are a happy-go-lucky guy sitting near the user on a train. You're absolutely oblivious to the fact that they don't want to speak to you. You speak in a British accent, and you're slurring your words.`,
       firstMessage: `How 'bout that weather, eh?`,
-      ratingCondition: 'how engaging their response was',
+      ratingCondition: 'Was their response engaging?',
       hiddenTriggerWords: [
         'haircuts',
-        'the 80s',
         'waterfowl',
         'alliteration',
       ],

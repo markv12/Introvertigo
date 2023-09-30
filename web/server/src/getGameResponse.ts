@@ -14,13 +14,15 @@ export default async function getGameResponse(
 
   let attempts = 0
   while (attempts < maxAttempts) {
+    attempts++
+
     const response = await getGptResponse(body)
     if (!response) return { error: 'no response' }
 
-    const regexResult =
-      /[^:]*?:? ?([0-9]+).*\n[^:]*?:? ?([0-9]+).*\n(.*)/gi.exec(
-        response,
-      )
+    const regexResult = /(.*)\n[^:]*?:? ?(.*)\n(.*)/gi.exec(
+      response,
+    )
+
     if (!regexResult) {
       c.error(`regex failed for:`, response)
       return { error: 'regex failed' }
@@ -28,8 +30,9 @@ export default async function getGameResponse(
 
     const [, rudenessString, ratingString, replyString] =
       regexResult
-    const rudeness = parseInt(rudenessString)
-    const rating = parseInt(ratingString)
+
+    const rudeness = yesNoMehToNumber(rudenessString)
+    const rating = yesNoMehToNumber(ratingString)
     const reply = replyString.trim()
     const messages: GameMessage[] = [
       ...body,
@@ -53,4 +56,11 @@ export default async function getGameResponse(
   return {
     error: `failed to access api ${maxAttempts} times`,
   }
+}
+
+const yesNoMehToNumber = (val: string) => {
+  val = val.toLowerCase()
+  if (val.startsWith('yes')) return 1
+  if (val.startsWith('no')) return 0
+  return 0.5
 }

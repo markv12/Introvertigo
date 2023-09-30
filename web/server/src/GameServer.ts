@@ -68,13 +68,13 @@ export class GameServer {
           c.sub('uri decode unnecessary')
         }
 
-        c.log(`got body`, bodyAsText)
+        // c.log(`got body`, bodyAsText)
         try {
           let body:
             | { messages: GameMessage[] }
             | undefined = JSON.parse(bodyAsText)
 
-          c.log(`parsed body`, body)
+          // c.log(`parsed body`, body)
 
           if (!body?.messages?.length) {
             return generateHTTPResponse(

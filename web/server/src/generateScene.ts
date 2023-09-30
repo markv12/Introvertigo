@@ -28,21 +28,21 @@ function getInitialMessages(key: SceneKey) {
   messages.push({
     content:
       sceneData[key].systemIntro +
-      ` Even if the conversation seems to falter, keep it going! If the topics of ${c.printList(
+      ` Even if the conversation seems to falter, keep it going! Do not apologize for bothering them. If the topics of ${c.printList(
         sceneData[key].hiddenTriggerWords,
         'or',
       )} are mentioned you will get very excited, but you won't bring them up yourself.
 
 You MUST respond to every message in this three line format:
-- Rate how rude you think the user is being from 1 (very polite) to 10 (very rude)
-- Rate ${
+- (answer with Yes, No, or Meh) Was the user's response rude?
+- (answer with Yes, No, or Meh) ${
         sceneData[key].ratingCondition
-      } from 1 (low) to 10 (high)
+      }
 - Finally, respond in 1-2 sentences.
 
 EXAMPLE RESPONSE:
-3
-9
+Meh
+Yes
 (sentence text)`,
     role: `system`,
   })
