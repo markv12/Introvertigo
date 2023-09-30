@@ -27,7 +27,7 @@ export default async function getGameResponse(
 
     if (!regexResult) {
       c.error(`regex failed for:`, response)
-      return { error: 'regex failed' }
+      continue
     }
 
     const [, rudenessString, ratingString, replyString] =
