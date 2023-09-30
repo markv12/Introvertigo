@@ -59,13 +59,13 @@ export class GameServer {
         req.method === 'POST' &&
         url.pathname.endsWith('/response')
       ) {
-        const stream = req.body as ReadableStream<
-          GameMessage[]
-        >
+        const stream = req.body as ReadableStream<{
+          messages: GameMessage[]
+        }>
         let readResult = await Bun.readableStreamToText(
           stream,
         )
-        let body: GameMessage[] | undefined
+        let body: { messages: GameMessage[] } | undefined
         try {
           body = JSON.parse(readResult)
         } catch (e) {
@@ -76,7 +76,7 @@ export class GameServer {
           )
         }
 
-        if (!body?.length) {
+        if (!body?.messages?.length) {
           return generateHTTPResponse(
             `invalid body value`,
             400,
@@ -85,7 +85,9 @@ export class GameServer {
         c.log(`got body`, body)
 
         return generateHTTPResponse(
-          JSON.stringify(await getGameResponse(body)),
+          JSON.stringify(
+            await getGameResponse(body.messages),
+          ),
         )
       }
 
