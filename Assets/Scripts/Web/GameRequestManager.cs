@@ -32,13 +32,14 @@ public class RequestResponse {
 }
 
 public class GameRequestManager : Singleton<GameRequestManager> {
-    GameScenario currentScenario;
-    public void GetGameScenario(Action<GameScenario> onComplete) {
+    private GameScenario currentScenario;
+    public static GameScenario CurrentScenario => Instance.currentScenario;
+    public void GetGameScenario(Action onComplete) {
         StartCoroutine(RestUtility.Get("https://p.jasperstephenson.com/ld54/getscenario", (response) => {
             currentScenario = JsonUtility.FromJson<GameScenario>(response);
-            onComplete(currentScenario);
+            onComplete();
         }, () => {
-            onComplete(null);
+            onComplete();
         }));
     }
 

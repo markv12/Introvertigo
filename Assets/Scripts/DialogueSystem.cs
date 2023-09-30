@@ -3,11 +3,13 @@ using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
+using System.Text;
 
 public class DialogueSystem : MonoBehaviour {
     public TMP_InputField mainInputField;
     public TMP_Text outputDialogue;
     public TMP_Text whatYouSaidText;
+    public TMP_Text requiredWordsText;
     public Button enterButton;
     public GameObject backstoryBG;
     public TMP_Text backstoryText;
@@ -15,21 +17,64 @@ public class DialogueSystem : MonoBehaviour {
     private DialogueVertexAnimator dvaOutput;
     private DialogueVertexAnimator dvaWhatYouSaid;
 
-    private string firstMessage;
     private void Awake() {
         dvaOutput = new DialogueVertexAnimator(outputDialogue, null, PlayTalkSound);
         dvaWhatYouSaid = new DialogueVertexAnimator(whatYouSaidText, null, PlayTalkSound);
         enterButton.onClick.AddListener(Enter);
-        backstoryBeginButton.onClick.AddListener(() => { backstoryBG.SetActive(false); EnemyTalk(firstMessage); });
-        GameRequestManager.Instance.GetGameScenario((GameScenario gameScenario) => {
+        backstoryBeginButton.onClick.AddListener(BackstoryBegin);
+        GameRequestManager.Instance.GetGameScenario(() => {
+            GameScenario gameScenario = GameRequestManager.CurrentScenario;
             if(gameScenario != null) {
                 backstoryText.text = gameScenario.backstory;
                 backstoryBeginButton.gameObject.SetActive(true);
-                if(gameScenario.messages.Length > 0) {
-                    firstMessage = gameScenario.messages[gameScenario.messages.Length - 1].content;
-                }
+                InputValueChanged("");
             }
         });
+
+        mainInputField.onValueChanged.AddListener(InputValueChanged);
+    }
+
+    private bool hasRequiredWord = false;
+    private void InputValueChanged(string value) {
+        hasRequiredWord = HasRequiredWord(value, out string indicatorText);
+        enterButton.gameObject.SetActive(hasRequiredWord);
+        requiredWordsText.text = indicatorText;
+    }
+
+    private static readonly StringBuilder builder = new StringBuilder();
+    private bool HasRequiredWord(string value, out string indicatorText) {
+        bool hasRequiredWord = false;
+        builder.Clear();
+        string matchValue = value.ToLower();
+        builder.Append("Use at least one of these words:  ");
+        string[] requiredWords = GameRequestManager.CurrentScenario.requiredWords;
+        for (int i = 0; i < requiredWords.Length; i++) {
+            string word = requiredWords[i];
+            bool wordUsed = matchValue.Contains(word.ToLower());
+            if (wordUsed) { hasRequiredWord = true; }
+            builder.Append("<color=" + (wordUsed ? "green" : "black") + ">");
+            builder.Append(word);
+            builder.Append("</color>");
+            if (i < requiredWords.Length - 1) {
+                builder.Append(",  ");
+            }
+        }
+        indicatorText = builder.ToString();
+        return hasRequiredWord;
+    }
+
+    private void Update() {
+        if (InputUtil.GetKeyDown(UnityEngine.InputSystem.Key.Enter) && hasRequiredWord) {
+            Enter();
+        }
+    }
+
+    private void BackstoryBegin() {
+        backstoryBG.SetActive(false);
+        GameMessage[] messages = GameRequestManager.CurrentScenario.messages;
+        if (messages.Length > 0) {
+            EnemyTalk(messages[messages.Length - 1].content);
+        }
     }
 
     private void Enter() {
