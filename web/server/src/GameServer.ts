@@ -69,7 +69,7 @@ export class GameServer {
         try {
           body = JSON.parse(readResult)
         } catch (e) {
-          c.error(e)
+          c.error(e, readResult)
           return generateHTTPResponse(
             JSON.stringify({ error: 'invalid json' }),
             400,

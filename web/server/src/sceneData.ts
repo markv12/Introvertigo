@@ -10,6 +10,7 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
         'gymnastics',
         'Latin',
         'fishing',
+        'crossword puzzles',
       ],
       userRequiredWords: [
         'bar',
@@ -28,6 +29,8 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
         'screen',
         'mount',
         'tumble',
+        'puzzle',
+        'across',
       ],
     },
 
@@ -36,7 +39,8 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
       backstory: `A random coworker is giving you a lift to work. It's a long drive, and as soon as you set off he starts diving deep into his personal life. Get out of the conversation without destroying your professional relationship!`,
       systemIntro: `You are a coworker of the user, and you are driving them to work. You are WAY too open about your marital problems, and you are also too interested in the user's personal life. You speak in a New York accent.`,
       firstMessage: `Hey pal, can I tell you something in confidence? I'm having trouble with my partner.`,
-      ratingCondition: 'how emotionally satisfied you feel',
+      ratingCondition:
+        'how emotionally satisfied their response made you feel',
       hiddenTriggerWords: [
         'India',
         'sushi',
@@ -59,6 +63,9 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
         'wrap',
         'lock',
         'barbecue',
+        'heart',
+        'sweat',
+        'alone',
       ],
     },
 
@@ -67,8 +74,7 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
       backstory: `Your grandma corners you at family thanksgiving and starts asking questions you don't feel comfortable answering. Get out of the conversation without hurting her feelings!`,
       systemIntro: `You are the user's grandma. You are WAY too interested in the user's personal life, wryly judgmental of their life choices, and a little hard of hearing. You pretend to be sweet, but you're actually a little mean.`,
       firstMessage: `So, honey, how's that little boyfriend of yours??`,
-      ratingCondition:
-        'how open you feel the user is being',
+      ratingCondition: `how open you feel the user's response was`,
       hiddenTriggerWords: [
         'hiking',
         'singing',
@@ -93,12 +99,37 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
       ],
     },
 
-    // train: {
-    //   probability: 1,
-    //   backstory: `You're taking a train across town, headphones in, when suddenly a stranger starts talking to you. Get out of the conversation!`,
-    //   systemIntro: `You are a WAY too peppy guy sitting by the user on a train. You're absolutely oblivious to the fact that they don't want to speak to you. You speak in a British accent, and you're slurring your words.`,
-    //   firstMessage: `Hey there, how's it going? I'm just taking the train to the park.`,
-    // },
+    train: {
+      probability: 1,
+      backstory: `You're taking a train across town. Your headphones are on; you're grooving.Suddenly, a stranger comes into your field of view. He doesn't seem to blink, and he seems to be expecting a response from you. Reluctantly, you take off your headphones. Put an end to the conversation!`,
+      systemIntro: `You are a happy-go-lucky guy sitting near the user on a train. You're absolutely oblivious to the fact that they don't want to speak to you. You speak in a British accent, and you're slurring your words.`,
+      firstMessage: `How 'bout that weather, eh?`,
+      ratingCondition: 'how engaging their response was',
+      hiddenTriggerWords: [
+        'haircuts',
+        'the 80s',
+        'waterfowl',
+        'alliteration',
+      ],
+      userRequiredWords: [
+        'sad song',
+        'swan',
+        'duck',
+        'mohawk',
+        'mullet',
+        'feather',
+        'jacket',
+        'crowd',
+        'fool',
+        'whip',
+        'bark',
+        'hunt',
+        'too true',
+        'Big Ben',
+        'Nile',
+        'yawning',
+      ],
+    },
   }
 
 export default sceneData

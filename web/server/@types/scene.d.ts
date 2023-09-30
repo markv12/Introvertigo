@@ -1,4 +1,4 @@
-type SceneKey = 'urinal' | 'car' | 'grandma' //| 'train'
+type SceneKey = 'urinal' | 'car' | 'grandma' | 'train'
 
 interface GameScene {
   key: SceneKey
