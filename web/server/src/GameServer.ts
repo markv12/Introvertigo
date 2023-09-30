@@ -46,10 +46,14 @@ export class GameServer {
       if (url.pathname.endsWith('/ping'))
         return generateHTTPResponse(`pong`)
 
-      if (url.pathname.endsWith('/getscenario'))
+      if (url.pathname.includes('/getscenario')) {
+        const key = url.searchParams.get('key') as
+          | SceneKey
+          | undefined
         return generateHTTPResponse(
-          JSON.stringify(await generateScene()),
+          JSON.stringify(await generateScene(key)),
         )
+      }
 
       if (
         req.method === 'POST' &&

@@ -1,12 +1,11 @@
 import * as c from '../../common'
 
-export default function generateScene(): GameSceneInitData {
-  const keyWeights: { [key: string]: number } = {}
-  for (const key in sceneData) {
-    keyWeights[key] = sceneData[key as SceneKey].probability
-  }
-
-  const key = c.randomWithWeights(keyWeights) as SceneKey
+export default function generateScene(
+  forceKey?: SceneKey,
+): GameSceneInitData {
+  const key =
+    forceKey ||
+    (c.randomWithWeights(keyWeights) as SceneKey)
 
   const backstory = sceneData[key].backstory
   const requiredWords = c.randomXFromArray(
@@ -161,4 +160,9 @@ EXAMPLE RESPONSE:
     role: `assistant`,
   })
   return messages
+}
+
+const keyWeights: { [key: string]: number } = {}
+for (const key in sceneData) {
+  keyWeights[key] = sceneData[key as SceneKey].probability
 }
