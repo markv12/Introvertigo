@@ -94,7 +94,7 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
 
     train: {
       probability: 1,
-      backstory: `You're taking a train across town. Your headphones are on; you're grooving.Suddenly, a stranger comes into your field of view. He doesn't seem to blink, and he seems to be expecting a response from you. Reluctantly, you take off your headphones. Put an end to the conversation!`,
+      backstory: `You're taking a train across town. Your headphones are on; you're grooving. Suddenly, a stranger comes into your field of view. He doesn't seem to blink, and he seems to be expecting a response from you. Reluctantly, you take off your headphones. Put an end to the conversation!`,
       systemIntro: `You are a happy-go-lucky guy sitting near the user on a train. You're absolutely oblivious to the fact that they don't want to speak to you. You speak in a British accent, and you're slurring your words.`,
       firstMessage: `How 'bout that weather, eh?`,
       ratingCondition: 'Was their response engaging?',
@@ -143,10 +143,12 @@ You MUST respond to every message in this three-line format:
       }
 - Respond in 1-2 sentences.
 
-EXAMPLE RESPONSE:
+Example Response:
 Meh
 Yes
-(sentence text)`,
+(sentence text)
+
+DO NOT ANSWER without the Yes/No/Meh part.`,
     role: `system`,
   })
   messages.push({
