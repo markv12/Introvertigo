@@ -62,33 +62,32 @@ export class GameServer {
         const stream = req.body as ReadableStream<{
           messages: GameMessage[]
         }>
-        let readResult = await Bun.readableStreamToText(
-          stream,
-        )
-        let body: { messages: GameMessage[] } | undefined
         try {
-          body = JSON.parse(readResult)
+          let body:
+            | { messages: GameMessage[] }
+            | undefined = await Bun.readableStreamToJSON(
+            stream,
+          )
+          if (!body?.messages?.length) {
+            return generateHTTPResponse(
+              `invalid body value`,
+              400,
+            )
+          }
+          c.log(`got body`, body)
+
+          return generateHTTPResponse(
+            JSON.stringify(
+              await getGameResponse(body.messages),
+            ),
+          )
         } catch (e) {
-          c.error(e, readResult)
+          c.error(e, await Bun.readableStreamToText(stream))
           return generateHTTPResponse(
             JSON.stringify({ error: 'invalid json' }),
             400,
           )
         }
-
-        if (!body?.messages?.length) {
-          return generateHTTPResponse(
-            `invalid body value`,
-            400,
-          )
-        }
-        c.log(`got body`, body)
-
-        return generateHTTPResponse(
-          JSON.stringify(
-            await getGameResponse(body.messages),
-          ),
-        )
       }
 
       // * fallback to any other request
