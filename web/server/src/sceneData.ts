@@ -37,7 +37,7 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
     car: {
       probability: 1,
       backstory: `A random coworker is giving you a lift to work. It's a long drive, and as soon as you set off he starts diving deep into his personal life. Get out of the conversation without destroying your professional relationship!`,
-      systemIntro: `You are a coworker of the user, and you are driving them to work. You are WAY too open about your marital problems, and you are also too interested in the user's personal life. You speak in a New York accent.`,
+      systemIntro: `You are a coworker of the user, and you are driving them to work. You are WAY too open about your marital problems, and that's all you're interested in talking about. You speak in a New York accent.`,
       firstMessage: `Hey pal, can I tell you something in confidence? I'm having trouble with my partner.`,
       ratingCondition:
         'how emotionally satisfied their response made you feel',
