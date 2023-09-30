@@ -9,6 +9,8 @@ export default async function getGameResponse(
   if (latestMessage.role !== 'user')
     return { error: 'latest message is not user' }
 
+  c.log(`generating based on messages:`, body)
+
   // const sanitizedMessage = c.sanitize(latestMessage.content)
   // latestMessage.content = sanitizedMessage.result
 
@@ -40,14 +42,8 @@ export default async function getGameResponse(
     ]
 
     c.sub(
-      'got gpt response',
-      latestMessage.content,
-      '\n -> ',
-      {
-        reply,
-        rudeness,
-        rating,
-      },
+      `"${latestMessage.content}" (rudeness: ${rudenessString}, rating: ${ratingString})
+  -> "${reply}"`,
     )
 
     return {
