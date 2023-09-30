@@ -22,8 +22,8 @@ public class DialogueSystem : MonoBehaviour {
 
     private readonly List<string> currentRequiredWords = new List<string>(8);
     private void Awake() {
-        dvaOutput = new DialogueVertexAnimator(outputDialogue, null, PlayTalkSound);
-        dvaWhatYouSaid = new DialogueVertexAnimator(whatYouSaidText, null, PlayTalkSound);
+        dvaOutput = new DialogueVertexAnimator(outputDialogue, null, PlayEnemyTalkSound);
+        dvaWhatYouSaid = new DialogueVertexAnimator(whatYouSaidText, null, PlayPlayerTalkSound);
         enterButton.onClick.AddListener(Enter);
         backstoryBeginButton.onClick.AddListener(BackstoryBegin);
         GameRequestManager.Instance.GetGameScenario(sceneKey, () => {
@@ -129,7 +129,11 @@ public class DialogueSystem : MonoBehaviour {
         enemyTalkRoutine = StartCoroutine(dvaOutput.AnimateTextIn(commands, processedMessage, 1, null));
     }
 
-    private void PlayTalkSound(float pitchCenter) {
-        AudioManager.Instance.PlayTalkSound(1.0f, pitchCenter);
+    private void PlayPlayerTalkSound(float pitchCenter) {
+        AudioManager.Instance.PlayPlayerTalkSound(1.0f, pitchCenter);
+    }
+
+    private void PlayEnemyTalkSound(float pitchCenter) {
+        AudioManager.Instance.PlayRandomPitchSound(sceneAnimator.enemyTalkClip, 1.0f, pitchCenter, sceneAnimator.enemyPitchVariation);
     }
 }

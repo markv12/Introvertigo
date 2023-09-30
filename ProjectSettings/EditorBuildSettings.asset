@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/UrinalScene.unity
+    guid: 53bb427e58c854f49918cf831683864f
   m_configObjects: {}

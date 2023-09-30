@@ -55,6 +55,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3c809b3d84f654dbe42c62c04c598a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneKey: 
+  sceneAnimator: {fileID: 0}
   mainInputField: {fileID: 3280329198840608160}
   outputDialogue: {fileID: 3280329199570504207}
   whatYouSaidText: {fileID: 3280329198583951653}
@@ -1608,7 +1610,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 150989a9c3d997d4c967109a6d2a2592, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 36e80cefcd8e6465bbabb36d8a7e44bf, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
