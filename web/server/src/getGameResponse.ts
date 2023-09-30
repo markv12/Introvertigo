@@ -27,12 +27,13 @@ export default async function getGameResponse(
     attempts++
 
     const response = await getGptResponse([
-      ...body,
+      ...body.slice(0, -1),
       // * we toss in a reminder for the prompt that doesn't get added to the official message list
       {
         content: `Don't forget to respond to every message in the three-line format.`,
         role: 'system',
       },
+      latestMessage,
     ])
     if (!response) return { error: 'no response' }
 
