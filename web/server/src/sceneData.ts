@@ -131,7 +131,7 @@ export function getInitialMessages(key: SceneKey) {
   messages.push({
     content:
       sceneData[key].systemIntro +
-      ` Always keep the energy up and keep asking questions! NEVER apologize for bothering them or back down. If the topics of ${c.printList(
+      ` Always keep asking questions to dig into the topic! If they give an inch, take a mile! NEVER apologize for bothering them or back down. If the topics of ${c.printList(
         sceneData[key].hiddenTriggerWords,
         'or',
       )} are mentioned you will get very excited, but you won't bring them up yourself.
@@ -141,7 +141,7 @@ You MUST respond to every message in this three-line format:
 - (answer with Yes, No, or Meh) ${
         sceneData[key].ratingCondition
       }
-- Finally, respond in 1-2 sentences.
+- Respond in 1-2 sentences.
 
 EXAMPLE RESPONSE:
 Meh
