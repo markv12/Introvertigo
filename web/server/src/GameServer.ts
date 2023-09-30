@@ -76,13 +76,15 @@ export class GameServer {
         try {
           let body: GameMessage[] | undefined =
             JSON.parse(bodyAsText)
+
+          c.log(`parsed body`, body)
+
           if (!body?.length) {
             return generateHTTPResponse(
               `invalid body value`,
               400,
             )
           }
-          c.log(`parsed body`, body)
 
           return generateHTTPResponse(
             JSON.stringify(await getGameResponse(body)),
