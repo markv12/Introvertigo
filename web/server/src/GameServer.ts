@@ -62,19 +62,21 @@ export class GameServer {
         const stream = req.body as ReadableStream<{
           messages: GameMessage[]
         }>
+        const bodyAsText = await Bun.readableStreamToText(
+          stream,
+        )
+        c.log(`got body`, bodyAsText)
         try {
           let body:
             | { messages: GameMessage[] }
-            | undefined = await Bun.readableStreamToJSON(
-            stream,
-          )
+            | undefined = JSON.parse(bodyAsText)
           if (!body?.messages?.length) {
             return generateHTTPResponse(
               `invalid body value`,
               400,
             )
           }
-          c.log(`got body`, body)
+          c.log(`parsed body`, body)
 
           return generateHTTPResponse(
             JSON.stringify(
