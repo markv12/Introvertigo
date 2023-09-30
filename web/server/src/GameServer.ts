@@ -59,23 +59,24 @@ export class GameServer {
         req.method === 'POST' &&
         url.pathname.endsWith('/response')
       ) {
-        const stream = req.body as ReadableStream<{
-          messages: GameMessage[]
-        }>
+        const stream = req.body as ReadableStream<
+          GameMessage[]
+        >
         let bodyAsText = await Bun.readableStreamToText(
           stream,
         )
         bodyAsText = bodyAsText.replace(/^messages=/, '')
         try {
           bodyAsText = decodeURIComponent(bodyAsText)
-        } catch (e) {}
+        } catch (e) {
+          c.sub('uri decode unnecessary')
+        }
 
         c.log(`got body`, bodyAsText)
         try {
-          let body:
-            | { messages: GameMessage[] }
-            | undefined = JSON.parse(bodyAsText)
-          if (!body?.messages?.length) {
+          let body: GameMessage[] | undefined =
+            JSON.parse(bodyAsText)
+          if (!body?.length) {
             return generateHTTPResponse(
               `invalid body value`,
               400,
@@ -84,9 +85,7 @@ export class GameServer {
           c.log(`parsed body`, body)
 
           return generateHTTPResponse(
-            JSON.stringify(
-              await getGameResponse(body.messages),
-            ),
+            JSON.stringify(await getGameResponse(body)),
           )
         } catch (e) {
           c.error(e, await Bun.readableStreamToText(stream))
