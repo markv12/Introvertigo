@@ -19,6 +19,11 @@ export default function generateScene(
     backstory,
     messages: getInitialMessages(key),
     requiredWords,
+    win: c.randomFromArray(sceneData[key].winMessages),
+    lose: c.randomFromArray(sceneData[key].loseMessages),
+    loseRude: c.randomFromArray(
+      sceneData[key].loseRudeMessages,
+    ),
   }
   return scene
 }

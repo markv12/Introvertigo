@@ -1,4 +1,10 @@
-type SceneKey = 'urinal' | 'car' | 'grandma' | 'train'
+type SceneKey =
+  | 'urinal'
+  | 'car'
+  | 'grandma'
+  | 'train'
+  | 'plane'
+  | 'gym'
 
 interface GameScene {
   key: SceneKey
@@ -7,6 +13,9 @@ interface GameScene {
 interface GameSceneInitData extends GameScene {
   backstory: string
   requiredWords: string[]
+  win: string
+  lose: string
+  loseRude: string
 }
 
 interface GameGPTResponse {
@@ -32,4 +41,7 @@ interface SceneGeneratorData {
   hiddenTriggerWords: string[]
   systemIntro: string
   firstMessage: string
+  winMessages: string[]
+  loseMessages: string[]
+  loseRudeMessages: string[]
 }
