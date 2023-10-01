@@ -12,49 +12,46 @@ export default async function getGameResponse(
   const latestMessage = body[body.length - 1]
   if (latestMessage.role !== 'user')
     return { error: 'latest message is not user' }
-  if (latestMessage.content.length > 100)
-    latestMessage.content = latestMessage.content.slice(
-      0,
-      100,
-    )
+  const latestMessageText = latestMessage.content.slice(
+    0,
+    100,
+  )
+  const secondLatestMessageText =
+    body[body.length - 2]?.content.slice(0, 100) || ''
 
-  if (body.length > 3)
-    // * throw out old messages
-    body = [body[0], ...body.slice(-2)]
+  let contextToGiveChatGPT = [...body]
+  if (contextToGiveChatGPT.length > 3)
+    // * throw out old messages in prompts
+    contextToGiveChatGPT = [
+      contextToGiveChatGPT[0],
+      ...contextToGiveChatGPT.slice(-2),
+    ]
 
-  c.log(`generating based on messages:`, body)
+  // c.log(`generating based on messages:`, body)
 
-  // if last system message is more than 2 messages ago, we'll add a new one
-  if (
-    body.findLastIndex((m) => m.role === 'system') <
-    body.length - 2
-  ) {
-    body.push()
-  }
-
-  // const sanitizedMessage = c.sanitize(latestMessage.content)
-  // latestMessage.content = sanitizedMessage.result
+  // const sanitizedMessage = c.sanitize(latestMessageText)
+  // latestMessageText = sanitizedMessage.result
 
   const fullContext = firstMessage.content.slice(
     0,
     firstMessage.content.indexOf('\n'),
   )
-  const keyWords = firstMessage.content.slice(
-    firstMessage.content.indexOf('If the topics of ') + 17,
-    firstMessage.content.indexOf('are mentioned'),
-  )
+  // const keyWords = firstMessage.content.slice(
+  //   firstMessage.content.indexOf('If the topics of ') + 17,
+  //   firstMessage.content.indexOf('are mentioned'),
+  // )
 
   const promises = [
     checkRudeness(
-      latestMessage.content,
-      body[body.length - 2]?.content || '',
+      latestMessageText,
+      secondLatestMessageText,
     ),
     checkInterest(
-      latestMessage.content,
-      body[body.length - 2]?.content || '',
+      latestMessageText,
+      secondLatestMessageText,
       fullContext,
     ),
-    getGptResponse(body),
+    getGptResponse(contextToGiveChatGPT),
   ]
   const [rudeness, interest, reply] = await Promise.all(
     promises,

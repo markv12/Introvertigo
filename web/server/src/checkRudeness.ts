@@ -27,9 +27,9 @@ export async function checkRudeness(
       [
         {
           role: 'system',
-          content: `You rank the politeness of messages. Respond to each message with "polite", "rude", or "neutral".
+          content: `You rank the politeness/clarity of messages. Respond to each message with "polite", "rude", or "neutral".
 This is in response to the text, "${previousMessage}".
-How polite is the following message? Only respond with "polite", "rude", or "neutral".`,
+How polite is the following message? Only respond with "polite", "neutral", or "rude".`,
         },
         { role: 'user', content: message },
       ],
@@ -75,20 +75,21 @@ export async function checkInterest(
       [
         {
           role: 'system',
-          content: `You rank how interesting/engaging a message is in a conversation.
+          content: `You rank how exciting a message is in a conversation.
 Your character's context is: ${context}.
-Respond to each message with "interesting", "not interesting", or "neutral". Only respond with one of those three options.`,
+Respond to each message with "EXTREMELY exciting", "exciting", or "kind of exciting".
+Only respond with one of those three options. Do not be too generous with your ratings.`,
         },
         { role: 'user', content: message },
       ],
-      7,
+      2,
     )
   )
     .replace(/"/g, '')
     .toLowerCase()
   let interest = 0
-  if (response.includes('not')) interest = -1
-  else if (response.includes('interesting')) interest = 1
+  if (response.includes('kind')) interest = -1
+  else if (response.includes('extremely')) interest = 1
 
   c.sub(`interest is ${interest} (response: ${response})`)
   return interest
