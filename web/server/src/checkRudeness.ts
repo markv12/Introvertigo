@@ -4,14 +4,17 @@ import getGptResponse from './gpt'
 export async function checkRudeness(
   message: string,
 ): Promise<number> {
-  const response = await getGptResponse([
-    {
-      role: 'system',
-      content:
-        'You rank the politeness/clarity of messages. Respond to each message with a number from 1 to 10 where 1 is VERY polite and 10 is rude or unintelligible.',
-    },
-    { role: 'user', content: message },
-  ])
+  const response = await getGptResponse(
+    [
+      {
+        role: 'system',
+        content:
+          'You rank the politeness/clarity of messages. Respond to each message with a number from 1 to 10 where 1 is VERY polite and 10 is rude or unintelligible.',
+      },
+      { role: 'user', content: message },
+    ],
+    1,
+  )
   const rudeness = oneToTenStringToNegativeOneToOne(
     response || '5',
   )
@@ -25,15 +28,19 @@ export async function checkInterest(
   context: string,
 ): Promise<number> {
   c.log({ message, previousMessage, context })
-  const response = await getGptResponse([
-    {
-      role: 'system',
-      content: `You rank from 1-10 how interesting/engaging a message is in a conversation. ONLY REPLY with a number from 1 to 10 where 1 is NOT interesting and 10 is VERY interesting/engaging.
+  const response = await getGptResponse(
+    [
+      {
+        role: 'system',
+        content: `You are a machine that ranks from 1-10 how interesting/engaging a message is in a conversation. ONLY REPLY with a number from 1 to 10 where 1 is NOT interesting and 10 is VERY interesting/engaging.
 Context is: ${context}
-Previous message was: ${previousMessage}`,
-    },
-    { role: 'user', content: message },
-  ])
+Previous message was: ${previousMessage}
+Example output: "5"`,
+      },
+      { role: 'user', content: message },
+    ],
+    1,
+  )
   const interest = oneToTenStringToNegativeOneToOne(
     response || '5',
   )
@@ -42,7 +49,7 @@ Previous message was: ${previousMessage}`,
 }
 
 const oneToTenStringToNegativeOneToOne = (val: string) => {
-  const num = parseInt(val)
+  const num = parseInt(val.replace(/\D/g, ''))
   if (isNaN(num)) return 0
   const zeroToOne = (num - 1) / 9
   return c.clamp(-1, c.r2(zeroToOne * 2 - 1), 1)
