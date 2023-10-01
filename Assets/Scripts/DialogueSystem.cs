@@ -60,12 +60,12 @@ public class DialogueSystem : MonoBehaviour {
             bool hasRequiredWord = false;
             builder.Clear();
             string matchValue = value.ToLower();
-            builder.Append("<color=#999999>Must use one:</color>  ");
+            builder.Append("<color=#b7bfff99>Must use one:</color>  ");
             for (int i = 0; i < currentRequiredWords.Count; i++) {
                 string word = currentRequiredWords[i];
                 bool wordUsed = !hasRequiredWord && matchValue.Contains(word.ToLower());
                 if (wordUsed) { hasRequiredWord = true; }
-                builder.Append("<color=" + (wordUsed ? "green" : "white") + ">");
+                builder.Append("<color=" + (wordUsed ? "#fffeb9" : "#b7bfff") + ">");
                 builder.Append(word);
                 builder.Append("</color>");
                 if (i < currentRequiredWords.Count - 1) {

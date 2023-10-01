@@ -1501,20 +1501,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3280329197907824137, guid: 1902cfc4101498d48a16dbb5bf7b99e9, type: 3}
-      propertyPath: sceneKey
-      value: urinal
-      objectReference: {fileID: 0}
-    - target: {fileID: 3280329197907824137, guid: 1902cfc4101498d48a16dbb5bf7b99e9, type: 3}
       propertyPath: sceneAnimator
       value: 
       objectReference: {fileID: 79086093}
     - target: {fileID: 3280329197907824141, guid: 1902cfc4101498d48a16dbb5bf7b99e9, type: 3}
       propertyPath: m_Name
       value: DialogueSystem
-      objectReference: {fileID: 0}
-    - target: {fileID: 3280329197907824141, guid: 1902cfc4101498d48a16dbb5bf7b99e9, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1902cfc4101498d48a16dbb5bf7b99e9, type: 3}
