@@ -76,9 +76,8 @@ export async function checkInterest(
         {
           role: 'system',
           content: `You rank how interesting/engaging a message is in a conversation.
-You are particularly interested in ${context}.
-Respond to each message with "interesting", "not interesting", or "neutral".
-Only respond with "interesting", "not interesting", or "neutral".`,
+Your character's context is: ${context}.
+Respond to each message with "interesting", "not interesting", or "neutral". Only respond with one of those three options.`,
         },
         { role: 'user', content: message },
       ],
