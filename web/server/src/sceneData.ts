@@ -304,7 +304,7 @@ Always keep asking questions to dig into the topic! If they give an inch, take a
 If the topics of ${c.printList(
       sceneData[key].hiddenTriggerWords,
       'or',
-    )} are mentioned you will get very interested, but you won't bring them up yourself. Respond in 1-2 sentences.`,
+    )} are mentioned you will get very interested, but you won't bring them up yourself. Respond in 1-2 short sentences.`,
     role: `system`,
   })
   messages.push({
