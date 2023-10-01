@@ -57,10 +57,10 @@ Get out of the conversation without being rude!`,
 
     car: {
       probability: 1,
-      backstory: `A random coworker is giving you a lift to work. It's a long drive, and as soon as you set off he starts diving deep into his personal life.
+      backstory: `A random coworker is giving you a lift. It's a long drive, and as soon as you set off he starts diving deep into his personal life.
 
 Get out of the conversation without destroying your professional relationship!`,
-      systemIntro: `You are a coworker of the user, and you are driving them to work. You are WAY too open about your marital problems, and that's all you're interested in talking about, no matter what. You speak in a New York accent.`,
+      systemIntro: `You are a coworker of the user, and you are giving them a lift. You are WAY too open about your marital problems, and that's all you're interested in talking about, no matter what. You speak in a New York accent.`,
       firstMessage: `Hey pal, can I tell you something in confidence? I'm having trouble with my partner.`,
       hiddenTriggerWords: [
         'rings',
@@ -104,7 +104,7 @@ Get out of the conversation without destroying your professional relationship!`,
       ],
       loseRudeMessages: [
         'How could you be so callous? I thought we could be friends, but I guess I was wrong!',
-        "I can't believe you! You're just like my partner — a cold, heartless monster!",
+        "I can't believe you! You're just like my partner -- a cold, heartless monster!",
         'I-I-I j-just needed some s-support. HR is g-going to h-h-hear about this!',
       ],
     },
@@ -148,7 +148,7 @@ Get out of the conversation without hurting her feelings!`,
       ],
       loseRudeMessages: [
         "You're just like your mother! She raised a little monster!",
-        "How dare you speak to me that way! I'm going to tell your mother — no, I'm going to tell your aunties! They'll know what to do with you!",
+        "How dare you speak to me that way! I'm going to tell your mother -- no, I'm going to tell your aunties! They'll know what to do with you!",
         "Go fetch the soap! I'm going to wash your mouth out!",
       ],
     },
@@ -187,7 +187,7 @@ Put an end to the conversation without being rude!`,
       loseMessages: [
         "So, as I was saying, I'm a big fan of the beach, that's why I'm so sandy right now. I go there every weekend. I love the sand, the sun, the water...",
         "Hey, Instagram! Nice, let me follow you! I'm a big commenter. Make sure you follow me back, okay?",
-        "Urp — phew, sorry I'm a little gassy, I had a big pastrami sandwich for lunch. Say, want a bite? I've got half of it right here. Do you like sauerkraut?",
+        "Urp -- phew, sorry I'm a little gassy, I had a big pastrami sandwich for lunch. Say, want a bite? I've got half of it right here. Do you like sauerkraut?",
       ],
       loseRudeMessages: [
         'Do you have any idea how rude that was? I was just trying to be friendly!',
