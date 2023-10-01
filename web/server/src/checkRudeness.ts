@@ -10,18 +10,21 @@ export async function checkRudeness(
       {
         role: 'system',
         content: `ONLY RESPOND WITH A NUMBER.
-You rank the politeness of messages. Respond to each message with a number from -10 to 10 where -10 is very polite and 10 is very rude.
+You rank the politeness of messages. Respond to each message with a number from 1 to 10 where 1 is VERY rude and 10 is polite.
 This is in response to the text, "${previousMessage}".
-How rude is the following message? ONLY RESPOND WITH A NUMBER.`,
+How polite is the following message? ONLY RESPOND WITH A NUMBER.`,
       },
       { role: 'user', content: message },
     ],
     1,
   )
-  const rudeness = negativeTenToTenStringToNegativeOneToOne(
+  const rudeness = oneToTenStringToNegativeOneToOne(
     response || '5',
   )
-  c.sub(`rudeness is ${rudeness} (response: ${response})`)
+  c.sub(
+    `rudeness is ${rudeness} (response: ${response})`,
+    previousMessage,
+  )
   return rudeness
 }
 
