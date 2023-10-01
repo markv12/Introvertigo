@@ -77,7 +77,7 @@ export async function checkInterest(
           role: 'system',
           content: `You rank how interesting/engaging a message is in a conversation.
 Your character's context is: ${context}.
-Respond to each message with "interesting", "not interesting", or "neutral". Only respond with one of those three options.`,
+Respond to each message with "very interesting", "not interesting", or "neutral". Only respond with one of those three options.`,
         },
         { role: 'user', content: message },
       ],
@@ -88,7 +88,7 @@ Respond to each message with "interesting", "not interesting", or "neutral". Onl
     .toLowerCase()
   let interest = 0
   if (response.includes('not')) interest = -1
-  else if (response.includes('interesting')) interest = 1
+  else if (response.includes('very')) interest = 1
 
   c.sub(`interest is ${interest} (response: ${response})`)
   return interest
