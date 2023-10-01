@@ -77,7 +77,7 @@ export async function checkInterest(
           role: 'system',
           content: `You rank how interesting a message is in a conversation.
 Your character's context is: ${context}.
-Something is considered interesting only if it is specifically related to your character's context.
+Things that are only vaguely related to your character's context are not interesting.
 Respond to each message with "EXTREMELY interesting", "VERY interesting", or "kind of interesting". `,
         },
         { role: 'user', content: message },
