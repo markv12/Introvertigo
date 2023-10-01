@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -615,6 +615,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2d881ed2c8fe1344583688860be1bd9c, type: 2}
+    - target: {fileID: -6313004078139390537, guid: 5e9846bda719133428e040121f8ff6ec, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.0446956
+      objectReference: {fileID: 0}
     - target: {fileID: -5713056762112849301, guid: 5e9846bda719133428e040121f8ff6ec, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -632,16 +636,32 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 3fd463ac51daf3e4bb0f6d895a1efe2c, type: 2}
     - target: {fileID: -2267386370532640393, guid: 5e9846bda719133428e040121f8ff6ec, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.276
+      propertyPath: m_LocalPosition.y
+      value: 0.9253726
       objectReference: {fileID: 0}
+    - target: {fileID: -2267386370532640393, guid: 5e9846bda719133428e040121f8ff6ec, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.103
+      objectReference: {fileID: 0}
+    - target: {fileID: -1066698181835293880, guid: 5e9846bda719133428e040121f8ff6ec, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d90266f85fbc485478f479a4eca40c5f, type: 2}
     - target: {fileID: 919132149155446097, guid: 5e9846bda719133428e040121f8ff6ec, type: 3}
       propertyPath: m_Name
       value: Kitchen_ED
       objectReference: {fileID: 0}
     - target: {fileID: 6284321369727437977, guid: 5e9846bda719133428e040121f8ff6ec, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.2814
+      objectReference: {fileID: 0}
+    - target: {fileID: 6284321369727437977, guid: 5e9846bda719133428e040121f8ff6ec, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.199
+      objectReference: {fileID: 0}
+    - target: {fileID: 6284321369727437977, guid: 5e9846bda719133428e040121f8ff6ec, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.18609715
+      value: 0.1651
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e9846bda719133428e040121f8ff6ec, type: 3}
