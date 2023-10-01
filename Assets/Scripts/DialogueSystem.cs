@@ -113,7 +113,7 @@ public class DialogueSystem : MonoBehaviour {
         IEnumerator SayRoutine() {
             whatYouSaidText.text = inputText;
             whatYouSaidText.ForceMeshUpdate();
-            whatYouSaidBG.sizeDelta = whatYouSaidBG.sizeDelta.SetX(whatYouSaidText.preferredWidth + 35);
+            whatYouSaidBG.sizeDelta = whatYouSaidBG.sizeDelta.SetX(whatYouSaidText.preferredWidth + 50);
             whatYouSaidBG.gameObject.SetActive(true);
             whatYouSaidText.text = "";
             List<DialogueCommand> commands = DialogueUtility.ProcessInputString(inputText, out string processedMessage);
@@ -135,7 +135,7 @@ public class DialogueSystem : MonoBehaviour {
         enemyDialogueBG.gameObject.SetActive(true);
         enemyDialogue.text = message;
         enemyDialogue.ForceMeshUpdate();
-        enemyDialogueBG.sizeDelta = enemyDialogueBG.sizeDelta.SetY(enemyDialogue.renderedHeight + 75);
+        enemyDialogueBG.sizeDelta = enemyDialogueBG.sizeDelta.SetY(enemyDialogue.renderedHeight + 80);
         enemyDialogue.text = "";
         this.EnsureCoroutineStopped(ref enemyTalkRoutine);
         List<DialogueCommand> commands = DialogueUtility.ProcessInputString(message, out string processedMessage);
