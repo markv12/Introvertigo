@@ -75,8 +75,8 @@ export async function checkInterest(
       [
         {
           role: 'system',
-          content: `You rank how exciting a message is in a conversation.
-Your character's context is: ${context}.
+          content: `You rank how exciting a message is to a character.
+The character's context is: "${context}"
 Respond to each message with "EXTREMELY exciting", "exciting", or "kind of exciting".
 Only respond with one of those three options.`,
           // Do not be too generous with your ratings.
