@@ -6,6 +6,7 @@ public class UrinalSceneAnimator : SceneAnimator {
     public SpriteRenderer playerRenderer;
     public Transform enemyT;
     public SpriteRenderer enemyRenderer;
+    public WorldSpriteSineColorAnimator enemySineAnim;
 
     public Transform cameraT;
     public int startIndex;
@@ -14,8 +15,21 @@ public class UrinalSceneAnimator : SceneAnimator {
         MoveToIndex(startIndex);
     }
 
+    private int rudeCount = 0;
     public override EndType HandleResponse(GPTResponse gptResponse) {
-        if(gptResponse.rating < -0.1f) {
+        if (gptResponse.rudeness > 0) {
+            rudeCount++;
+        }
+        if (rudeCount == 0) {
+            enemySineAnim.enabled = false;
+            enemyRenderer.color = Color.white;
+        } else if (rudeCount == 1) {
+            enemySineAnim.enabled = true;
+        } else if (rudeCount >= 2) {
+            return EndType.rude;
+        }
+
+        if (gptResponse.rating < -0.1f) {
             if(currentIndex < steps.Length - 1) {
                 MoveToIndex(currentIndex + 1);
             } else {
@@ -28,6 +42,7 @@ public class UrinalSceneAnimator : SceneAnimator {
                 return EndType.bad;
             }
         }
+     
         return EndType.none;
     }
 

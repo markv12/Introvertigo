@@ -134,7 +134,7 @@ public class DialogueSystem : MonoBehaviour {
                 //endScreen.ShowEnd(sceneAnimator.EndSprite(EndType.rude), GameRequestManager.CurrentScenario.EndText(EndType.rude));
                 EnemyTalk(gptResponse.reply);
             } else {
-                endScreen.ShowEnd(sceneAnimator.EndSprite(endType), GameRequestManager.CurrentScenario.EndText(endType));
+                endScreen.ShowEnd(sceneAnimator.EndSprite(endType), GameRequestManager.CurrentScenario.EndText(endType), endType == EndType.rude);
             }
         }
     }

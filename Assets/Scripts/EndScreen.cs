@@ -9,6 +9,7 @@ public class EndScreen : MonoBehaviour {
     public Image mainImage;
     public TMP_Text mainText;
     public Button forwardButton;
+    public GameObject rudeImage;
 
     private void Awake() {
         forwardButton.onClick.AddListener(() => {
@@ -16,10 +17,11 @@ public class EndScreen : MonoBehaviour {
         });
     }
 
-    public void ShowEnd(Sprite image, string text) {
+    public void ShowEnd(Sprite image, string text, bool rude) {
         StartCoroutine(EndRoutine());
 
         IEnumerator EndRoutine() {
+            rudeImage.SetActive(rude);
             mainImage.sprite = image;
             mainText.text = "\"" + text + "\"";
             mainGroup.alpha = 0;
