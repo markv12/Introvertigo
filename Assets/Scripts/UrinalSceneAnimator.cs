@@ -16,6 +16,7 @@ public class UrinalSceneAnimator : SceneAnimator {
     }
 
     private int rudeCount = 0;
+    private const float RATING_DEAD_ZONE = 0.15f;
     public override EndType HandleResponse(GPTResponse gptResponse) {
         if (gptResponse.rudeness > 0) {
             rudeCount++;
@@ -29,13 +30,13 @@ public class UrinalSceneAnimator : SceneAnimator {
             return EndType.rude;
         }
 
-        if (gptResponse.rating < -0.1f) {
+        if (gptResponse.rating < -RATING_DEAD_ZONE) {
             if(currentIndex < steps.Length - 1) {
                 MoveToIndex(currentIndex + 1);
             } else {
                 return EndType.good;
             }
-        } else if (gptResponse.rating > 0.1f) {
+        } else if (gptResponse.rating > RATING_DEAD_ZONE) {
             if(currentIndex > 0) {
                 MoveToIndex(currentIndex - 1);
             } else {
