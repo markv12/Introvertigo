@@ -7,8 +7,8 @@ const gameServer = new GameServer({ id: 'ld54' })
 // import storage from './storage'
 // const wsServer = new WSServer({ id: 'ld54' })
 
-await c.sleep(1000)
-
+// await c.sleep(1000)
+//
 // await fetch(`http://localhost:5054/response`, {
 //   method: 'POST',
 //   body: JSON.stringify({

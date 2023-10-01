@@ -7,7 +7,7 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
       backstory: `You finally made it to the bathroom after drinking three entire sports drinks. You just started your business when suddenly another bathroom-goer starts talking to you.
 
 Get out of the conversation without being rude!`,
-      systemIntro: `You are a WAY-too-chatty guy standing at the urinal next to the user. You speak in a South Dakota accent, and you're overly familiar in your tone.`,
+      systemIntro: `I want you to act as a WAY-too-chatty guy standing at the urinal next to the user. You speak in a South Dakota accent, and you're overly familiar in your tone.`,
       firstMessage: `Heyyy there bud, how's your day going? This is my favorite part of the day.`,
       hiddenTriggerWords: [
         'water parks',
@@ -56,7 +56,7 @@ Get out of the conversation without being rude!`,
       backstory: `A random coworker is giving you a lift to work. It's a long drive, and as soon as you set off he starts diving deep into his personal life.
 
 Get out of the conversation without destroying your professional relationship!`,
-      systemIntro: `You are a coworker of the user, and you are driving them to work. You are WAY too open about your marital problems, and that's all you're interested in talking about, no matter what. You speak in a New York accent.`,
+      systemIntro: `I want you to act as a coworker of the user, and you are driving them to work. You are WAY too open about your marital problems, and that's all you're interested in talking about, no matter what. You speak in a New York accent.`,
       firstMessage: `Hey pal, can I tell you something in confidence? I'm having trouble with my partner.`,
       hiddenTriggerWords: [
         'rings',
@@ -107,7 +107,7 @@ Get out of the conversation without destroying your professional relationship!`,
       backstory: `Your grandma corners you after family dinner and starts asking questions you don't feel comfortable answering.
 
 Get out of the conversation without hurting her feelings!`,
-      systemIntro: `You are the user's grandma. You are WAY too interested in the user's romantic life, wryly judgmental of their life choices, and a little hard of hearing. You continually steer the conversation towards the user's love life. You speak in a Southern accent.`,
+      systemIntro: `I want you to act as the user's grandma. You are WAY too interested in the user's romantic life, wryly judgmental of their life choices, and a little hard of hearing. You continually steer the conversation towards the user's love life. You speak in a Southern accent.`,
       firstMessage: `So, honey, how's that little boyfriend of yours??`,
       hiddenTriggerWords: [
         'first dates',
@@ -151,7 +151,7 @@ Get out of the conversation without hurting her feelings!`,
       backstory: `You're taking a train across town. Your headphones are on; you're grooving. Suddenly, a stranger comes into your field of view. He doesn't seem to blink, and he seems to be expecting a response from you. Reluctantly, you take off your headphones.
 
 Put an end to the conversation without being rude!`,
-      systemIntro: `You are a happy-go-lucky guy sitting near the user on a train. You're absolutely oblivious to the fact that they don't want to speak to you. You speak in a British accent, and you're slurring your words.`,
+      systemIntro: `I want you to act as a happy-go-lucky guy sitting near the user on a train. You're absolutely oblivious to the fact that they don't want to speak to you. You speak in a British accent, and you're slurring your words.`,
       firstMessage: `How 'bout that weather, eh?`,
       hiddenTriggerWords: ['sketching', 'beaches', 'birds'],
       userRequiredWords: [
@@ -194,7 +194,7 @@ Put an end to the conversation without being rude!`,
       backstory: `You've just sat down for a long plane ride. As you open your book to read, you notice the person next to you glance over. You know it's coming, so you lower the book with an internal sigh as she starts up the small talk.
 
 End the interaction without making it awkward!`,
-      systemIntro: `You are a chatty cathy who's sitting next to the user on a plane. You're VERY interested in what they're reading, and VERY excitable.`,
+      systemIntro: `I want you to act as a chatty lady who's sitting next to the user on a plane. You're VERY interested in what they're reading, and VERY excitable.`,
       firstMessage: `Look at you, smartypants! I forgot my book, but you've got yours! Whatcha reading over there?`,
       hiddenTriggerWords: ['zen', 'horses', 'puzzles'],
       userRequiredWords: [
@@ -240,7 +240,7 @@ End the interaction without making it awkward!`,
       backstory: `Just as you start your last set of bench presses at the gym, you hear a voice from overhead. Your arms tremble, but you're stuck there until they finish talking and help you put the bar back!
 
 Get out of the conversation before you run out of stamina!`,
-      systemIntro: `You are a brand new gym goer who strikes up a conversation with the user. You're VERY excited to be there and TOTALLY oblivious to the user's discomfort and desire to leave. You give lots of unwarranted weightlifting advice. You have a thick New Jersey accent.`,
+      systemIntro: `I want you to act as a brand new gym goer who strikes up a conversation with the user. You're VERY excited to be there and TOTALLY oblivious to the user's discomfort and desire to leave. You give lots of unwarranted weightlifting advice. You have a thick New Jersey accent.`,
       firstMessage: `Wow, that looks heavy! Have you been lifting long?`,
       hiddenTriggerWords: ['shoes', 'metal', 'baking'],
       userRequiredWords: [
@@ -302,12 +302,14 @@ ${responseFormatCommand}`,
   return messages
 }
 
-export const responseFormatCommand = `You MUST respond in this three-part format:
-- 1-10: How rude/nonsensical was the user's message? (1 is polite, 10 is rude) 
-- 1-10: How satisfying/interesting was the user's message? (1 is boring, 10 is interesting) 
-- Finally, write a leading response (1-2 sentences)
+export const responseFormatCommand = `RESPOND IN THREE PARTS:
+Rank how rude/nonsensical the user's message is from 1 (polite) to 10 (rude)
+Rank how satisfying/interesting the user's message is from 1 (boring) to 10 (interesting)
+Finally, write a leading response in quotation marks (1-2 sentences).
 
 Example Response:
+\`\`\`
 3
 7
-(sentence text)`
+"(sentence text)"
+\`\`\``

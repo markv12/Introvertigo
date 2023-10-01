@@ -2,7 +2,7 @@ import * as c from '../../common'
 import getGptResponse from './gpt'
 import { responseFormatCommand } from './sceneData'
 
-const maxAttempts = 2
+const maxAttempts = 1
 export default async function getGameResponse(
   body: GameMessage[],
 ): Promise<GameGPTResponse | GameGPTResponseError> {
@@ -42,9 +42,8 @@ export default async function getGameResponse(
     ])
     if (!response) return { error: 'no response' }
 
-    const regexResult = /(.*)\n[^:]*?:? ?(.*)\n(.*)/gi.exec(
-      response,
-    )
+    const regexResult =
+      /(.*)\n[^:]*?:? ?(.*)\n"?(.*)"?$/gi.exec(response)
 
     if (!regexResult) {
       c.error(`regex failed for:`, response)
