@@ -519,6 +519,7 @@ MonoBehaviour:
   playerRenderer: {fileID: 1718306639}
   enemyT: {fileID: 1784586093}
   enemyRenderer: {fileID: 1784586092}
+  enemySineAnim: {fileID: 1784586094}
   cameraT: {fileID: 2100378053}
   startIndex: 2
 --- !u!4 &79086094
@@ -3643,6 +3644,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1784586093}
   - component: {fileID: 1784586092}
+  - component: {fileID: 1784586094}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -3717,6 +3719,24 @@ Transform:
   m_Father: {fileID: 596930763}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1784586094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784586091}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 243349ee4c0356247a1533c4210fbe0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainRenderer: {fileID: 1784586092}
+  lowColor: {r: 1, g: 1, b: 1, a: 1}
+  highColor: {r: 1, g: 0.43962264, b: 0.43962264, a: 1}
+  lowScale: 1
+  highScale: 1
+  pulsesPerSecond: 1
 --- !u!1001 &1802923879
 PrefabInstance:
   m_ObjectHideFlags: 0
