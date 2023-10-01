@@ -304,8 +304,8 @@ ${responseFormatCommand}`,
 }
 
 export const responseFormatCommand = `You MUST respond in this format:
-- Answer: How rude or nonsensical was the user's response? (answer with number 1-10. 1 is polite, 10 is rude) 
-- Answer: How satisfying/interesting was the user's response? (answer with number 1-10. 1 is boring, 10 is interesting) 
+- Number 1-10: How rude or nonsensical was the user's response? (1 is polite, 10 is rude) 
+- Number 1-10: How satisfying/interesting was the user's response? (1 is boring, 10 is interesting) 
 - Finally, write a leading response (1-2 sentences)
 
 Example Response:
@@ -315,4 +315,4 @@ Example Response:
 (sentence text)
 \`\`\`
 
-ALWAYS INCLUDE the Yes/No/Meh part in your responses.`
+ALWAYS INCLUDE the number part in your responses.`
