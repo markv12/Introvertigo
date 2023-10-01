@@ -8,12 +8,17 @@ public class EndScreen : MonoBehaviour {
     public CanvasGroup mainGroup;
     public Image mainImage;
     public TMP_Text mainText;
+    public RectTransform mainTextBox;
     public Button forwardButton;
     public GameObject rudeImage;
 
+    private bool ended = false;
     private void Awake() {
         forwardButton.onClick.AddListener(() => {
-            LoadingScreen.LoadScene("UrinalScene");
+            if (!ended) {
+                ended = true;
+                GameFlowManager.NextScene();
+            }
         });
     }
 
@@ -23,9 +28,14 @@ public class EndScreen : MonoBehaviour {
         IEnumerator EndRoutine() {
             rudeImage.SetActive(rude);
             mainImage.sprite = image;
-            mainText.text = "\"" + text + "\"";
+
             mainGroup.alpha = 0;
             mainGroup.gameObject.SetActive(true);
+
+            mainText.text = "\"" + text + "\"";
+            mainText.ForceMeshUpdate();
+            mainTextBox.sizeDelta = mainTextBox.sizeDelta.SetY(mainText.renderedHeight + 70);
+
             yield return this.CreateAnimationRoutine(1.2f, (float progress) => {
                 mainGroup.alpha = Mathf.Lerp(0, 1, progress);
             });

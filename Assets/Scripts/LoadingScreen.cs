@@ -28,6 +28,7 @@ public class LoadingScreen : MonoBehaviour {
     }
 
     private const float FADE_TIME = 0.75f;
+    private static readonly Color FADE_BLUE = new Color(0.145098f, 0.1921569f, 0.4392157f);
     private static readonly WaitForSeconds middleWait = new WaitForSeconds(0.75f);
     private IEnumerator _FadeLoadScene(string sceneName) {
         AudioManager.Instance.FadeOutBGAudio();
@@ -35,7 +36,7 @@ public class LoadingScreen : MonoBehaviour {
         async.allowSceneActivation = false;
 
         mainImage.enabled = true;
-        mainImage.color = Color.black.SetA(mainImage.color.a);
+        mainImage.color = FADE_BLUE.SetA(mainImage.color.a);
         Color startColor = mainImage.color;
         Color endColor = mainImage.color.SetA(1);
         float progress = 0;
