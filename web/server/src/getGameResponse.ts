@@ -18,9 +18,9 @@ export default async function getGameResponse(
       100,
     )
 
-  if (body.length > 4)
+  if (body.length > 3)
     // * throw out old messages
-    body = [body[0], ...body.slice(-4)]
+    body = [body[0], ...body.slice(-2)]
 
   c.log(`generating based on messages:`, body)
 

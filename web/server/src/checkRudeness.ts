@@ -8,7 +8,7 @@ export async function checkRudeness(
     {
       role: 'system',
       content:
-        'You rank the politeness/clarity of messages. Respond to each message with a number from 1 to 10 where 1 is VERY polite and 10 is rude/unintelligible.',
+        'You rank the politeness/clarity of messages. Respond to each message with a number from 1 to 10 where 1 is VERY polite and 10 is rude or unintelligible.',
     },
     { role: 'user', content: message },
   ])
