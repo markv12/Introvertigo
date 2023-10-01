@@ -28,7 +28,7 @@ export async function checkInterest(
   const response = await getGptResponse([
     {
       role: 'system',
-      content: `You rank how interesting/engaging a message is in a conversation. Respond to each incoming message with a number from 1 to 10 where 1 is NOT and 10 is VERY interesting/engaging.
+      content: `You rank from 1-10 how interesting/engaging a message is in a conversation. ONLY REPLY with a number from 1 to 10 where 1 is NOT interesting and 10 is VERY interesting/engaging.
 Context is: ${context}
 Previous message was: ${previousMessage}`,
     },
