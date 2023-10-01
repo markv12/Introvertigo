@@ -27,7 +27,7 @@ export async function checkRudeness(
       [
         {
           role: 'system',
-          content: `You rank the politeness of messages. Respond to each message with "polite", "rude", or "neutral".
+          content: `You rank the politeness/clarity of messages. Respond to each message with "polite", "rude", or "neutral".
 This is in response to the text, "${previousMessage}".
 How polite is the following message? Only respond with "polite", "rude", or "neutral".`,
         },
