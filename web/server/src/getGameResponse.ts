@@ -9,6 +9,10 @@ export default async function getGameResponse(
   if (latestMessage.role !== 'user')
     return { error: 'latest message is not user' }
 
+  const commandText = body[0].content
+    .slice(body[0].content.indexOf('You MUST '))
+    .trim()
+
   // c.log(`generating based on messages:`, body)
 
   // if last system message is more than 2 messages ago, we'll add a new one
@@ -30,7 +34,7 @@ export default async function getGameResponse(
       ...body.slice(0, -1),
       // * we toss in a reminder for the prompt that doesn't get added to the official message list
       {
-        content: `Don't forget to respond to every message in the three-line format.`,
+        content: commandText,
         role: 'system',
       },
       latestMessage,
@@ -43,7 +47,19 @@ export default async function getGameResponse(
 
     if (!regexResult) {
       c.error(`regex failed for:`, response)
-      continue
+      if (attempts < maxAttempts) continue
+      else {
+        c.log(`returning anyway`)
+        return {
+          rudeness: 0,
+          rating: 0,
+          reply: response,
+          messages: [
+            ...body,
+            { content: response, role: 'assistant' },
+          ],
+        }
+      }
     }
 
     const [, rudenessString, ratingString, replyString] =
@@ -78,6 +94,6 @@ export default async function getGameResponse(
 const yesNoMehToNumber = (val: string) => {
   val = val.toLowerCase()
   if (val.startsWith('yes')) return 1
-  if (val.startsWith('no')) return 0
-  return 0.5
+  if (val.startsWith('no')) return -1
+  return 0
 }

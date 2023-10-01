@@ -4,7 +4,9 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
   {
     urinal: {
       probability: 1,
-      backstory: `You finally made it to the bathroom after drinking three sports drinks. You just started your business when suddenly another bathroom-goer starts talking to you. Get out of the conversation without being rude!`,
+      backstory: `You finally made it to the bathroom after drinking three entire sports drinks. You just started your business when suddenly another bathroom-goer starts talking to you.
+
+Get out of the conversation without being rude!`,
       systemIntro: `You are a WAY-too-chatty guy standing at the urinal next to the user. You speak in a South Dakota accent, and you're overly familiar in your tone.`,
       firstMessage: `Heyyy there bud, how's your day going? This is my favorite part of the day.`,
       ratingCondition:
@@ -52,7 +54,9 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
 
     car: {
       probability: 1,
-      backstory: `A random coworker is giving you a lift to work. It's a long drive, and as soon as you set off he starts diving deep into his personal life. Get out of the conversation without destroying your professional relationship!`,
+      backstory: `A random coworker is giving you a lift to work. It's a long drive, and as soon as you set off he starts diving deep into his personal life.
+
+Get out of the conversation without destroying your professional relationship!`,
       systemIntro: `You are a coworker of the user, and you are driving them to work. You are WAY too open about your marital problems, and that's all you're interested in talking about, no matter what. You speak in a New York accent.`,
       firstMessage: `Hey pal, can I tell you something in confidence? I'm having trouble with my partner.`,
       ratingCondition: 'Was their response satisfying?',
@@ -100,7 +104,9 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
 
     grandma: {
       probability: 1,
-      backstory: `Your grandma corners you after family dinner and starts asking questions you don't feel comfortable answering. Get out of the conversation without hurting her feelings!`,
+      backstory: `Your grandma corners you after family dinner and starts asking questions you don't feel comfortable answering.
+
+Get out of the conversation without hurting her feelings!`,
       systemIntro: `You are the user's grandma. You are WAY too interested in the user's romantic life, wryly judgmental of their life choices, and a little hard of hearing. You continually steer the conversation towards the user's love life. You speak in a Southern accent.`,
       firstMessage: `So, honey, how's that little boyfriend of yours??`,
       ratingCondition: `Was their response satisfying/interesting?`,
@@ -141,7 +147,9 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
 
     train: {
       probability: 1,
-      backstory: `You're taking a train across town. Your headphones are on; you're grooving. Suddenly, a stranger comes into your field of view. He doesn't seem to blink, and he seems to be expecting a response from you. Reluctantly, you take off your headphones. Put an end to the conversation without being rude!`,
+      backstory: `You're taking a train across town. Your headphones are on; you're grooving. Suddenly, a stranger comes into your field of view. He doesn't seem to blink, and he seems to be expecting a response from you. Reluctantly, you take off your headphones.
+
+Put an end to the conversation without being rude!`,
       systemIntro: `You are a happy-go-lucky guy sitting near the user on a train. You're absolutely oblivious to the fact that they don't want to speak to you. You speak in a British accent, and you're slurring your words.`,
       firstMessage: `How 'bout that weather, eh?`,
       ratingCondition:
@@ -183,7 +191,9 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
 
     plane: {
       probability: 1,
-      backstory: `You've just sat down for a long plane ride. As you open your book to read, you notice the person next to you glance over. You know it's coming, so you lower the book with an internal sigh as she starts up the small talk. End the interaction without making it awkward!`,
+      backstory: `You've just sat down for a long plane ride. As you open your book to read, you notice the person next to you glance over. You know it's coming, so you lower the book with an internal sigh as she starts up the small talk.
+
+End the interaction without making it awkward!`,
       systemIntro: `You are a chatty cathy who's sitting next to the user on a plane. You're VERY interested in what they're reading, and VERY excitable.`,
       firstMessage: `Look at you, smartypants! I forgot my book, but you've got yours! Whatcha reading over there?`,
       ratingCondition:
@@ -224,7 +234,9 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
 
     gym: {
       probability: 1,
-      backstory: `Just as you start your last set of bench presses at the gym, you hear a voice from overhead. Your arms tremble, but you're stuck there until they finish talking and help you put the bar back! Get out of the conversation before you run out of stamina!`,
+      backstory: `Just as you start your last set of bench presses at the gym, you hear a voice from overhead. Your arms tremble, but you're stuck there until they finish talking and help you put the bar back!
+
+Get out of the conversation before you run out of stamina!`,
       systemIntro: `You are a brand new gym goer who strikes up a conversation with the user. You're VERY excited to be there and TOTALLY oblivious to the user's discomfort and desire to leave. You have a thick New Jersey accent.`,
       firstMessage: `Wow, that looks heavy! Have you been lifting long?`,
       ratingCondition:
@@ -247,9 +259,9 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
         'nuts',
       ],
       winMessages: [
-        'Oh shoot, I just realized you totally need a spot. Let me get that for you!',
-        "I... can see that you're in the middle of a set. I'll be... over here.",
-        "Oh wow, you're really focused! Sorry for distracting you! I'll leave you in peace.",
+        'Oh shoot, I just realized you totally need a spot. Sorry for yakking your ear off!',
+        "I... can see that you're in the middle of a set. I'll be over there if you need me.",
+        "Looks like you're really focused! Sorry for distracting you! I'll leave you in peace.",
       ],
       loseMessages: [
         "Oh, that reminds me! I've been lifting for about a year now, and I've learned SO much. I first got inspired by...",
