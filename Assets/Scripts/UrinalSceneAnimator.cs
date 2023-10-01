@@ -14,12 +14,21 @@ public class UrinalSceneAnimator : SceneAnimator {
         MoveToIndex(startIndex);
     }
 
-    public override void HandleResponse(GPTResponse gptResponse) {
-        if(gptResponse.rating < -0.5f) {
-            MoveToIndex(currentIndex + 1);
-        } else if (gptResponse.rating > 0.5f) {
-            MoveToIndex(currentIndex - 1);
+    public override EndType HandleResponse(GPTResponse gptResponse) {
+        if(gptResponse.rating < -0.1f) {
+            if(currentIndex < steps.Length - 1) {
+                MoveToIndex(currentIndex + 1);
+            } else {
+                return EndType.good;
+            }
+        } else if (gptResponse.rating > 0.1f) {
+            if(currentIndex > 0) {
+                MoveToIndex(currentIndex - 1);
+            } else {
+                return EndType.bad;
+            }
         }
+        return EndType.none;
     }
 
     private Coroutine enemyRoutine;
@@ -38,12 +47,12 @@ public class UrinalSceneAnimator : SceneAnimator {
         Quaternion cameraEndRotation = step.cameraPos.rotation;
 
         this.EnsureCoroutineStopped(ref enemyRoutine);
-        enemyRoutine = this.CreateAnimationRoutine(1f, (float progress) => {
+        enemyRoutine = this.CreateAnimationRoutine(1.2f, (float progress) => {
             enemyT.position = Vector3.Lerp(enemyStartPos, enemyEndPos, Easing.easeInOutSine(0, 1, progress));
         });
 
         this.EnsureCoroutineStopped(ref cameraRoutine);
-        cameraRoutine = this.CreateAnimationRoutine(1.2f, (float progress) => {
+        cameraRoutine = this.CreateAnimationRoutine(1.35f, (float progress) => {
             float easedProgress = Easing.easeInOutSine(0, 1, progress);
             cameraT.SetPositionAndRotation(Vector3.Lerp(cameraStartPos, cameraEndPos, easedProgress), Quaternion.Lerp(cameraStartRotation, cameraEndRotation, easedProgress));
         });

@@ -17,6 +17,22 @@ public class GameScenario {
     public GameMessage[] messages;
     public string backstory;
     public string[] requiredWords;
+    public string win;
+    public string lose;
+    public string loseRude;
+
+    public string EndText(EndType endType) {
+        switch (endType) {
+            case EndType.good:
+                return win;
+            case EndType.bad:
+                return lose;
+            case EndType.rude:
+                return loseRude;
+            default:
+                return "";
+        }
+    }
 }
 
 [Serializable]
@@ -41,6 +57,7 @@ public class GameRequestManager : Singleton<GameRequestManager> {
             uri += "?key=" + sceneKey;
         }
         StartCoroutine(RestUtility.Get(uri, (response) => {
+            Debug.Log(response);
             currentScenario = JsonUtility.FromJson<GameScenario>(response);
             onComplete();
         }, () => {

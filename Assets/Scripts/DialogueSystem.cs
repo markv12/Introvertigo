@@ -19,10 +19,12 @@ public class DialogueSystem : MonoBehaviour {
     public GameObject backstoryBG;
     public TMP_Text backstoryText;
     public Button backstoryBeginButton;
+    public EndScreen endScreen;
     private DialogueVertexAnimator dvaEnemy;
     private DialogueVertexAnimator dvaWhatYouSaid;
 
-    private readonly List<string> currentRequiredWords = new List<string>(8);
+    private readonly List<string> allRequiredWords = new List<string>(18);
+    private string[] currentRequiredWords;
     private void Awake() {
         dvaEnemy = new DialogueVertexAnimator(enemyDialogue, null, PlayEnemyTalkSound);
         dvaWhatYouSaid = new DialogueVertexAnimator(whatYouSaidText, null, PlayPlayerTalkSound);
@@ -31,8 +33,9 @@ public class DialogueSystem : MonoBehaviour {
         GameRequestManager.Instance.GetGameScenario(sceneKey, () => {
             GameScenario gameScenario = GameRequestManager.CurrentScenario;
             if(gameScenario != null) {
-                currentRequiredWords.Clear();
-                currentRequiredWords.AddRange(gameScenario.requiredWords);
+                allRequiredWords.Clear();
+                allRequiredWords.AddRange(gameScenario.requiredWords);
+                currentRequiredWords = allRequiredWords.RandomSubset(5);
                 backstoryText.text = gameScenario.backstory;
                 backstoryBeginButton.gameObject.SetActive(true);
                 InputValueChanged("");
@@ -53,7 +56,7 @@ public class DialogueSystem : MonoBehaviour {
 
     private static readonly StringBuilder builder = new StringBuilder();
     private bool HasRequiredWord(string value, out string indicatorText) {
-        if(currentRequiredWords.Count == 0) {
+        if(currentRequiredWords.Length == 0) {
             indicatorText = "";
             return true;
         } else {
@@ -61,14 +64,14 @@ public class DialogueSystem : MonoBehaviour {
             builder.Clear();
             string matchValue = value.ToLower();
             builder.Append("<color=#b7bfff99>Must use one:</color>  ");
-            for (int i = 0; i < currentRequiredWords.Count; i++) {
+            for (int i = 0; i < currentRequiredWords.Length; i++) {
                 string word = currentRequiredWords[i];
                 bool wordUsed = !hasRequiredWord && matchValue.Contains(word.ToLower());
                 if (wordUsed) { hasRequiredWord = true; }
                 builder.Append("<color=" + (wordUsed ? "#fffeb9" : "#b7bfff") + ">");
                 builder.Append(word);
                 builder.Append("</color>");
-                if (i < currentRequiredWords.Count - 1) {
+                if (i < currentRequiredWords.Length - 1) {
                     builder.Append(",  ");
                 }
             }
@@ -97,12 +100,13 @@ public class DialogueSystem : MonoBehaviour {
 
         string inputText = mainInputField.text.Trim();
         if(!string.IsNullOrWhiteSpace(inputText) && inputText.Length <= 100) {
-            for (int i = 0; i < currentRequiredWords.Count; i++) {
-                if (inputText.ToLower().Contains(currentRequiredWords[i].ToLower())){
-                    currentRequiredWords.RemoveAt(i);
+            for (int i = 0; i < allRequiredWords.Count; i++) {
+                if (inputText.ToLower().Contains(allRequiredWords[i].ToLower())){
+                    allRequiredWords.RemoveAt(i);
                     break;
                 }
             }
+            currentRequiredWords = allRequiredWords.RandomSubset(5);
             mainInputField.text = "";
             StartCoroutine(SayRoutine());
             GameRequestManager.Instance.SubmitNextMessage(inputText, (GPTResponse rr) => {
@@ -125,8 +129,13 @@ public class DialogueSystem : MonoBehaviour {
             while (!dialogueFinished || Time.time < stopTime) {
                 yield return null;
             }
-            sceneAnimator.HandleResponse(gptResponse);
-            EnemyTalk(gptResponse.reply);
+            EndType endType = sceneAnimator.HandleResponse(gptResponse);
+            if (endType == EndType.none) {
+                //endScreen.ShowEnd(sceneAnimator.EndSprite(EndType.rude), GameRequestManager.CurrentScenario.EndText(EndType.rude));
+                EnemyTalk(gptResponse.reply);
+            } else {
+                endScreen.ShowEnd(sceneAnimator.EndSprite(endType), GameRequestManager.CurrentScenario.EndText(endType));
+            }
         }
     }
 

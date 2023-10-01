@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public static class ArrayExtensions
 {
@@ -19,5 +21,10 @@ public static class ArrayExtensions
             subset[i] = array[indices[i]];
         }
         return subset;
+    }
+
+    public static T[] RandomSubset<T>(this List<T> list, int length) {
+        if(length > list.Count) { return list.ToArray(); }
+        return list.OrderBy(x => UnityEngine.Random.Range(0f, 1f)).Take(length).ToArray();
     }
 }

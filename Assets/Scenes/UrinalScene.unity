@@ -496,11 +496,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyTalkClip: {fileID: 8300000, guid: 7e5908f3e795042cc978fc277ca00bba, type: 3}
   enemyPitchVariation: 1
+  goodEndSprite: {fileID: 21300000, guid: e99f26165e0177648afb2f228998674f, type: 3}
+  badEndSprite: {fileID: 21300000, guid: 83674db98c40c924f948e31172b0106d, type: 3}
+  rudeEndSprite: {fileID: 21300000, guid: f6eafc76b1146e54aa3d264f844a2945, type: 3}
   steps:
   - cameraPos: {fileID: 1876496402}
     enemyPos: {fileID: 1885883585}
     enemySprite: {fileID: 21300000, guid: 1d193835dd444594dab7f7db8bdc6dbb, type: 3}
-    playerSprite: {fileID: 21300000, guid: 447d956cd20a09f4d8bf88e9daf5c355, type: 3}
+    playerSprite: {fileID: 21300000, guid: 4e709137768bb934cbb86af178ebbd3f, type: 3}
   - cameraPos: {fileID: 949518850}
     enemyPos: {fileID: 1783784042}
     enemySprite: {fileID: 21300000, guid: 06dce162ae018d24595e557fefac046e, type: 3}
