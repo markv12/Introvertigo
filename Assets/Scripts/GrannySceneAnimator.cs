@@ -5,10 +5,10 @@ public class GrannySceneAnimator : SceneAnimator
 {
     public Transform cameraT;
     public Camera mainCamera;
+    public Vignette vignette;
     public GrannySceneStep[] steps;
     public int startIndex;
     private int currentIndex;
-    public Vignette vignette;
 
 
     private void Start()

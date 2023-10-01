@@ -17,7 +17,7 @@ public class Vignette : MonoBehaviour
     }
     public void SetVignette(float value)
     {
-        float transformValue = (1.1f - value * 0.6f);
+        float transformValue = (1.3f - value * 0.6f);
         targetScale = transformValue;
     }
 }

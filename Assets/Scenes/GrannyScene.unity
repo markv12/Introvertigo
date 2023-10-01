@@ -1276,15 +1276,16 @@ MonoBehaviour:
   rudeEndSprite: {fileID: 0}
   cameraT: {fileID: 1914573474}
   mainCamera: {fileID: 1914573473}
+  vignette: {fileID: 5376306099438066697}
   steps:
   - cameraPos: {fileID: 2014469444}
     cameraFOV: 75
     granny: {fileID: 1060220717}
-    vignetteAmount: 0.8
+    vignetteAmount: 0.6
   - cameraPos: {fileID: 1718833166}
     cameraFOV: 60
     granny: {fileID: 1664379947}
-    vignetteAmount: 0.5
+    vignetteAmount: 0.4
   - cameraPos: {fileID: 1035390278}
     cameraFOV: 40
     granny: {fileID: 2113423038}
@@ -1294,7 +1295,6 @@ MonoBehaviour:
     granny: {fileID: 211541578}
     vignetteAmount: 0
   startIndex: 2
-  vignette: {fileID: 5376306099438066697}
 --- !u!4 &1182635931
 Transform:
   m_ObjectHideFlags: 0
