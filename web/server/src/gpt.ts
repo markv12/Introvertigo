@@ -10,7 +10,7 @@ const openai = new OpenAI({
 let tokensUsedSinceStart = 0
 function tokensToCost(tokens: number) {
   const costPerToken = 0.0015 / 1000
-  return c.r2(tokens * costPerToken, 2)
+  return c.r2(tokens * costPerToken, 4)
 }
 
 export default async function getGptResponse(
