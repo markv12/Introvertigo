@@ -10,6 +10,7 @@ public class DialogueSystem : MonoBehaviour
     public string sceneKey;
     public SceneAnimator sceneAnimator;
 
+    public GameObject textEntryUI;
     public TMP_InputField mainInputField;
     public RectTransform enemyDialogueBG;
     public TMP_Text enemyDialogue;
@@ -30,6 +31,7 @@ public class DialogueSystem : MonoBehaviour
     private string[] currentRequiredWords;
     private void Awake()
     {
+        textEntryUI.SetActive(false);
         dvaEnemy = new DialogueVertexAnimator(enemyDialogue, null, PlayEnemyTalkSound);
         dvaWhatYouSaid = new DialogueVertexAnimator(whatYouSaidText, null, PlayPlayerTalkSound);
         enterButton.onClick.AddListener(Enter);
@@ -110,6 +112,7 @@ public class DialogueSystem : MonoBehaviour
         {
             backstoryBegan = true;
             backstoryBG.SetActive(false);
+            textEntryUI.SetActive(true);
             GameMessage[] messages = GameRequestManager.CurrentScenario.messages;
             if (messages.Length > 0)
             {
