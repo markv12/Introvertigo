@@ -32,9 +32,9 @@ export async function checkInterest(
     [
       {
         role: 'system',
-        content: `You are a machine that ranks from 1-10 how interesting/engaging a message is in a conversation. ONLY REPLY with a number from 1 to 10 where 1 is NOT interesting and 10 is VERY interesting/engaging.
+        content: `You rank how interesting/engaging a message is in a conversation. Respond to each message with a number from 1 to 10 where 1 is NOT interesting and 10 is VERY interesting/engaging.
+
 Context is: ${context}
-Previous message was: ${previousMessage}
 Example output: "5"`,
       },
       { role: 'user', content: message },
