@@ -15,10 +15,10 @@ public class UrinalSceneAnimator : SceneAnimator {
     }
 
     public override void HandleResponse(GPTResponse gptResponse) {
-        if(gptResponse.rating < 5) {
-            MoveToIndex(currentIndex - 1);
-        } else {
+        if(gptResponse.rating < -0.5f) {
             MoveToIndex(currentIndex + 1);
+        } else if (gptResponse.rating > 0.5f) {
+            MoveToIndex(currentIndex - 1);
         }
     }
 
