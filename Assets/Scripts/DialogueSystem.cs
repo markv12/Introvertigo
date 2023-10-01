@@ -156,6 +156,6 @@ public class DialogueSystem : MonoBehaviour {
     }
 
     private void PlayEnemyTalkSound(float pitchCenter) {
-        AudioManager.Instance.PlayRandomPitchSound(sceneAnimator.enemyTalkClip, 1.0f, pitchCenter, sceneAnimator.enemyPitchVariation);
+        AudioManager.Instance.PlayRandomPitchSound(sceneAnimator.enemyTalkClip, sceneAnimator.enemyTalkVolume, pitchCenter, sceneAnimator.enemyPitchVariation);
     }
 }
