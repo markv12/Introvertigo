@@ -35,17 +35,24 @@ export default async function getGameResponse(
   // const sanitizedMessage = c.sanitize(latestMessage.content)
   // latestMessage.content = sanitizedMessage.result
 
+  const fullContext = firstMessage.content.slice(
+    0,
+    firstMessage.content.indexOf('\n'),
+  )
   const keyWords = firstMessage.content.slice(
     firstMessage.content.indexOf('If the topics of ') + 17,
     firstMessage.content.indexOf('are mentioned'),
   )
 
   const promises = [
-    checkRudeness(latestMessage.content),
+    checkRudeness(
+      latestMessage.content,
+      body[body.length - 2]?.content || '',
+    ),
     checkInterest(
       latestMessage.content,
       body[body.length - 2]?.content || '',
-      keyWords,
+      fullContext,
     ),
     getGptResponse(body),
   ]

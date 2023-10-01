@@ -3,13 +3,16 @@ import getGptResponse from './gpt'
 
 export async function checkRudeness(
   message: string,
+  previousMessage: string,
 ): Promise<number> {
   const response = await getGptResponse(
     [
       {
         role: 'system',
-        content:
-          'You rank the politeness of messages. Respond to each message with a number from 1 to 10 where 1 is very polite and 10 is very rude.',
+        content: `ONLY RESPOND WITH A NUMBER.
+You rank the politeness of messages. Respond to each message with a number from 1 to 10 where 1 is very polite and 10 is very rude.
+This is in response to the text, "${previousMessage}".
+How rude is the following message? ONLY RESPOND WITH A NUMBER.`,
       },
       { role: 'user', content: message },
     ],
