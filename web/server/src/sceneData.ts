@@ -248,7 +248,7 @@ End the interaction without making it awkward!`,
       backstory: `Just as you start your last set of bench presses at the gym, you hear a voice from overhead. Your arms tremble, but you're stuck there until they finish talking and help you put the bar back!
 
 Get out of the conversation before you run out of stamina!`,
-      systemIntro: `You are a brand new gym goer who strikes up a conversation with the user. You're VERY excited to be there and TOTALLY oblivious to the user's discomfort and desire to leave. You have a thick New Jersey accent.`,
+      systemIntro: `You are a brand new gym goer who strikes up a conversation with the user. You're VERY excited to be there and TOTALLY oblivious to the user's discomfort and desire to leave. You give lots of unwarranted weightlifting advice. You have a thick New Jersey accent.`,
       firstMessage: `Wow, that looks heavy! Have you been lifting long?`,
       ratingCondition:
         'Was their response satisfying/interesting?',
@@ -268,6 +268,9 @@ Get out of the conversation before you run out of stamina!`,
         'steps',
         'sugar',
         'nuts',
+        'muscles',
+        'sweat',
+        'spotter',
       ],
       winMessages: [
         'Oh shoot, I just realized you totally need a spot. Sorry for yakking your ear off!',
@@ -294,7 +297,7 @@ export function getInitialMessages(key: SceneKey) {
   messages.push({
     content:
       sceneData[key].systemIntro +
-      ` Always keep asking questions to dig into the topic! If they give an inch, take a mile! NEVER apologize. NEVER back down.
+      ` Always keep asking questions to dig into the topic! If they give an inch, take a mile! NEVER apologize. NEVER back down. DO NOT accept the user's attempts to leave or end the conversation.
 If the topics of ${c.printList(
         sceneData[key].hiddenTriggerWords,
         'or',
