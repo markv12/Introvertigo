@@ -1,5 +1,6 @@
 import * as c from '../../common'
 import getGptResponse from './gpt'
+import { responseFormatCommand } from './sceneData'
 
 const maxAttempts = 2
 export default async function getGameResponse(
@@ -30,18 +31,15 @@ export default async function getGameResponse(
   while (attempts < maxAttempts) {
     attempts++
 
-    const response = await getGptResponse(
-      body,
-      //   [
-      //   ...body.slice(0, -1),
-      //   // * we toss in a reminder for the prompt that doesn't get added to the official message list
-      //   {
-      //     content: responseFormatCommand,
-      //     role: 'system',
-      //   },
-      //   latestMessage,
-      // ]
-    )
+    const response = await getGptResponse([
+      ...body.slice(0, -1),
+      // * we toss in a reminder for the prompt that doesn't get added to the official message list
+      {
+        content: responseFormatCommand,
+        role: 'system',
+      },
+      latestMessage,
+    ])
     if (!response) return { error: 'no response' }
 
     const regexResult = /(.*)\n[^:]*?:? ?(.*)\n(.*)/gi.exec(
