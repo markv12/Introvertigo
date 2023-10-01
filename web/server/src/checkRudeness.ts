@@ -29,7 +29,7 @@ export async function checkRudeness(
           role: 'system',
           content: `You rank the politeness/clarity of messages. Respond to each message with "polite", "rude", or "neutral".
 This is in response to the text, "${previousMessage}".
-How polite is the following message? Only respond with "polite", "rude", or "neutral".`,
+How polite is the following message? Only respond with "polite", "neutral", or "rude".`,
         },
         { role: 'user', content: message },
       ],
@@ -77,11 +77,11 @@ export async function checkInterest(
           role: 'system',
           content: `You rank how interesting/engaging a message is in a conversation.
 Your character's context is: ${context}.
-Respond to each message with "very interesting", "not interesting", or "neutral". Only respond with one of those three options.`,
+Respond to each message with "VERY engaging/interesting", "kind of engaging/interesting", or "not very engaging/interesting". Only respond with one of those three options.`,
         },
         { role: 'user', content: message },
       ],
-      7,
+      5,
     )
   )
     .replace(/"/g, '')
