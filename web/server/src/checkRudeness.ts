@@ -77,7 +77,9 @@ export async function checkInterest(
           role: 'system',
           content: `You rank how exciting a message is to a character.
 The character's context is: "${context}"
-Respond to each message with "EXTREMELY exciting", "exciting", or "kind of exciting".
+Messages about the character's context are more exciting.
+Messages that are clearly trying to end the conversation are also more exciting.
+Respond to each message with "VERY exciting", "exciting", or "kind of exciting".
 Only respond with one of those three options.`,
           // Do not be too generous with your ratings.
         },
@@ -90,7 +92,7 @@ Only respond with one of those three options.`,
     .toLowerCase()
   let interest = 0
   if (response.includes('kind')) interest = -1
-  else if (response.includes('extre')) interest = 1
+  else if (response.includes('very')) interest = 1
 
   c.sub(`interest is ${interest} (response: ${response})`)
   return interest
