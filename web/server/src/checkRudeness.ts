@@ -35,7 +35,8 @@ export async function checkInterest(
         content: `You rank how interesting/engaging a message is in a conversation. Respond to each message with a number from 1 to 10 where 1 is NOT interesting and 10 is VERY interesting/engaging.
 
 Context is: ${context}
-Example output: "5"`,
+
+Respond with a number from 1 to 10. Any other response will be ignored.`,
       },
       { role: 'user', content: message },
     ],
