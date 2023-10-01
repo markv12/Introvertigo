@@ -32,7 +32,7 @@ public class ScenarioEndScreen : MonoBehaviour {
             mainGroup.alpha = 0;
             mainGroup.gameObject.SetActive(true);
 
-            mainText.text = "\"" + text + "\"";
+            mainText.text = text;
             mainText.ForceMeshUpdate();
             mainTextBox.sizeDelta = mainTextBox.sizeDelta.SetY(mainText.renderedHeight + 70);
 

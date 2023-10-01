@@ -86,35 +86,43 @@ public class DialogueSystem : MonoBehaviour {
         }
     }
 
+    private bool backstoryBegan = false;
     private void BackstoryBegin() {
-        backstoryBG.SetActive(false);
-        GameMessage[] messages = GameRequestManager.CurrentScenario.messages;
-        if (messages.Length > 0) {
-            EnemyTalk(messages[messages.Length - 1].content);
+        if (!backstoryBegan) {
+            backstoryBegan = true;
+            backstoryBG.SetActive(false);
+            GameMessage[] messages = GameRequestManager.CurrentScenario.messages;
+            if (messages.Length > 0) {
+                EnemyTalk(messages[messages.Length - 1].content);
+            }
         }
     }
 
+    private bool enterDisabled = false;
     private void Enter() {
         bool dialogueFinished = false;
         float stopTime = 0;
-
-        string inputText = mainInputField.text.Trim();
-        if(!string.IsNullOrWhiteSpace(inputText) && inputText.Length <= 100) {
-            for (int i = 0; i < allRequiredWords.Count; i++) {
-                if (inputText.ToLower().Contains(allRequiredWords[i].ToLower())){
-                    allRequiredWords.RemoveAt(i);
-                    break;
+        if (!enterDisabled) {
+            enterDisabled = true;
+            string inputText = mainInputField.text.Trim();
+            if (!string.IsNullOrWhiteSpace(inputText) && inputText.Length <= 100) {
+                for (int i = 0; i < allRequiredWords.Count; i++) {
+                    if (inputText.ToLower().Contains(allRequiredWords[i].ToLower())) {
+                        allRequiredWords.RemoveAt(i);
+                        break;
+                    }
                 }
+                currentRequiredWords = allRequiredWords.RandomSubset(5);
+                mainInputField.text = "";
+                StartCoroutine(SayRoutine(inputText));
+                GameRequestManager.Instance.SubmitNextMessage(inputText, (GPTResponse rr) => {
+                    StartCoroutine(ResponseRoutine(rr));
+                });
             }
-            currentRequiredWords = allRequiredWords.RandomSubset(5);
-            mainInputField.text = "";
-            StartCoroutine(SayRoutine());
-            GameRequestManager.Instance.SubmitNextMessage(inputText, (GPTResponse rr) => {
-                StartCoroutine(ResponseRoutine(rr));
-            });
         }
 
-        IEnumerator SayRoutine() {
+
+        IEnumerator SayRoutine(string inputText) {
             whatYouSaidText.text = inputText;
             whatYouSaidText.ForceMeshUpdate();
             whatYouSaidBG.sizeDelta = whatYouSaidBG.sizeDelta.SetX(whatYouSaidText.preferredWidth + 50);
@@ -141,6 +149,7 @@ public class DialogueSystem : MonoBehaviour {
 
     private Coroutine enemyTalkRoutine;
     private void EnemyTalk(string message) {
+        enterDisabled = true;
         enemyDialogueBG.gameObject.SetActive(true);
         enemyDialogue.text = message;
         enemyDialogue.ForceMeshUpdate();
@@ -148,7 +157,7 @@ public class DialogueSystem : MonoBehaviour {
         enemyDialogue.text = "";
         this.EnsureCoroutineStopped(ref enemyTalkRoutine);
         List<DialogueCommand> commands = DialogueUtility.ProcessInputString(message, out string processedMessage);
-        enemyTalkRoutine = StartCoroutine(dvaEnemy.AnimateTextIn(commands, processedMessage, 1, null));
+        enemyTalkRoutine = StartCoroutine(dvaEnemy.AnimateTextIn(commands, processedMessage, 1, () => { enterDisabled = false; }));
     }
 
     private void PlayPlayerTalkSound(float pitchCenter) {
