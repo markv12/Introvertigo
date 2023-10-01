@@ -16,7 +16,7 @@ function tokensToCost(tokens: number) {
 export default async function getGptResponse(
   messages: ChatCompletionMessageParam[],
   maxTokens = 100,
-): Promise<string | undefined> {
+): Promise<string> {
   // c.l(`getting gpt response`, { messages, maxTokens })
   return getOutput(messages, maxTokens)
 }
@@ -24,7 +24,7 @@ export default async function getGptResponse(
 async function getOutput(
   messages: ChatCompletionMessageParam[],
   maxTokens = 40,
-) {
+): Promise<string> {
   try {
     const tokens = maxTokens
     // c.sub(`getting gpt response`, { messages, tokens })
@@ -48,7 +48,7 @@ async function getOutput(
         c.error(e)
       })
 
-    if (!response) return undefined
+    if (!response) return ''
     const text = response.choices[0].message.content
 
     let output = (text || ``)
@@ -74,10 +74,10 @@ async function getOutput(
       )})`,
     )
 
-    if (!output) return undefined
+    if (!output) return ''
     return output
   } catch (e) {
     c.error(e)
-    return undefined
+    return ''
   }
 }
