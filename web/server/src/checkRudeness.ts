@@ -39,8 +39,8 @@ How polite is the following message? Only respond with "polite", "rude", or "neu
     .replace(/"/g, '')
     .toLowerCase()
   let rudeness = 0
-  if (response.includes('polite')) rudeness = 1
-  else if (response.includes('rude')) rudeness = -1
+  if (response.includes('polite')) rudeness = -1
+  else if (response.includes('rude')) rudeness = 1
 
   c.sub(`rudeness is ${rudeness} (response: ${response})`)
   return rudeness
@@ -81,7 +81,7 @@ Respond to each message with "interesting", "not interesting", or "neutral". Onl
         },
         { role: 'user', content: message },
       ],
-      6,
+      7,
     )
   )
     .replace(/"/g, '')
