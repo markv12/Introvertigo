@@ -7,6 +7,7 @@ public abstract class SceneAnimator : MonoBehaviour {
     public float enemyTalkVolume = 1;
     [Range(0f, 2f)]
     public float enemyPitchVariation = 1;
+    public Sprite enemyPog;
     public Sprite goodEndSprite;
     public Sprite badEndSprite;
     public Sprite rudeEndSprite;

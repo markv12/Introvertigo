@@ -479,6 +479,7 @@ MonoBehaviour:
   enterButton: {fileID: 3280329199744752237}
   backstoryBG: {fileID: 3280329198281451744}
   backstoryText: {fileID: 3280329199806670493}
+  backstoryEnemyPog: {fileID: 7891642228425927635}
   backstoryBeginButton: {fileID: 3280329198143486015}
   shortWarning: {fileID: 9118756260536024681}
   missingRequiredWarning: {fileID: 4492211264973337024}

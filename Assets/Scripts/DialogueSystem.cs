@@ -20,6 +20,7 @@ public class DialogueSystem : MonoBehaviour
     public Button enterButton;
     public GameObject backstoryBG;
     public TMP_Text backstoryText;
+    public Image backstoryEnemyPog;
     public Button backstoryBeginButton;
     public GameObject shortWarning;
     public GameObject missingRequiredWarning;
@@ -36,6 +37,7 @@ public class DialogueSystem : MonoBehaviour
         dvaWhatYouSaid = new DialogueVertexAnimator(whatYouSaidText, null, PlayPlayerTalkSound);
         enterButton.onClick.AddListener(Enter);
         backstoryBeginButton.onClick.AddListener(BackstoryBegin);
+        backstoryEnemyPog.sprite = sceneAnimator.enemyPog;
         GameRequestManager.Instance.GetGameScenario(sceneKey, () =>
         {
             GameScenario gameScenario = GameRequestManager.CurrentScenario;
