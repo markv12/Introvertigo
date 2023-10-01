@@ -1,5 +1,6 @@
 import * as c from '../../common'
 import getGptResponse from './gpt'
+import { responseFormatCommand } from './sceneData'
 
 const maxAttempts = 3
 export default async function getGameResponse(
@@ -8,10 +9,6 @@ export default async function getGameResponse(
   const latestMessage = body[body.length - 1]
   if (latestMessage.role !== 'user')
     return { error: 'latest message is not user' }
-
-  const commandText = body[0].content
-    .slice(body[0].content.indexOf('You MUST '))
-    .trim()
 
   if (body.length > 5)
     // * throw out old messages
@@ -38,7 +35,7 @@ export default async function getGameResponse(
       ...body.slice(0, -1),
       // * we toss in a reminder for the prompt that doesn't get added to the official message list
       {
-        content: commandText,
+        content: responseFormatCommand,
         role: 'system',
       },
       latestMessage,
@@ -69,8 +66,10 @@ export default async function getGameResponse(
     const [, rudenessString, ratingString, replyString] =
       regexResult
 
-    const rudeness = yesNoMehToNumber(rudenessString)
-    const rating = yesNoMehToNumber(ratingString)
+    const rudeness =
+      oneToTenStringToNegativeOneToOne(rudenessString)
+    const rating =
+      oneToTenStringToNegativeOneToOne(ratingString)
     const reply = replyString.trim()
     const messages: GameMessage[] = [
       ...body,
@@ -100,4 +99,11 @@ const yesNoMehToNumber = (val: string) => {
   if (val.startsWith('yes')) return 1
   if (val.startsWith('no')) return -1
   return 0
+}
+
+const oneToTenStringToNegativeOneToOne = (val: string) => {
+  const num = parseInt(val)
+  if (isNaN(num)) return 0
+  const zeroToOne = (num - 1) / 9
+  return zeroToOne * 2 - 1
 }

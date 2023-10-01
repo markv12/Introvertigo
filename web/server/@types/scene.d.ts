@@ -36,7 +36,6 @@ interface GameMessage {
 interface SceneGeneratorData {
   probability: number
   backstory: string
-  ratingCondition: string
   userRequiredWords: string[]
   hiddenTriggerWords: string[]
   systemIntro: string

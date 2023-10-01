@@ -9,8 +9,6 @@ const sceneData: { [key in SceneKey]: SceneGeneratorData } =
 Get out of the conversation without being rude!`,
       systemIntro: `You are a WAY-too-chatty guy standing at the urinal next to the user. You speak in a South Dakota accent, and you're overly familiar in your tone.`,
       firstMessage: `Heyyy there bud, how's your day going? This is my favorite part of the day.`,
-      ratingCondition:
-        'Was their response satisfying/interesting',
       hiddenTriggerWords: [
         'water parks',
         'soccer',
@@ -60,7 +58,6 @@ Get out of the conversation without being rude!`,
 Get out of the conversation without destroying your professional relationship!`,
       systemIntro: `You are a coworker of the user, and you are driving them to work. You are WAY too open about your marital problems, and that's all you're interested in talking about, no matter what. You speak in a New York accent.`,
       firstMessage: `Hey pal, can I tell you something in confidence? I'm having trouble with my partner.`,
-      ratingCondition: 'Was their response satisfying?',
       hiddenTriggerWords: [
         'rings',
         'West Coast',
@@ -112,7 +109,6 @@ Get out of the conversation without destroying your professional relationship!`,
 Get out of the conversation without hurting her feelings!`,
       systemIntro: `You are the user's grandma. You are WAY too interested in the user's romantic life, wryly judgmental of their life choices, and a little hard of hearing. You continually steer the conversation towards the user's love life. You speak in a Southern accent.`,
       firstMessage: `So, honey, how's that little boyfriend of yours??`,
-      ratingCondition: `Was their response satisfying/interesting?`,
       hiddenTriggerWords: [
         'first dates',
         'black-and-white movies',
@@ -157,8 +153,6 @@ Get out of the conversation without hurting her feelings!`,
 Put an end to the conversation without being rude!`,
       systemIntro: `You are a happy-go-lucky guy sitting near the user on a train. You're absolutely oblivious to the fact that they don't want to speak to you. You speak in a British accent, and you're slurring your words.`,
       firstMessage: `How 'bout that weather, eh?`,
-      ratingCondition:
-        'Was their response satisfying/interesting?',
       hiddenTriggerWords: ['sketching', 'beaches', 'birds'],
       userRequiredWords: [
         'doodle',
@@ -202,8 +196,6 @@ Put an end to the conversation without being rude!`,
 End the interaction without making it awkward!`,
       systemIntro: `You are a chatty cathy who's sitting next to the user on a plane. You're VERY interested in what they're reading, and VERY excitable.`,
       firstMessage: `Look at you, smartypants! I forgot my book, but you've got yours! Whatcha reading over there?`,
-      ratingCondition:
-        'Was their response satisfying/interesting?',
       hiddenTriggerWords: ['zen', 'horses', 'puzzles'],
       userRequiredWords: [
         'focus',
@@ -250,8 +242,6 @@ End the interaction without making it awkward!`,
 Get out of the conversation before you run out of stamina!`,
       systemIntro: `You are a brand new gym goer who strikes up a conversation with the user. You're VERY excited to be there and TOTALLY oblivious to the user's discomfort and desire to leave. You give lots of unwarranted weightlifting advice. You have a thick New Jersey accent.`,
       firstMessage: `Wow, that looks heavy! Have you been lifting long?`,
-      ratingCondition:
-        'Was their response satisfying/interesting?',
       hiddenTriggerWords: ['shoes', 'metal', 'baking'],
       userRequiredWords: [
         'strength',
@@ -303,21 +293,7 @@ If the topics of ${c.printList(
         'or',
       )} are mentioned you will get very interested, but you won't bring them up yourself.
 
-You MUST respond in this format:
-- Answer: Was the user's response rude or nonsensical? (answer with Yes, No, or Meh) 
-- Answer: ${
-        sceneData[key].ratingCondition
-      } (answer with Yes, No, or Meh) 
-- Finally, write a leading response (1-2 sentences)
-
-Example Response:
-\`\`\`
-Meh
-Yes
-(sentence text)
-\`\`\`
-
-ALWAYS INCLUDE the Yes/No/Meh part in your responses.`,
+${responseFormatCommand}`,
     role: `system`,
   })
   messages.push({
@@ -326,3 +302,17 @@ ALWAYS INCLUDE the Yes/No/Meh part in your responses.`,
   })
   return messages
 }
+
+export const responseFormatCommand = `You MUST respond in this format:
+- Answer: How rude or nonsensical was the user's response? (answer with number 1-10. 1 is polite, 10 is rude) 
+- Answer: How satisfying/interesting was the user's response? (answer with number 1-10. 1 is boring, 10 is interesting) 
+- Finally, write a leading response (1-2 sentences)
+
+Example Response:
+\`\`\`
+3
+7
+(sentence text)
+\`\`\`
+
+ALWAYS INCLUDE the Yes/No/Meh part in your responses.`
