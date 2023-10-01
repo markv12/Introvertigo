@@ -285,15 +285,14 @@ export default sceneData
 export function getInitialMessages(key: SceneKey) {
   const messages: GameMessage[] = []
   messages.push({
-    content:
-      sceneData[key].systemIntro +
-      ` Always keep asking questions to dig into the topic! If they give an inch, take a mile! NEVER apologize. NEVER back down. DO NOT accept the user's attempts to leave or end the conversation.
-If the topics of ${c.printList(
-        sceneData[key].hiddenTriggerWords,
-        'or',
-      )} are mentioned you will get very interested, but you won't bring them up yourself.
+    content: `${responseFormatCommand}
+${sceneData[key].systemIntro}
 
-${responseFormatCommand}`,
+Always keep asking questions to dig into the topic! If they give an inch, take a mile! NEVER apologize. NEVER back down. DO NOT accept the user's attempts to leave or end the conversation.
+If the topics of ${c.printList(
+      sceneData[key].hiddenTriggerWords,
+      'or',
+    )} are mentioned you will get very interested, but you won't bring them up yourself.`,
     role: `system`,
   })
   messages.push({
@@ -304,8 +303,8 @@ ${responseFormatCommand}`,
 }
 
 export const responseFormatCommand = `You MUST respond in this format:
-- Number 1-10: How rude or nonsensical was the user's response? (1 is polite, 10 is rude) 
-- Number 1-10: How satisfying/interesting was the user's response? (1 is boring, 10 is interesting) 
+- Number 1-10: How rude or nonsensical was the user's message? (1 is polite, 10 is rude) 
+- Number 1-10: How satisfying/interesting was the user's message? (1 is boring, 10 is interesting) 
 - Finally, write a leading response (1-2 sentences)
 
 Example Response:
@@ -314,5 +313,4 @@ Example Response:
 7
 (sentence text)
 \`\`\`
-
 ALWAYS INCLUDE the number part in your responses.`
