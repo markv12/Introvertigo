@@ -19,7 +19,7 @@ public class DialogueSystem : MonoBehaviour {
     public GameObject backstoryBG;
     public TMP_Text backstoryText;
     public Button backstoryBeginButton;
-    public EndScreen endScreen;
+    public ScenarioEndScreen endScreen;
     private DialogueVertexAnimator dvaEnemy;
     private DialogueVertexAnimator dvaWhatYouSaid;
 
@@ -131,7 +131,7 @@ public class DialogueSystem : MonoBehaviour {
             }
             EndType endType = sceneAnimator.HandleResponse(gptResponse);
             if (endType == EndType.none) {
-                //endScreen.ShowEnd(sceneAnimator.EndSprite(EndType.rude), GameRequestManager.CurrentScenario.EndText(EndType.rude));
+                //endScreen.ShowEnd(sceneAnimator.EndSprite(EndType.bad), GameRequestManager.CurrentScenario.EndText(EndType.bad), true);
                 EnemyTalk(gptResponse.reply);
             } else {
                 endScreen.ShowEnd(sceneAnimator.EndSprite(endType), GameRequestManager.CurrentScenario.EndText(endType), endType == EndType.rude);
