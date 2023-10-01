@@ -289,19 +289,21 @@ If the topics of ${c.printList(
         'or',
       )} are mentioned you will get very interested, but you won't bring them up yourself.
 
-You MUST respond to every message in this three-line format:
-- Was the user's response rude or nonsensical? (answer with Yes, No, or Meh) 
-- ${
+You MUST respond in this format:
+- Answer: Was the user's response rude or nonsensical? (answer with Yes, No, or Meh) 
+- Answer: ${
         sceneData[key].ratingCondition
       } (answer with Yes, No, or Meh) 
 - Finally, write a leading response (1-2 sentences)
 
 Example Response:
+\`\`\`
 Meh
 Yes
 (sentence text)
+\`\`\`
 
-DO NOT ANSWER without the Yes/No/Meh part.`,
+ALWAYS INCLUDE the Yes/No/Meh part in your responses.`,
     role: `system`,
   })
   messages.push({
