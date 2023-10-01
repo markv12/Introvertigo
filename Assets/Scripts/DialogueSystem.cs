@@ -179,7 +179,8 @@ public class DialogueSystem : MonoBehaviour
             }
             else
             {
-                endScreen.ShowEnd(sceneAnimator.EndSprite(endType), GameRequestManager.CurrentScenario.EndText(endType), endType == EndType.rude, endType == EndType.good, endType == EndType.bad);
+                GameFlowManager.RecordSceneResult(endType, 0);
+                endScreen.ShowEnd(sceneAnimator.EndSprite(endType), GameRequestManager.CurrentScenario.EndText(endType), endType);
             }
         }
     }

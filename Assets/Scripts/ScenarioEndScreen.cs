@@ -3,8 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScenarioEndScreen : MonoBehaviour
-{
+public class ScenarioEndScreen : MonoBehaviour {
     public RectTransform mainT;
     public CanvasGroup mainGroup;
     public Image mainImage;
@@ -16,27 +15,22 @@ public class ScenarioEndScreen : MonoBehaviour
     public GameObject tooCloseImage;
 
     private bool ended = false;
-    private void Awake()
-    {
-        forwardButton.onClick.AddListener(() =>
-        {
-            if (!ended)
-            {
+    private void Awake() {
+        forwardButton.onClick.AddListener(() => {
+            if (!ended) {
                 ended = true;
                 GameFlowManager.NextScene();
             }
         });
     }
 
-    public void ShowEnd(Sprite image, string text, bool rude, bool safe, bool tooClose)
-    {
+    public void ShowEnd(Sprite image, string text, EndType endType) {
         StartCoroutine(EndRoutine());
 
-        IEnumerator EndRoutine()
-        {
-            rudeImage.SetActive(rude);
-            safeImage.SetActive(safe);
-            tooCloseImage.SetActive(tooClose);
+        IEnumerator EndRoutine() {
+            rudeImage.SetActive(endType == EndType.rude);
+            safeImage.SetActive(endType == EndType.good);
+            tooCloseImage.SetActive(endType == EndType.bad);
             mainImage.sprite = image;
 
             mainGroup.alpha = 0;
@@ -46,8 +40,7 @@ public class ScenarioEndScreen : MonoBehaviour
             mainText.ForceMeshUpdate();
             mainTextBox.sizeDelta = mainTextBox.sizeDelta.SetY(mainText.renderedHeight + 70);
 
-            yield return this.CreateAnimationRoutine(1.2f, (float progress) =>
-            {
+            yield return this.CreateAnimationRoutine(1.2f, (float progress) => {
                 mainGroup.alpha = Mathf.Lerp(0, 1, progress);
             });
             yield return WaitUtil.GetWait(0.333f);
