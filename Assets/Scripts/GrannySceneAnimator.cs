@@ -1,83 +1,70 @@
 using System;
 using UnityEngine;
 
-public class UrinalSceneAnimator : SceneAnimator {
-    public UrinalSceneStep[] steps;
-    public SpriteRenderer playerRenderer;
-    public Transform enemyT;
-    public SpriteRenderer enemyRenderer;
-    public WorldSpriteSineColorAnimator enemySineAnim;
-
+public class GrannySceneAnimator : SceneAnimator {
     public Transform cameraT;
+    public Camera mainCamera;
+    public GrannySceneStep[] steps;
     public int startIndex;
     private int currentIndex;
+
     private void Start() {
         MoveToIndex(startIndex);
     }
 
-    private int rudeCount = 0;
     public override EndType HandleResponse(GPTResponse gptResponse) {
+        //MoveToIndex(currentIndex - 1);
         if (gptResponse.rudeness > 0) {
-            rudeCount++;
-        }
-        if (rudeCount == 0) {
-            enemySineAnim.enabled = false;
-            enemyRenderer.color = Color.white;
-        } else if (rudeCount == 1) {
-            enemySineAnim.enabled = true;
-        } else if (rudeCount >= 2) {
             return EndType.rude;
         }
 
         if (gptResponse.rating < -RATING_DEAD_ZONE) {
-            if(currentIndex < steps.Length - 1) {
+            if (currentIndex < steps.Length - 1) {
                 MoveToIndex(currentIndex + 1);
             } else {
                 return EndType.good;
             }
         } else if (gptResponse.rating > RATING_DEAD_ZONE) {
-            if(currentIndex > 0) {
+            if (currentIndex > 0) {
                 MoveToIndex(currentIndex - 1);
             } else {
                 return EndType.bad;
             }
         }
-     
         return EndType.none;
     }
 
-    private Coroutine enemyRoutine;
     private Coroutine cameraRoutine;
     private void MoveToIndex(int index) {
         currentIndex = index;
-        UrinalSceneStep step = steps[index];
-        playerRenderer.sprite = step.playerSprite;
-        Vector3 enemyStartPos = enemyT.position;
-        Vector3 enemyEndPos = step.enemyPos.position;
-        enemyRenderer.sprite = step.enemySprite;
+        GrannySceneStep step = steps[index];
 
         Vector3 cameraStartPos = cameraT.position;
         Vector3 cameraEndPos = step.cameraPos.position;
         Quaternion cameraStartRotation = cameraT.rotation;
         Quaternion cameraEndRotation = step.cameraPos.rotation;
-
-        this.EnsureCoroutineStopped(ref enemyRoutine);
-        enemyRoutine = this.CreateAnimationRoutine(1.2f, (float progress) => {
-            enemyT.position = Vector3.Lerp(enemyStartPos, enemyEndPos, Easing.easeInOutSine(0, 1, progress));
-        });
+        float startFOV = mainCamera.fieldOfView;
+        float endFOV = step.cameraFOV;
 
         this.EnsureCoroutineStopped(ref cameraRoutine);
+        bool swappedGranny = false;
         cameraRoutine = this.CreateAnimationRoutine(1.35f, (float progress) => {
             float easedProgress = Easing.easeInOutSine(0, 1, progress);
             cameraT.SetPositionAndRotation(Vector3.Lerp(cameraStartPos, cameraEndPos, easedProgress), Quaternion.Lerp(cameraStartRotation, cameraEndRotation, easedProgress));
+            mainCamera.fieldOfView = Mathf.Lerp(startFOV, endFOV, easedProgress);
+            if(progress > 0.5f && !swappedGranny) {
+                swappedGranny = true;
+                for (int i = 0; i < steps.Length; i++) {
+                    steps[i].granny.SetActive(i == currentIndex);
+                }
+            }
         });
     }
 }
 
 [Serializable]
-public class UrinalSceneStep {
+public class GrannySceneStep {
     public Transform cameraPos;
-    public Transform enemyPos;
-    public Sprite enemySprite;
-    public Sprite playerSprite;
+    public float cameraFOV;
+    public GameObject granny;
 }

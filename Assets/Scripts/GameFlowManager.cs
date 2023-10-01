@@ -1,6 +1,6 @@
 
 public static class GameFlowManager {
-    private static readonly string[] sceneOrder = new string[] { "UrinalScene" };
+    private static readonly string[] sceneOrder = new string[] { "UrinalScene", "GrannyScene" };
     private static int sceneIndex;
     public static void StartGame() {
         sceneIndex = 0;

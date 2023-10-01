@@ -11,6 +11,7 @@ public abstract class SceneAnimator : MonoBehaviour {
     public Sprite badEndSprite;
     public Sprite rudeEndSprite;
 
+    protected const float RATING_DEAD_ZONE = 0.15f;
     public abstract EndType HandleResponse(GPTResponse gptResponse);
 
     public Sprite EndSprite(EndType endType) {

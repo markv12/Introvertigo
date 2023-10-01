@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/UrinalScene.unity
     guid: 53bb427e58c854f49918cf831683864f
   - enabled: 1
+    path: Assets/Scenes/GrannyScene.unity
+    guid: 0f315020cde58e245985984f7a4b674e
+  - enabled: 1
     path: Assets/Scenes/EndScreen.unity
     guid: a1779b6df04f8d74fa55627e385436c5
   m_configObjects: {}
