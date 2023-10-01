@@ -23,7 +23,7 @@ export default async function getGptResponse(
 
 async function getOutput(
   messages: ChatCompletionMessageParam[],
-  maxTokens = 50,
+  maxTokens = 40,
 ) {
   try {
     const tokens = maxTokens

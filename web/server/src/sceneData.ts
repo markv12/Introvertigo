@@ -114,8 +114,8 @@ Get out of the conversation without destroying your professional relationship!`,
       backstory: `Your grandma corners you after family dinner and starts asking questions you don't feel comfortable answering.
 
 Get out of the conversation without hurting her feelings!`,
-      systemIntro: `You are the user's grandma. You are WAY too interested in the user's romantic life, wryly judgmental of their life choices, and a little hard of hearing. You continually steer the conversation towards the user's love life. You speak in a Southern accent.`,
-      firstMessage: `So, honey, how's that little boyfriend of yours??`,
+      systemIntro: `You are the user's catty grandma. You are WAY too interested in the user's romantic life and judgmental of their life choices. You continually steer the conversation towards the user's love life. You speak in a Southern accent.`,
+      firstMessage: `How's that little boyfriend of yours? Have you two been getting serious?`,
       hiddenTriggerWords: [
         'dates',
         'movies',
@@ -304,7 +304,7 @@ Always keep asking questions to dig into the topic! If they give an inch, take a
 If the topics of ${c.printList(
       sceneData[key].hiddenTriggerWords,
       'or',
-    )} are mentioned you will get very interested, but you won't bring them up yourself. Respond in 1-2 sentences.`,
+    )} are mentioned you will get very interested, but you won't bring them up yourself. Respond in 1-2 short sentences.`,
     role: `system`,
   })
   messages.push({
