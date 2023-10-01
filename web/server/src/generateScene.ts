@@ -9,10 +9,7 @@ export default function generateScene(
     (c.randomWithWeights(keyWeights) as SceneKey)
 
   const backstory = sceneData[key].backstory
-  const requiredWords = c.randomXFromArray(
-    sceneData[key].userRequiredWords,
-    4,
-  )
+  const requiredWords = sceneData[key].userRequiredWords
 
   const scene: GameSceneInitData = {
     key,
