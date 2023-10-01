@@ -15,6 +15,7 @@ export async function checkRudeness(
   const rudeness = oneToTenStringToNegativeOneToOne(
     response || '5',
   )
+  c.sub(`rudeness is ${rudeness}`)
   return rudeness
 }
 
@@ -36,6 +37,7 @@ Previous message was: ${previousMessage}`,
   const interest = oneToTenStringToNegativeOneToOne(
     response || '5',
   )
+  c.sub(`interest is ${interest}`)
   return interest
 }
 
