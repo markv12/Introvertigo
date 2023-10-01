@@ -302,15 +302,12 @@ ${responseFormatCommand}`,
   return messages
 }
 
-export const responseFormatCommand = `You MUST respond in this three-line format:
-- Number 1-10: How rude or nonsensical was the user's message? (1 is polite, 10 is rude) 
-- Number 1-10: How satisfying/interesting was the user's message? (1 is boring, 10 is interesting) 
+export const responseFormatCommand = `You MUST respond in this three-part format:
+- 1-10: How rude/nonsensical was the user's message? (1 is polite, 10 is rude) 
+- 1-10: How satisfying/interesting was the user's message? (1 is boring, 10 is interesting) 
 - Finally, write a leading response (1-2 sentences)
 
 Example Response:
-\`\`\`
 3
 7
-(sentence text)
-\`\`\`
-ALWAYS INCLUDE the number part in your responses. YOUR RESPONSE WILL BE IGNORED IF YOU DON'T FOLLOW THIS THREE-LINE FORMAT.`
+(sentence text)`
