@@ -8,7 +8,7 @@ export async function checkRudeness(
     {
       role: 'system',
       content:
-        'You rank politeness and clarity. Respond to each message with a number from 1 to 10 where 1 is polite and sensible and 10 is rude or unintelligible.',
+        'You rank the politeness/clarity of messages. Respond to each message with a number from 1 to 10 where 1 is VERY polite and 10 is rude/unintelligible.',
     },
     { role: 'user', content: message },
   ])
@@ -28,7 +28,7 @@ export async function checkInterest(
   const response = await getGptResponse([
     {
       role: 'system',
-      content: `You rank how interesting/engaging something is in a conversation. Respond to each new message with a number from 1 to 10 where 1 is NOT and 10 is VERY interesting/engaging.
+      content: `You rank how interesting/engaging a message is in a conversation. Respond to each incoming message with a number from 1 to 10 where 1 is NOT and 10 is VERY interesting/engaging.
 Context is: ${context}
 Previous message was: ${previousMessage}`,
     },
