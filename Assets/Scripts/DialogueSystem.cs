@@ -20,6 +20,8 @@ public class DialogueSystem : MonoBehaviour
     public GameObject backstoryBG;
     public TMP_Text backstoryText;
     public Button backstoryBeginButton;
+    public GameObject shortWarning;
+    public GameObject missingRequiredWarning;
     public ScenarioEndScreen endScreen;
     private DialogueVertexAnimator dvaEnemy;
     private DialogueVertexAnimator dvaWhatYouSaid;
@@ -54,9 +56,11 @@ public class DialogueSystem : MonoBehaviour
     private void InputValueChanged(string newText)
     {
         hasRequiredWord = HasRequiredWord(newText, out string indicatorText);
-        int wordCount = DialogueUtility.WordCount(newText);
-        enterButton.gameObject.SetActive(wordCount >= 5 && hasRequiredWord);
+        bool wordCountLongEnough = DialogueUtility.WordCount(newText) >= 5;
+        enterButton.gameObject.SetActive(wordCountLongEnough && hasRequiredWord);
         requiredWordsText.text = indicatorText;
+        shortWarning.SetActive(!string.IsNullOrEmpty(newText) && !wordCountLongEnough);
+        missingRequiredWarning.SetActive(!string.IsNullOrEmpty(newText) && !hasRequiredWord);
     }
 
     private static readonly StringBuilder builder = new StringBuilder();
