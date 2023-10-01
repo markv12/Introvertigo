@@ -48,7 +48,7 @@ public class GrannySceneAnimator : SceneAnimator {
 
         this.EnsureCoroutineStopped(ref cameraRoutine);
         bool swappedGranny = false;
-        cameraRoutine = this.CreateAnimationRoutine(1.35f, (float progress) => {
+        cameraRoutine = this.CreateAnimationRoutine(1.5f, (float progress) => {
             float easedProgress = Easing.easeInOutSine(0, 1, progress);
             cameraT.SetPositionAndRotation(Vector3.Lerp(cameraStartPos, cameraEndPos, easedProgress), Quaternion.Lerp(cameraStartRotation, cameraEndRotation, easedProgress));
             mainCamera.fieldOfView = Mathf.Lerp(startFOV, endFOV, easedProgress);
