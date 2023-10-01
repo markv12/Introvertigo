@@ -12,7 +12,7 @@ public static class GameFlowManager {
         if(sceneIndex < sceneOrder.Length) {
             LoadingScreen.LoadScene(sceneOrder[sceneIndex]);
         } else {
-            LoadingScreen.LoadScene("StartScreen");
+            LoadingScreen.LoadScene("EndScreen");
         }
     }
 }
