@@ -17,13 +17,13 @@ export default async function getGptResponse(
   messages: ChatCompletionMessageParam[],
   maxTokens = 100,
 ): Promise<string | undefined> {
-  c.l(`getting gpt response`, { messages, maxTokens })
+  // c.l(`getting gpt response`, { messages, maxTokens })
   return getOutput(messages, maxTokens)
 }
 
 async function getOutput(
   messages: ChatCompletionMessageParam[],
-  maxTokens = 100,
+  maxTokens = 50,
 ) {
   try {
     const tokens = maxTokens
