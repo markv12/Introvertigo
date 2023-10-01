@@ -78,7 +78,8 @@ export async function checkInterest(
           content: `You rank how exciting a message is in a conversation.
 Your character's context is: ${context}.
 Respond to each message with "EXTREMELY exciting", "exciting", or "kind of exciting".
-Only respond with one of those three options. Do not be too generous with your ratings.`,
+Only respond with one of those three options.`,
+          // Do not be too generous with your ratings.
         },
         { role: 'user', content: message },
       ],
