@@ -89,7 +89,7 @@ Only respond with one of those three options. Do not be too generous with your r
     .toLowerCase()
   let interest = 0
   if (response.includes('kind')) interest = -1
-  else if (response.includes('extremely')) interest = 1
+  else if (response.includes('extre')) interest = 1
 
   c.sub(`interest is ${interest} (response: ${response})`)
   return interest
