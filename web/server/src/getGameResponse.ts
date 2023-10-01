@@ -77,7 +77,7 @@ export default async function getGameResponse(
     ]
 
     c.sub(
-      `"${latestMessage.content}" (rudeness: ${rudeness}, rating: ${rating})
+      `"${latestMessage.content}" (rudeness: ${rudeness}[${rudenessString}], rating: ${rating}[${ratingString}])
   -> "${reply}"`,
     )
 
@@ -105,5 +105,5 @@ const oneToTenStringToNegativeOneToOne = (val: string) => {
   const num = parseInt(val)
   if (isNaN(num)) return 0
   const zeroToOne = (num - 1) / 9
-  return zeroToOne * 2 - 1
+  return c.r2(zeroToOne * 2 - 1)
 }
