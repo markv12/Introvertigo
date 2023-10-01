@@ -53,7 +53,7 @@ ONLY RESPOND WITH A NUMBER.`,
 }
 
 const oneToTenStringToNegativeOneToOne = (val: string) => {
-  const num = parseInt(val.replace(/\D/g, ''))
+  const num = parseInt(val.replace(/"/g, ''))
   if (isNaN(num)) return 0
   const zeroToOne = (num - 1) / 9
   return c.clamp(-1, c.r2(zeroToOne * 2 - 1), 1)
