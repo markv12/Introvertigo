@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
@@ -43,5 +44,20 @@ public class AudioManager : MonoBehaviour {
         AudioSource result = audioSources[audioSourceIndex];
         audioSourceIndex = (audioSourceIndex + 1) % audioSources.Length;
         return result;
+    }
+
+
+    private readonly List<BGAudio> activeBGAudio = new List<BGAudio>(4);
+    public void RegisterBGAudio(BGAudio bgAudio) {
+        activeBGAudio.Add(bgAudio);
+    }
+    public void UnregisterBGAudio(BGAudio bgAudio) {
+        activeBGAudio.Remove(bgAudio);
+    }
+
+    public void FadeOutBGAudio() {
+        for (int i = 0; i < activeBGAudio.Count; i++) {
+            activeBGAudio[i].FadeOut();
+        }
     }
 }

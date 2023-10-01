@@ -27,9 +27,10 @@ public class LoadingScreen : MonoBehaviour {
         }
     }
 
-    private const float FADE_TIME = 0.5f;
+    private const float FADE_TIME = 0.75f;
     private static readonly WaitForSeconds middleWait = new WaitForSeconds(0.75f);
     private IEnumerator _FadeLoadScene(string sceneName) {
+        AudioManager.Instance.FadeOutBGAudio();
         AsyncOperation async = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
         async.allowSceneActivation = false;
 
