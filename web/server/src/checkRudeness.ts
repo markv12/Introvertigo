@@ -33,7 +33,7 @@ How polite is the following message? Only respond with "polite", "rude", or "neu
         },
         { role: 'user', content: message },
       ],
-      1,
+      6,
     )
   )
     .replace(/"/g, '')
@@ -82,7 +82,7 @@ Only respond with "interesting", "not interesting", or "neutral".`,
         },
         { role: 'user', content: message },
       ],
-      1,
+      6,
     )
   )
     .replace(/"/g, '')
