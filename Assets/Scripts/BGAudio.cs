@@ -26,7 +26,7 @@ public class BGAudio : MonoBehaviour {
     }
 
     private void OnDestroy() {
-        if(AudioManager.Instance != null) {
+        if(!AudioManager.InstanceNull) {
             AudioManager.Instance.UnregisterBGAudio(this);
         }
     }

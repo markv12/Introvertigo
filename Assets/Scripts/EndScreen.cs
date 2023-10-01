@@ -21,7 +21,7 @@ public class EndScreen : MonoBehaviour {
 
         IEnumerator EndRoutine() {
             mainImage.sprite = image;
-            mainText.text = text;
+            mainText.text = "\"" + text + "\"";
             mainGroup.alpha = 0;
             mainGroup.gameObject.SetActive(true);
             yield return this.CreateAnimationRoutine(1.2f, (float progress) => {

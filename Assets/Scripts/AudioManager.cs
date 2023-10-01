@@ -4,6 +4,7 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour {
     private const string AUDIO_MANAGER_PATH = "AudioManager";
     private static AudioManager instance;
+    public static bool InstanceNull => instance == null;
     public static AudioManager Instance {
         get {
             if (instance == null) {

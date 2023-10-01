@@ -42,8 +42,8 @@ public class GameRequest {
 
 [Serializable]
 public class GPTResponse {
-    public int rudeness;
-    public int rating;
+    public float rudeness;
+    public float rating;
     public string reply;
     public GameMessage[] messages;
 }
@@ -57,7 +57,6 @@ public class GameRequestManager : Singleton<GameRequestManager> {
             uri += "?key=" + sceneKey;
         }
         StartCoroutine(RestUtility.Get(uri, (response) => {
-            Debug.Log(response);
             currentScenario = JsonUtility.FromJson<GameScenario>(response);
             onComplete();
         }, () => {
