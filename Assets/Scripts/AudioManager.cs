@@ -23,9 +23,19 @@ public class AudioManager : MonoBehaviour {
     private int audioSourceIndex = 0;
 
     public AudioClip talk;
+    public AudioClip rude;
+    public AudioClip moveCloser;
 
     public void PlayPlayerTalkSound(float intensity, float pitchCenter, float pitchVarianceMultiplier = 1) {
         PlayRandomPitchSound(talk, intensity, pitchCenter, pitchVarianceMultiplier);
+    }
+
+    public void PlayRudeSound() {
+        PlaySFX(rude, 0.5f, 1);
+    }
+
+    public void PlayMoveCloserSound() {
+        PlaySFX(moveCloser, 0.5f, 1);
     }
 
     public void PlayRandomPitchSound(AudioClip clip, float intensity, float pitchCenter, float pitchVarianceMultiplier = 1) {

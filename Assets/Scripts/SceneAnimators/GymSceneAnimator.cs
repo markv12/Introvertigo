@@ -18,6 +18,7 @@ public class GymSceneAnimator : SceneAnimator {
     private int rudeCount = 0;
     public override EndType HandleResponse(GPTResponse gptResponse) {
         if (gptResponse.rudeness > 0) {
+            AudioManager.Instance.PlayRudeSound();
             rudeCount++;
         }
         if (rudeCount == 0) {

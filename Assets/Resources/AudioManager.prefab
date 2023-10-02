@@ -56,6 +56,8 @@ MonoBehaviour:
   - {fileID: 1819576093674034417}
   - {fileID: 4088904254624913688}
   talk: {fileID: 8300000, guid: e50f1bd9af12e462f971f825085e82fa, type: 3}
+  rude: {fileID: 8300000, guid: 1720ecde15222dc42b36cacbc89de20c, type: 3}
+  moveCloser: {fileID: 8300000, guid: fefc61379b5ab224db3db57b8a32ad2d, type: 3}
 --- !u!1 &2892731772364066494
 GameObject:
   m_ObjectHideFlags: 0
