@@ -38,7 +38,7 @@ export class GameServer {
   serverInitData: ServeOptions = {
     fetch: async (req, server) => {
       const url = new URL(req.url)
-      c.sub(req.method + ' ' + url.pathname)
+      c.sub('\n' + req.method + ' ' + url.pathname)
 
       if (url.pathname.endsWith('/ping'))
         return generateHTTPResponse(`pong`)

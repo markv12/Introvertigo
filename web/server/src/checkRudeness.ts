@@ -42,7 +42,7 @@ How polite is the following message? Only respond with "polite", "neutral", or "
   if (response.includes('polite')) rudeness = -1
   else if (response.includes('rude')) rudeness = 1
 
-  c.sub(`rudeness is ${rudeness} (response: ${response})`)
+  // c.sub(`rudeness is ${rudeness} (response: ${response})`)
   return rudeness
 }
 
@@ -93,7 +93,7 @@ Only respond with one of those three options.`,
   if (response.includes('kind')) interest = -1
   else if (response.includes('very')) interest = 1
 
-  c.sub(`interest is ${interest} (response: ${response})`)
+  // c.sub(`interest is ${interest} (response: ${response})`)
   return interest
 }
 
