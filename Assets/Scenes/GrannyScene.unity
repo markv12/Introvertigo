@@ -1178,9 +1178,9 @@ MonoBehaviour:
   enemyTalkVolume: 0.3
   enemyPitchVariation: 1
   enemyPog: {fileID: 21300000, guid: ee6feec8cca7a4d25839686c37b42dfa, type: 3}
-  goodEndSprite: {fileID: 0}
-  badEndSprite: {fileID: 0}
-  rudeEndSprite: {fileID: 0}
+  goodEndSprite: {fileID: 21300000, guid: 687c4fd4dfa950641b7e6aafe1d19e69, type: 3}
+  badEndSprite: {fileID: 21300000, guid: a37652393cf77b04e848f1fc6532d55a, type: 3}
+  rudeEndSprite: {fileID: 21300000, guid: 1137bfa13e421c44bb92288f25c89b20, type: 3}
   cameraT: {fileID: 1914573474}
   mainCamera: {fileID: 1914573473}
   vignette: {fileID: 5376306099438066697}

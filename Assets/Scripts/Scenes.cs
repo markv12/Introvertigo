@@ -4,6 +4,7 @@ public enum Scenes {
     START_SCREEN,
     URINAL_SCENE,
     GRANNY_SCENE,
+    GYM_SCENE,
     END_SCREEN,
 }
 
@@ -16,6 +17,8 @@ public static class ScenesExtensions {
                 return "UrinalScene";
             case Scenes.GRANNY_SCENE:
                 return "GrannyScene";
+            case Scenes.GYM_SCENE:
+                return "GymScene";
             case Scenes.END_SCREEN:
                 return "EndScreen";
             default:
@@ -34,6 +37,8 @@ public static class SceneHelper {
                     return Scenes.URINAL_SCENE;
                 case "GrannyScene":
                     return Scenes.GRANNY_SCENE;
+                case "GymScene":
+                    return Scenes.GYM_SCENE;
                 case "EndScreen":
                     return Scenes.END_SCREEN;
                 default:

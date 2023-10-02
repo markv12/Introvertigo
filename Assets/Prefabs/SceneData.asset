@@ -17,6 +17,8 @@ MonoBehaviour:
     pog: {fileID: 21300000, guid: 2233626b23cb346538c75b100df08d54, type: 3}
   - scene: 2
     pog: {fileID: 21300000, guid: ee6feec8cca7a4d25839686c37b42dfa, type: 3}
+  - scene: 3
+    pog: {fileID: 21300000, guid: 337ef09d00d8f44b3a8567ac6657ea0b, type: 3}
   safeSprite: {fileID: 21300000, guid: af096bd0a5bfa4ea18098b8fef8d2b30, type: 3}
   tooCloseSprite: {fileID: 21300000, guid: e81b6dd7e83f8415dbd29d9024167fe2, type: 3}
   rudeSprite: {fileID: 21300000, guid: 2f37835f8ac58b54fa212c100c75ce54, type: 3}
