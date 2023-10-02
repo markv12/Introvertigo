@@ -1177,7 +1177,6 @@ MonoBehaviour:
   enemyTalkClip: {fileID: 8300000, guid: bcdd239b7fd1d4c15ad715e37aed91f1, type: 3}
   enemyTalkVolume: 0.257
   enemyPitchVariation: 1
-  enemyPog: {fileID: 21300000, guid: ee6feec8cca7a4d25839686c37b42dfa, type: 3}
   goodEndSprite: {fileID: 21300000, guid: 687c4fd4dfa950641b7e6aafe1d19e69, type: 3}
   badEndSprite: {fileID: 21300000, guid: a37652393cf77b04e848f1fc6532d55a, type: 3}
   rudeEndSprite: {fileID: 21300000, guid: 1137bfa13e421c44bb92288f25c89b20, type: 3}
@@ -1188,11 +1187,11 @@ MonoBehaviour:
   - cameraPos: {fileID: 2014469444}
     cameraFOV: 75
     granny: {fileID: 1060220717}
-    vignetteAmount: 0.6
+    vignetteAmount: 0.5
   - cameraPos: {fileID: 1718833166}
     cameraFOV: 60
     granny: {fileID: 1664379947}
-    vignetteAmount: 0.4
+    vignetteAmount: 0.35
   - cameraPos: {fileID: 1035390278}
     cameraFOV: 40
     granny: {fileID: 2113423038}

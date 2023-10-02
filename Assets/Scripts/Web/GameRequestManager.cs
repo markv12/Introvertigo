@@ -70,7 +70,6 @@ public class GameRequestManager : Singleton<GameRequestManager> {
         GameRequest gr = new GameRequest() { messages = messages.ToArray() };
 
         StartCoroutine(RestUtility.PostJSON("https://p.jasperstephenson.com/ld54/response", JsonUtility.ToJson(gr), (success, response) => {
-            Debug.Log(response);
             GPTResponse rr = JsonUtility.FromJson<GPTResponse>(response);
             currentScenario.messages = rr.messages;
             onComplete(rr);

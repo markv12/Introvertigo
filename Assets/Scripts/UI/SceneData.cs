@@ -3,16 +3,23 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "SceneData", menuName = "Scene Data")]
 public class SceneData : ScriptableObject {
-    public ScenePogPair[] enemyPogs;
+    public ScenePogSet[] enemyPogs;
     public Sprite safeSprite;
     public Sprite tooCloseSprite;
     public Sprite rudeSprite;
 
-    public Sprite GetPogForScene(Scenes scene) {
+    public Sprite GetPogForScene(Scenes scene, EndType endType) {
         for (int i = 0; i < enemyPogs.Length; i++) {
-            ScenePogPair spp = enemyPogs[i];
-            if(spp.scene == scene) {
-                return spp.pog;
+            ScenePogSet sps = enemyPogs[i];
+            if(sps.scene == scene) {
+                switch (endType) {
+                    case EndType.good:
+                        return sps.goodPog;
+                    case EndType.rude:
+                        return sps.rudePog;
+                    case EndType.bad:
+                        return sps.badPog;
+                }
             }
         }
         return null;
@@ -32,8 +39,10 @@ public class SceneData : ScriptableObject {
     }
 
     [Serializable]
-    public class ScenePogPair {
+    public class ScenePogSet {
         public Scenes scene;
-        public Sprite pog;
+        public Sprite goodPog;
+        public Sprite rudePog;
+        public Sprite badPog;
     }
 }

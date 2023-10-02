@@ -6,13 +6,19 @@ using UnityEngine.UI;
 public class ScenarioEndScreen : MonoBehaviour {
     public RectTransform mainT;
     public CanvasGroup mainGroup;
+    public Image bgImage;
+    public Sprite goodGradient;
+    public Sprite rudeGradient;
+    public Sprite badGradient;
     public Image mainImage;
+    public Image enemyPog;
     public TMP_Text mainText;
     public RectTransform mainTextBox;
     public Button forwardButton;
     public GameObject rudeImage;
     public GameObject safeImage;
     public GameObject tooCloseImage;
+    public SceneData sceneData;
 
     private bool ended = false;
     private void Awake() {
@@ -25,14 +31,16 @@ public class ScenarioEndScreen : MonoBehaviour {
     }
 
     public void ShowEnd(Sprite image, string text, EndType endType) {
+        bgImage.sprite = GetBGGradient(endType);
+        rudeImage.SetActive(endType == EndType.rude);
+        safeImage.SetActive(endType == EndType.good);
+        tooCloseImage.SetActive(endType == EndType.bad);
+        mainImage.sprite = image;
+        enemyPog.sprite = sceneData.GetPogForScene(SceneHelper.CurrentScene, endType);
+
         StartCoroutine(EndRoutine());
 
         IEnumerator EndRoutine() {
-            rudeImage.SetActive(endType == EndType.rude);
-            safeImage.SetActive(endType == EndType.good);
-            tooCloseImage.SetActive(endType == EndType.bad);
-            mainImage.sprite = image;
-
             mainGroup.alpha = 0;
             mainGroup.gameObject.SetActive(true);
 
@@ -45,6 +53,19 @@ public class ScenarioEndScreen : MonoBehaviour {
             });
             yield return WaitUtil.GetWait(0.333f);
             forwardButton.gameObject.SetActive(true);
+        }
+    }
+
+    private Sprite GetBGGradient(EndType endType) {
+        switch (endType) {
+            case EndType.good:
+                return goodGradient;
+            case EndType.rude:
+                return rudeGradient;
+            case EndType.bad:
+                return badGradient;
+            default:
+                return goodGradient;
         }
     }
 }

@@ -14,15 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPogs:
   - scene: 1
-    pog: {fileID: 21300000, guid: 2233626b23cb346538c75b100df08d54, type: 3}
+    goodPog: {fileID: 21300000, guid: 7d2f07fc968d8184392e61e35e347dc6, type: 3}
+    rudePog: {fileID: 21300000, guid: 6b9a074cc86fc45468887557e1b84631, type: 3}
+    badPog: {fileID: 21300000, guid: 2f9a419adb1f1154387c23c078b01949, type: 3}
   - scene: 2
-    pog: {fileID: 21300000, guid: ee6feec8cca7a4d25839686c37b42dfa, type: 3}
+    goodPog: {fileID: 21300000, guid: b8517b2eda2f95c46a82d6bb74561495, type: 3}
+    rudePog: {fileID: 21300000, guid: 37cbbf7de004d704380d60588e00e975, type: 3}
+    badPog: {fileID: 21300000, guid: 9b2adf0995794b3429af411bb4ae5698, type: 3}
   - scene: 3
-    pog: {fileID: 21300000, guid: 337ef09d00d8f44b3a8567ac6657ea0b, type: 3}
+    goodPog: {fileID: 21300000, guid: cc88dc585a76e51499fb5466e2a397c5, type: 3}
+    rudePog: {fileID: 21300000, guid: 2952a4b550763984e8d8af367795b46b, type: 3}
+    badPog: {fileID: 21300000, guid: 18359f53d832b0e4bb5e1bce12e7ddac, type: 3}
   - scene: 4
-    pog: {fileID: 21300000, guid: 3e01df55454664a2d80134f46a551e82, type: 3}
+    goodPog: {fileID: 21300000, guid: 47b754cf44cf5244489ce87787b8550d, type: 3}
+    rudePog: {fileID: 21300000, guid: 77dc7cff453910c449b49553b2c44ec6, type: 3}
+    badPog: {fileID: 21300000, guid: 83d5c9d0cb2a7154bae48bc85d2e6fd7, type: 3}
   - scene: 5
-    pog: {fileID: 21300000, guid: 2b4aaa6b2d169453892e2748f1188413, type: 3}
+    goodPog: {fileID: 21300000, guid: 40956cf4f2ac8564bbefcca85b2a6f2d, type: 3}
+    rudePog: {fileID: 21300000, guid: 1e773ab08190d5e43a09f55c8435db86, type: 3}
+    badPog: {fileID: 21300000, guid: de26a4e3d0dfc9f4f9b675d7315c00ab, type: 3}
   safeSprite: {fileID: 21300000, guid: af096bd0a5bfa4ea18098b8fef8d2b30, type: 3}
   tooCloseSprite: {fileID: 21300000, guid: e81b6dd7e83f8415dbd29d9024167fe2, type: 3}
   rudeSprite: {fileID: 21300000, guid: 2f37835f8ac58b54fa212c100c75ce54, type: 3}

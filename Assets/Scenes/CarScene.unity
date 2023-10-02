@@ -1169,17 +1169,16 @@ MonoBehaviour:
   enemyTalkClip: {fileID: 8300000, guid: 9f2142d1ab2bc4dee85d3338e37aa159, type: 3}
   enemyTalkVolume: 0.137
   enemyPitchVariation: 1
-  enemyPog: {fileID: 21300000, guid: 2b4aaa6b2d169453892e2748f1188413, type: 3}
   goodEndSprite: {fileID: 21300000, guid: e0c79c4a3007b704cacd2fb8a1b2e1ca, type: 3}
   badEndSprite: {fileID: 21300000, guid: 4bef85ad1aa8f4c4ab68472fff02ffde, type: 3}
   rudeEndSprite: {fileID: 21300000, guid: f29067478cccf2f42b7a59d9ae831761, type: 3}
   steps:
   - cameraPos: {fileID: 589660856}
     enemySprite: {fileID: 21300000, guid: e38d921316ef37c469ff2a4acf4be6a2, type: 3}
-    vignetteAmount: 0.6
+    vignetteAmount: 0.5
   - cameraPos: {fileID: 1268123488}
     enemySprite: {fileID: 21300000, guid: 839ed16d264702a4482b6970b87e61e3, type: 3}
-    vignetteAmount: 0.4
+    vignetteAmount: 0.35
   - cameraPos: {fileID: 1846355794}
     enemySprite: {fileID: 21300000, guid: ba2408f43d1b6714f922310a890cf6b2, type: 3}
     vignetteAmount: 0
