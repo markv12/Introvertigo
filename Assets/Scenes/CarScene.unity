@@ -203,7 +203,6 @@ GameObject:
   m_Component:
   - component: {fileID: 68526923}
   - component: {fileID: 68526925}
-  - component: {fileID: 68526924}
   m_Layer: 0
   m_Name: RightArm
   m_TagString: Untagged
@@ -226,24 +225,6 @@ Transform:
   m_Father: {fileID: 1841792835}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 9.75, z: 0}
---- !u!114 &68526924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 68526922}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 243349ee4c0356247a1533c4210fbe0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainRenderer: {fileID: 0}
-  lowColor: {r: 1, g: 1, b: 1, a: 1}
-  highColor: {r: 0.8679245, g: 0.61000353, b: 0.62748975, a: 1}
-  lowScale: 1
-  highScale: 1
-  pulsesPerSecond: 1
 --- !u!212 &68526925
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -756,7 +737,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1332477870}
   - component: {fileID: 1332477872}
-  - component: {fileID: 1332477871}
   m_Layer: 0
   m_Name: LeftArm
   m_TagString: Untagged
@@ -779,24 +759,6 @@ Transform:
   m_Father: {fileID: 1841792835}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 9.41, y: -79.48, z: 0}
---- !u!114 &1332477871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1332477869}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 243349ee4c0356247a1533c4210fbe0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainRenderer: {fileID: 0}
-  lowColor: {r: 1, g: 1, b: 1, a: 1}
-  highColor: {r: 0.8679245, g: 0.61000353, b: 0.62748975, a: 1}
-  lowScale: 1
-  highScale: 1
-  pulsesPerSecond: 1
 --- !u!212 &1332477872
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -948,7 +910,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 243349ee4c0356247a1533c4210fbe0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainRenderer: {fileID: 1841792834}
+  mainRenderers:
+  - {fileID: 1841792834}
+  - {fileID: 1332477872}
+  - {fileID: 68526925}
   lowColor: {r: 1, g: 1, b: 1, a: 1}
   highColor: {r: 0.8679245, g: 0.61000353, b: 0.62748975, a: 1}
   lowScale: 1
