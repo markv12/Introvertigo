@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddf5f87b0df42e547a10f852abba0b01, type: 3}
+  m_Name: SceneData
+  m_EditorClassIdentifier: 
+  enemyPogs:
+  - scene: 1
+    pog: {fileID: 21300000, guid: 2233626b23cb346538c75b100df08d54, type: 3}
+  - scene: 2
+    pog: {fileID: 21300000, guid: ee6feec8cca7a4d25839686c37b42dfa, type: 3}
+  safeSprite: {fileID: 21300000, guid: af096bd0a5bfa4ea18098b8fef8d2b30, type: 3}
+  tooCloseSprite: {fileID: 21300000, guid: e81b6dd7e83f8415dbd29d9024167fe2, type: 3}
+  rudeSprite: {fileID: 21300000, guid: 2f37835f8ac58b54fa212c100c75ce54, type: 3}

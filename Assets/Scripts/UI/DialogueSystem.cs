@@ -24,11 +24,13 @@ public class DialogueSystem : MonoBehaviour {
     public GameObject shortWarning;
     public GameObject missingRequiredWarning;
     public ScenarioEndScreen endScreen;
+
     private DialogueVertexAnimator dvaEnemy;
     private DialogueVertexAnimator dvaWhatYouSaid;
-
     private readonly List<string> allRequiredWords = new List<string>(18);
     private string[] currentRequiredWords;
+    private int totalMessagesUsed = 0;
+
     private void Awake() {
         textEntryUI.SetActive(false);
         dvaEnemy = new DialogueVertexAnimator(enemyDialogue, null, PlayEnemyTalkSound);
@@ -93,7 +95,6 @@ public class DialogueSystem : MonoBehaviour {
             Enter();
         }
         if (mainInputField.gameObject.activeInHierarchy && !mainInputField.isFocused) {
-            Debug.Log("happened");
             StartCoroutine(ActivateTextField());
         }
     }
@@ -133,6 +134,7 @@ public class DialogueSystem : MonoBehaviour {
                 }
                 currentRequiredWords = allRequiredWords.RandomSubset(5);
                 mainInputField.text = "";
+                totalMessagesUsed++;
                 StartCoroutine(SayRoutine(inputText));
                 GameRequestManager.Instance.SubmitNextMessage(inputText, (GPTResponse rr) => {
                     StartCoroutine(ResponseRoutine(rr));
@@ -161,7 +163,7 @@ public class DialogueSystem : MonoBehaviour {
                 //endScreen.ShowEnd(sceneAnimator.EndSprite(EndType.bad), GameRequestManager.CurrentScenario.EndText(EndType.bad), true);
                 EnemyTalk(gptResponse.reply);
             } else {
-                GameFlowManager.RecordSceneResult(endType, 0);
+                GameFlowManager.RecordSceneResult(SceneHelper.CurrentScene, endType, totalMessagesUsed);
                 endScreen.ShowEnd(sceneAnimator.EndSprite(endType), GameRequestManager.CurrentScenario.EndText(endType), endType);
             }
         }
