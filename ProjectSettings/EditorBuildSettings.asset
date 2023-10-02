@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TrainScene.unity
     guid: fe63a642f42b0e8458570791b7e5ee7e
   - enabled: 1
+    path: Assets/Scenes/CarScene.unity
+    guid: ea39dda9b8cda6046bd64c4fa9ad7bd5
+  - enabled: 1
     path: Assets/Scenes/EndScreen.unity
     guid: a1779b6df04f8d74fa55627e385436c5
   m_configObjects: {}
