@@ -41,9 +41,8 @@ export class GameServer {
       const url = new URL(req.url)
       this.requestCounts[url.pathname] =
         (this.requestCounts[url.pathname] || 0) + 1
-      const hoursActive = c.r2(
-        (Date.now() - this.startedAt) / 1000 / 60 / 60,
-      )
+      const hoursActive =
+        (Date.now() - this.startedAt) / 1000 / 60 / 60
       const perHour = c.r2(
         this.requestCounts[url.pathname] / hoursActive,
       )
@@ -53,7 +52,7 @@ export class GameServer {
             req.method +
             ' ' +
             url.pathname +
-            ` (${perHour}/hr in ${hoursActive} hrs)`,
+            ` (${perHour}/hr in ${c.r2(hoursActive)} hrs)`,
         )
 
       if (url.pathname.endsWith('/ping'))

@@ -68,11 +68,12 @@ async function getOutput(
 
     tokensUsedSinceStart +=
       response.usage?.total_tokens || 0
-    c.sub(
-      `tokens used since server start: ${tokensUsedSinceStart} ($${tokensToCost(
-        tokensUsedSinceStart,
-      )})`,
-    )
+    if (c.lottery(1, 10))
+      c.sub(
+        `tokens used since server start: ${tokensUsedSinceStart} ($${tokensToCost(
+          tokensUsedSinceStart,
+        )})`,
+      )
 
     if (!output) return ''
     return output
