@@ -7,7 +7,7 @@ public class EndScreenPog : MonoBehaviour {
     public Image result;
     public SceneData sceneData;
     public void ShowResult(GameResult gr) {
-        enemyPog.sprite = sceneData.GetPogForScene(gr.scene);
+        enemyPog.sprite = sceneData.GetPogForScene(gr.scene, gr.endType);
         result.sprite = sceneData.GetSpriteForEndType(gr.endType);
     }
 }

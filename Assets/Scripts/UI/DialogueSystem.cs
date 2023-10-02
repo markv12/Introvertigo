@@ -24,6 +24,7 @@ public class DialogueSystem : MonoBehaviour {
     public GameObject shortWarning;
     public GameObject missingRequiredWarning;
     public ScenarioEndScreen endScreen;
+    public SceneData sceneData;
 
     private DialogueVertexAnimator dvaEnemy;
     private DialogueVertexAnimator dvaWhatYouSaid;
@@ -37,7 +38,7 @@ public class DialogueSystem : MonoBehaviour {
         dvaWhatYouSaid = new DialogueVertexAnimator(whatYouSaidText, null, PlayPlayerTalkSound);
         enterButton.onClick.AddListener(Enter);
         backstoryBeginButton.onClick.AddListener(BackstoryBegin);
-        backstoryEnemyPog.sprite = sceneAnimator.enemyPog;
+        backstoryEnemyPog.sprite = sceneData.GetPogForScene(SceneHelper.CurrentScene, EndType.good);
         GameRequestManager.Instance.GetGameScenario(sceneKey, () => {
             GameScenario gameScenario = GameRequestManager.CurrentScenario;
             if (gameScenario != null) {

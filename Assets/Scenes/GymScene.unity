@@ -793,7 +793,6 @@ MonoBehaviour:
   enemyTalkClip: {fileID: 8300000, guid: 2922f8c918d544a4ba570700ff6fc3c7, type: 3}
   enemyTalkVolume: 0.561
   enemyPitchVariation: 1
-  enemyPog: {fileID: 21300000, guid: 337ef09d00d8f44b3a8567ac6657ea0b, type: 3}
   goodEndSprite: {fileID: 21300000, guid: 2b9a10b72426106439784e65b37eeb6c, type: 3}
   badEndSprite: {fileID: 21300000, guid: cb3d6d70c5044604b9b85f9aef45c345, type: 3}
   rudeEndSprite: {fileID: 21300000, guid: 7f40038a14f1cd94995b2803863d16a2, type: 3}
@@ -802,12 +801,12 @@ MonoBehaviour:
     enemySprite: {fileID: 21300000, guid: e4f03865b7604144c8d4799b0d9fafc6, type: 3}
     enemySortingOrder: 2
     armSprite: {fileID: 21300000, guid: 0ea43a9542822674aa662718779a3649, type: 3}
-    vignetteAmount: 0.7
+    vignetteAmount: 0.5
   - enemyPos: {fileID: 1084806739}
     enemySprite: {fileID: 21300000, guid: c04e7ea015282764398ceb46afa0693a, type: 3}
     enemySortingOrder: -1
     armSprite: {fileID: 21300000, guid: 1bf008d4ff33c1b4e8af2924bb5ad9b6, type: 3}
-    vignetteAmount: 0.4
+    vignetteAmount: 0.35
   - enemyPos: {fileID: 550556574}
     enemySprite: {fileID: 21300000, guid: c04e7ea015282764398ceb46afa0693a, type: 3}
     enemySortingOrder: -1
