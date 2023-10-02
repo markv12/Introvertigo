@@ -201,7 +201,7 @@ Put an end to the conversation without being rude!`,
       loseMessages: [
         "So, as I was saying, I'm a big fan of the beach, that's why I'm so sandy right now. I go there every weekend. I love the sand, the sun, the water...",
         "Hey, Instagram! Nice, let me follow you! I'm a big commenter. Make sure you follow me back, okay?",
-        "Urp -- phew, sorry I'm a little gassy, I had a big pastrami sandwich for lunch. Say, want a bite? I've got half of it right here. Do you like sauerkraut?",
+        "Okay. You? And me? We're talking more about this. Let's go!",
       ],
       loseRudeMessages: [
         'Do you have any idea how rude that was? I was just trying to be friendly!',
