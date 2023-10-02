@@ -2,13 +2,14 @@ using System;
 using UnityEngine;
 
 public class TrainSceneAnimator : SceneAnimator {
-    public UrinalSceneStep[] steps;
+    public TrainSceneStep[] steps;
     public SpriteRenderer playerRenderer;
     public Transform enemyT;
     public SpriteRenderer enemyRenderer;
     public WorldSpriteSineColorAnimator enemySineAnim;
     public Vignette vignette;
 
+    public Camera mainCamera;
     public Transform cameraT;
     public int startIndex;
     private int currentIndex;
@@ -51,7 +52,7 @@ public class TrainSceneAnimator : SceneAnimator {
     private Coroutine cameraRoutine;
     private void MoveToIndex(int index) {
         currentIndex = index;
-        UrinalSceneStep step = steps[index];
+        TrainSceneStep step = steps[index];
         playerRenderer.sprite = step.playerSprite;
         Vector3 enemyStartPos = enemyT.position;
         Vector3 enemyEndPos = step.enemyPos.position;
@@ -63,6 +64,8 @@ public class TrainSceneAnimator : SceneAnimator {
         Vector3 cameraEndPos = step.cameraPos.position;
         Quaternion cameraStartRotation = cameraT.rotation;
         Quaternion cameraEndRotation = step.cameraPos.rotation;
+        float startFOV = mainCamera.fieldOfView;
+        float endFOV = step.cameraFOV;
 
         this.EnsureCoroutineStopped(ref enemyRoutine);
         enemyRoutine = this.CreateAnimationRoutine(1.2f, (float progress) => {
@@ -73,6 +76,7 @@ public class TrainSceneAnimator : SceneAnimator {
         cameraRoutine = this.CreateAnimationRoutine(1.35f, (float progress) => {
             float easedProgress = Easing.easeInOutSine(0, 1, progress);
             cameraT.SetPositionAndRotation(Vector3.Lerp(cameraStartPos, cameraEndPos, easedProgress), Quaternion.Lerp(cameraStartRotation, cameraEndRotation, easedProgress));
+            mainCamera.fieldOfView = Mathf.Lerp(startFOV, endFOV, easedProgress);
         });
     }
 }
@@ -80,6 +84,7 @@ public class TrainSceneAnimator : SceneAnimator {
 [Serializable]
 public class TrainSceneStep {
     public Transform cameraPos;
+    public float cameraFOV;
     public Transform enemyPos;
     public Sprite enemySprite;
     public Sprite playerSprite;
