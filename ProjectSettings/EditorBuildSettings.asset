@@ -15,6 +15,12 @@ EditorBuildSettings:
     path: Assets/Scenes/GrannyScene.unity
     guid: 0f315020cde58e245985984f7a4b674e
   - enabled: 1
+    path: Assets/Scenes/GymScene.unity
+    guid: 06dda25c6238cc64b838049f638311f6
+  - enabled: 1
+    path: Assets/Scenes/TrainScene.unity
+    guid: fe63a642f42b0e8458570791b7e5ee7e
+  - enabled: 1
     path: Assets/Scenes/EndScreen.unity
     guid: a1779b6df04f8d74fa55627e385436c5
   m_configObjects: {}
