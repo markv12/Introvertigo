@@ -35,11 +35,11 @@ public class AudioManager : MonoBehaviour {
     }
 
     public void PlayRudeSound() {
-        PlaySFX(rude, 0.5f, 1);
+        PlaySFX(rude, 0.6f, 1);
     }
 
     public void PlayMoveCloserSound() {
-        PlaySFX(moveCloser, 0.5f, 1);
+        PlaySFX(moveCloser, 0.7f, 1);
     }
 
     public void PlayRandomPitchSound(AudioClip clip, float intensity, float pitchCenter, float pitchVarianceMultiplier = 1) {

@@ -28,6 +28,7 @@ public class GrannySceneAnimator : SceneAnimator {
                 return EndType.good;
             }
         } else if (gptResponse.rating > RATING_DEAD_ZONE) {
+            AudioManager.Instance.PlayMoveCloserSound();
             if (currentIndex > 0) {
                 MoveToIndex(currentIndex - 1);
             } else {
