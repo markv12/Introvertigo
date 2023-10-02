@@ -65,46 +65,55 @@ export class GameServer {
         const stream = req.body as ReadableStream<{
           messages: GameMessage[]
         }>
-        let bodyAsText = await Bun.readableStreamToText(
-          stream,
-        )
-        bodyAsText = bodyAsText.replace(/^messages=/, '')
         try {
-          bodyAsText = decodeURIComponent(bodyAsText)
-        } catch (e) {
-          c.sub('uri decode unnecessary')
-        }
+          let bodyAsText = await Bun.readableStreamToText(
+            stream,
+          )
+          bodyAsText = bodyAsText.replace(/^messages=/, '')
 
-        // c.log(`got body`, bodyAsText)
-        try {
-          let body:
-            | { messages: GameMessage[] }
-            | undefined = JSON.parse(bodyAsText)
+          try {
+            bodyAsText = decodeURIComponent(bodyAsText)
+          } catch (e) {
+            c.sub('uri decode unnecessary')
+          }
 
-          // c.log(`parsed body`, body)
+          // c.log(`got body`, bodyAsText)
+          try {
+            let body:
+              | { messages: GameMessage[] }
+              | undefined = JSON.parse(bodyAsText)
 
-          if (!body?.messages?.length) {
+            // c.log(`parsed body`, body)
+
+            if (!body?.messages?.length) {
+              return generateHTTPResponse(
+                `invalid body value`,
+                400,
+              )
+            }
+
+            const gameResponse = await getGameResponse(
+              body?.messages,
+            )
+            c.sub(
+              `got response in ${c.msToTimeString(
+                Date.now() - startedAt,
+              )}`,
+            )
             return generateHTTPResponse(
-              `invalid body value`,
+              JSON.stringify(gameResponse),
+            )
+          } catch (e) {
+            c.error(e)
+            return generateHTTPResponse(
+              JSON.stringify({ error: 'invalid json' }),
               400,
             )
           }
-
-          const gameResponse = await getGameResponse(
-            body?.messages,
-          )
-          c.sub(
-            `got response in ${c.msToTimeString(
-              Date.now() - startedAt,
-            )}`,
-          )
-          return generateHTTPResponse(
-            JSON.stringify(gameResponse),
-          )
         } catch (e) {
-          c.error(e, await Bun.readableStreamToText(stream))
+          c.error(e)
           return generateHTTPResponse(
-            JSON.stringify({ error: 'invalid json' }),
+            JSON.stringify({ error: 'invalid body' }),
             400,
           )
         }
