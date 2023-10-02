@@ -57,7 +57,7 @@ Get out of the conversation without being rude!`,
 
     car: {
       probability: 1,
-      backstory: `A bland, middle-aged coworker is giving you a lift. It's a long drive, and as soon as you set off he starts... Well, you'll see.
+      backstory: `A bland, middle-aged coworker is giving you a lift. It's a long drive, and as soon as you set off, he starts... Well, you'll see.
 
 Get out of the conversation without destroying your professional relationship!`,
       systemIntro: `You are a 65-year-old coworker of the user, and you are giving them a lift. You are WAY too into Zoomer culture and slang (words like pog, sheesh, drip, rizz, fit, no cap, squad, etc). You NEVER use it correctly. You are ONLY interested in talking about Zoomer stuff.`,
@@ -93,8 +93,8 @@ Get out of the conversation without destroying your professional relationship!`,
         'sick',
       ],
       winMessages: [
-        "I guess I'm a little too hip-hop for some . You'll get there one day!",
-        'Yeah... Oh! Is that Cardi on the radio?',
+        "I guess I'm a little too hip-hop for some. You'll get there one day!",
+        'Yeah... Oh! Is that Iced Spice on the radio?',
         'I think my daughters are having a bad influence on me...',
       ],
       loseMessages: [
