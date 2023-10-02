@@ -61,6 +61,7 @@ export class GameServer {
         req.method === 'POST' &&
         url.pathname.endsWith('/response')
       ) {
+        const startedAt = Date.now()
         const stream = req.body as ReadableStream<{
           messages: GameMessage[]
         }>
@@ -89,10 +90,16 @@ export class GameServer {
             )
           }
 
+          const gameResponse = await getGameResponse(
+            body?.messages,
+          )
+          c.sub(
+            `got response in ${c.msToTimeString(
+              Date.now() - startedAt,
+            )}`,
+          )
           return generateHTTPResponse(
-            JSON.stringify(
-              await getGameResponse(body?.messages),
-            ),
+            JSON.stringify(gameResponse),
           )
         } catch (e) {
           c.error(e, await Bun.readableStreamToText(stream))
