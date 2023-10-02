@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -291,16 +291,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4893559348384833724, guid: d55a27c9d0664af40ac0fd0211b1ff4f, type: 3}
       propertyPath: m_Name
-      value: BGAudioHell
+      value: BGMusic
       objectReference: {fileID: 0}
     - target: {fileID: 4893559348384833725, guid: d55a27c9d0664af40ac0fd0211b1ff4f, type: 3}
       propertyPath: m_Volume
-      value: 0.4
+      value: 0.229
       objectReference: {fileID: 0}
     - target: {fileID: 4893559348384833725, guid: d55a27c9d0664af40ac0fd0211b1ff4f, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: a6136206220a646f9838153c465d2160, type: 3}
+      objectReference: {fileID: 8300000, guid: c59500e998c8c4f02af6c3ae99ea95e1, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d55a27c9d0664af40ac0fd0211b1ff4f, type: 3}
 --- !u!1 &581582373
@@ -1175,7 +1175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTalkClip: {fileID: 8300000, guid: bcdd239b7fd1d4c15ad715e37aed91f1, type: 3}
-  enemyTalkVolume: 0.3
+  enemyTalkVolume: 0.401
   enemyPitchVariation: 1
   enemyPog: {fileID: 21300000, guid: ee6feec8cca7a4d25839686c37b42dfa, type: 3}
   goodEndSprite: {fileID: 21300000, guid: 687c4fd4dfa950641b7e6aafe1d19e69, type: 3}
@@ -1278,7 +1278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4893559348384833725, guid: d55a27c9d0664af40ac0fd0211b1ff4f, type: 3}
       propertyPath: m_Volume
-      value: 0.14
+      value: 0.118
       objectReference: {fileID: 0}
     - target: {fileID: 4893559348384833725, guid: d55a27c9d0664af40ac0fd0211b1ff4f, type: 3}
       propertyPath: m_audioClip
