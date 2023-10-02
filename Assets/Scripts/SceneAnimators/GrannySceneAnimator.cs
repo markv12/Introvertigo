@@ -40,6 +40,7 @@ public class GrannySceneAnimator : SceneAnimator {
     private Coroutine cameraRoutine;
     private void MoveToIndex(int index) {
         currentIndex = index;
+        IndexAudio(currentIndex);
         GrannySceneStep step = steps[index];
 
         Vector3 cameraStartPos = cameraT.position;

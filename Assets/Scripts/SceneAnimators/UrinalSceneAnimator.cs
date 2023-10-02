@@ -52,6 +52,7 @@ public class UrinalSceneAnimator : SceneAnimator {
     private Coroutine cameraRoutine;
     private void MoveToIndex(int index) {
         currentIndex = index;
+        IndexAudio(currentIndex);
         UrinalSceneStep step = steps[index];
         playerRenderer.sprite = step.playerSprite;
         Vector3 enemyStartPos = enemyT.position;

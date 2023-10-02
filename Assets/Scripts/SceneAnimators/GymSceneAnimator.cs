@@ -50,6 +50,7 @@ public class GymSceneAnimator : SceneAnimator {
     private Coroutine enemyRoutine;
     private void MoveToIndex(int index) {
         currentIndex = index;
+        IndexAudio(currentIndex);
         GymSceneStep step = steps[index];
         Vector3 enemyStartPos = enemyT.position;
         Vector3 enemyEndPos = step.enemyPos.position;
