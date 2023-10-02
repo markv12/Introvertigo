@@ -8,6 +8,7 @@ export class GameServer {
   id: string
   startedAt = Date.now()
   server: ReturnType<typeof Bun.serve>
+  requestCounts = {} as Record<string, number>
 
   constructor({
     port = 5054,
@@ -38,7 +39,22 @@ export class GameServer {
   serverInitData: ServeOptions = {
     fetch: async (req, server) => {
       const url = new URL(req.url)
-      c.sub('\n' + req.method + ' ' + url.pathname)
+      this.requestCounts[url.pathname] =
+        (this.requestCounts[url.pathname] || 0) + 1
+      const hoursActive = c.r2(
+        (Date.now() - this.startedAt) / 1000 / 60 / 60,
+      )
+      const perHour = c.r2(
+        this.requestCounts[url.pathname] / hoursActive,
+      )
+      if (req.method !== 'OPTIONS')
+        c.sub(
+          '\n\n' +
+            req.method +
+            ' ' +
+            url.pathname +
+            ` (${perHour}/hr in ${hoursActive} hrs)`,
+        )
 
       if (url.pathname.endsWith('/ping'))
         return generateHTTPResponse(`pong`)
