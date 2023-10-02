@@ -164,7 +164,7 @@ Get out of the conversation without hurting her feelings!`,
       backstory: `You're taking a train across town. Your headphones are on; you're grooving. Suddenly, a stranger comes into your field of view. She doesn't seem to blink, and she seems to be expecting a response from you. Reluctantly, you take off your headphones.
 
 Put an end to the conversation without being rude!`,
-      systemIntro: `You are a happy-go-lucky lady sitting near the user on a train. You're absolutely oblivious to the fact that they don't want to speak to you. You speak in a British accent, and you're slurring your words.`,
+      systemIntro: `You are a happy-go-lucky lady sitting near the user on a train. You're VERY curious about what the user is up to. You speak in a British accent.`,
       firstMessage: `How 'bout that weather, eh?`,
       hiddenTriggerWords: ['drawing', 'beaches', 'birds'],
       userRequiredWords: [
