@@ -295,7 +295,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4893559348384833725, guid: d55a27c9d0664af40ac0fd0211b1ff4f, type: 3}
       propertyPath: m_Volume
-      value: 0.05
+      value: 0.062
       objectReference: {fileID: 0}
     - target: {fileID: 4893559348384833725, guid: d55a27c9d0664af40ac0fd0211b1ff4f, type: 3}
       propertyPath: m_audioClip
@@ -1175,7 +1175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyTalkClip: {fileID: 8300000, guid: bcdd239b7fd1d4c15ad715e37aed91f1, type: 3}
-  enemyTalkVolume: 0.401
+  enemyTalkVolume: 0.257
   enemyPitchVariation: 1
   enemyPog: {fileID: 21300000, guid: ee6feec8cca7a4d25839686c37b42dfa, type: 3}
   goodEndSprite: {fileID: 21300000, guid: 687c4fd4dfa950641b7e6aafe1d19e69, type: 3}
@@ -1278,7 +1278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4893559348384833725, guid: d55a27c9d0664af40ac0fd0211b1ff4f, type: 3}
       propertyPath: m_Volume
-      value: 0.03
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 4893559348384833725, guid: d55a27c9d0664af40ac0fd0211b1ff4f, type: 3}
       propertyPath: m_audioClip
