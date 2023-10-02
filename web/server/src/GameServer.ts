@@ -123,18 +123,13 @@ const generateHTTPResponse = (
   message: ConstructorParameters<typeof Response>[0],
   status?: number,
 ): Response => {
-  const options: ResponseInit | undefined = status
-    ? { status }
-    : undefined
+  const options: ResponseInit = status ? { status } : {}
+  options.headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods':
+      'GET, POST, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  }
   const res = new Response(message, options)
-  applyCorsToHTTPResponse(res)
   return res
-}
-
-const applyCorsToHTTPResponse = (res: Response) => {
-  res.headers.set('Access-Control-Allow-Origin', '*')
-  res.headers.set(
-    'Access-Control-Allow-Methods',
-    'GET, POST, PUT, DELETE, OPTIONS',
-  )
 }
