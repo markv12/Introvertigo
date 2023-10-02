@@ -165,6 +165,7 @@ public class DialogueSystem : MonoBehaviour {
             } else {
                 GameFlowManager.RecordSceneResult(SceneHelper.CurrentScene, endType, totalMessagesUsed);
                 endScreen.ShowEnd(sceneAnimator.EndSprite(endType), GameRequestManager.CurrentScenario.EndText(endType), endType);
+                AudioManager.Instance.StopHeartBeat();
             }
         }
     }

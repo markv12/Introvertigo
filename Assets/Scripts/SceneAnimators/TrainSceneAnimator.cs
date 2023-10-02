@@ -53,6 +53,7 @@ public class TrainSceneAnimator : SceneAnimator {
     private Coroutine cameraRoutine;
     private void MoveToIndex(int index) {
         currentIndex = index;
+        IndexAudio(currentIndex);
         TrainSceneStep step = steps[index];
         playerRenderer.sprite = step.playerSprite;
         Vector3 enemyStartPos = enemyT.position;

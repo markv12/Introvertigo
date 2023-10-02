@@ -27,4 +27,12 @@ public abstract class SceneAnimator : MonoBehaviour {
                 return null;
         }
     }
+
+    protected void IndexAudio(int index) {
+        if (index == 0) {
+            AudioManager.Instance.PlayHeartBeat();
+        } else {
+            AudioManager.Instance.StopHeartBeat();
+        }
+    }
 }

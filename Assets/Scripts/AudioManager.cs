@@ -20,6 +20,10 @@ public class AudioManager : MonoBehaviour {
     [Header("Sound Effects")]
     public AudioSource[] audioSources;
 
+    [Range(0f, 1f)]
+    public float heartBeatVolume = 1f;
+    public AudioSource heartBeatSource;
+
     private int audioSourceIndex = 0;
 
     public AudioClip talk;
@@ -57,6 +61,24 @@ public class AudioManager : MonoBehaviour {
         return result;
     }
 
+    public void PlayHeartBeat() {
+        this.EnsureCoroutineStopped(ref heartBeatFade);
+        heartBeatSource.volume = heartBeatVolume;
+        if (!heartBeatSource.isPlaying) {
+            heartBeatSource.Play();
+        }
+    }
+
+    private Coroutine heartBeatFade = null;
+    public void StopHeartBeat() {
+        this.EnsureCoroutineStopped(ref heartBeatFade);
+        float startVolume = heartBeatSource.volume;
+        heartBeatFade = this.CreateAnimationRoutine(0.3f, (float progress) => {
+            heartBeatSource.volume = Mathf.Lerp(startVolume, 0, progress);
+        }, () => {
+            heartBeatSource.Stop();
+        });
+    }
 
     private readonly List<BGAudio> activeBGAudio = new List<BGAudio>(4);
     public void RegisterBGAudio(BGAudio bgAudio) {
