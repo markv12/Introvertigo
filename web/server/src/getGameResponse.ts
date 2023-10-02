@@ -51,7 +51,7 @@ export default async function getGameResponse(
       secondLatestMessageText,
       fullContext,
     ),
-    getGptResponse(contextToGiveChatGPT, 50),
+    getGptResponse(contextToGiveChatGPT, 35),
   ]
   const [rudeness, interest, reply] = await Promise.all(
     promises,
