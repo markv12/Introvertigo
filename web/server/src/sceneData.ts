@@ -60,7 +60,7 @@ Get out of the conversation without being rude!`,
       backstory: `A random coworker is giving you a lift. It's a long drive, and as soon as you set off he starts diving deep into his personal life.
 
 Get out of the conversation without destroying your professional relationship!`,
-      systemIntro: `You are a coworker of the user, and you are giving them a lift. You are WAY too open about your marital problems, and that's all you're interested in talking about, no matter what. You speak in a New York accent.`,
+      systemIntro: `You are a coworker of the user, and you are giving them a lift. You are WAY too open about your marital problems, and that's ALL you're interested in talking about, no matter what. You speak in a New York accent.`,
       firstMessage: `Hey pal, can I tell you something in confidence? I'm having trouble with my partner.`,
       hiddenTriggerWords: [
         'rings',
