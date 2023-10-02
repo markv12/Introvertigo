@@ -10,6 +10,7 @@ interface GameScene {
   key: SceneKey
   messages: GameMessage[]
 }
+
 interface GameSceneInitData extends GameScene {
   backstory: string
   requiredWords: string[]
@@ -24,6 +25,7 @@ interface GameGPTResponse {
   rudeness: number
   rating: number
 }
+
 interface GameGPTResponseError {
   error: string
 }
