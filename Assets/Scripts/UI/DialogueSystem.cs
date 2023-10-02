@@ -184,7 +184,7 @@ public class DialogueSystem : MonoBehaviour {
     }
 
     private void PlayPlayerTalkSound(float pitchCenter) {
-        AudioManager.Instance.PlayPlayerTalkSound(1.0f, pitchCenter);
+        AudioManager.Instance.PlayPlayerTalkSound(0.6f, pitchCenter);
     }
 
     private void PlayEnemyTalkSound(float pitchCenter) {

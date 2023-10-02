@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class GameFlowManager {
-    private static readonly Scenes[] sceneOrder = new Scenes[] { Scenes.URINAL_SCENE, Scenes.GRANNY_SCENE, Scenes.GYM_SCENE, Scenes.TRAIN_SCENE };
+    private static readonly Scenes[] sceneOrder = new Scenes[] { Scenes.URINAL_SCENE, Scenes.GRANNY_SCENE, Scenes.GYM_SCENE, Scenes.TRAIN_SCENE, Scenes.CAR_SCENE };
     public static readonly List<GameResult> gameResults = new List<GameResult>(8);
 
     public static float startTime;
