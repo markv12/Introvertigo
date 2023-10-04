@@ -56,9 +56,10 @@ public class DialogueSystem : MonoBehaviour {
     }
 
     private bool hasRequiredWord = false;
+    private const int MIN_WORDS = 5;
     private void InputValueChanged(string newText) {
         hasRequiredWord = HasRequiredWord(newText, out string indicatorText);
-        bool wordCountLongEnough = DialogueUtility.WordCount(newText) >= 5;
+        bool wordCountLongEnough = DialogueUtility.WordCount(newText) >= MIN_WORDS;
         enterButton.gameObject.SetActive(wordCountLongEnough && hasRequiredWord);
         requiredWordsText.text = indicatorText;
         shortWarning.SetActive(!string.IsNullOrEmpty(newText) && !wordCountLongEnough);
@@ -92,7 +93,7 @@ public class DialogueSystem : MonoBehaviour {
     }
 
     private void Update() {
-        if (InputUtil.GetKeyDown(UnityEngine.InputSystem.Key.Enter) && hasRequiredWord) {
+        if (InputUtil.GetKeyDown(UnityEngine.InputSystem.Key.Enter) && hasRequiredWord && DialogueUtility.WordCount(mainInputField.text) >= MIN_WORDS) {
             Enter();
         }
         if (mainInputField.gameObject.activeInHierarchy && !mainInputField.isFocused) {
