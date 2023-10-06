@@ -267,9 +267,9 @@ End the interaction without making it awkward!`,
 
     gym: {
       probability: 1,
-      backstory: `Just as you start your last set of bench presses at the gym, you hear a voice from overhead. Your arms tremble, but you're stuck there until they finish talking and help you put the bar back!
+      backstory: `Just as you start your last set of bench presses at the gym, you hear a voice from overhead. Your arms tremble, but you're stuck there until they finish talking!
 
-Get out of the conversation before you run out of stamina!`,
+Get out of the conversation as fast as possible!`,
       systemIntro: `You are a brand new gym goer who strikes up a conversation with the user. You're VERY excited to be there and TOTALLY oblivious to the user's discomfort and desire to leave. You give lots of unwarranted weightlifting advice. You have a thick New Jersey accent.`,
       firstMessage: `Wow, that looks heavy! Have you been lifting long?`,
       hiddenTriggerWords: ['shoes', 'metal', 'cooking'],

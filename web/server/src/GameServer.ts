@@ -48,11 +48,9 @@ export class GameServer {
       )
       if (req.method !== 'OPTIONS')
         c.sub(
-          '\n\n' +
-            req.method +
-            ' ' +
-            url.pathname +
-            ` (${perHour}/hr in ${c.r2(hoursActive)} hrs)`,
+          `${req.method} ${
+            url.pathname
+          } (${perHour}/hr in ${c.r2(hoursActive)} hrs)`,
         )
 
       if (url.pathname.endsWith('/ping'))
