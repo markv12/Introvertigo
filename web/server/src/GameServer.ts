@@ -75,6 +75,7 @@ export class GameServer {
         url.pathname.includes('/response')
       ) {
         c.l(
+          url,
           url.searchParams.get('password'),
           url.searchParams.get('password') ===
             process.env.GAME_PASSWORD,
