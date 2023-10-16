@@ -72,8 +72,9 @@ export class GameServer {
 
       if (
         req.method === 'POST' &&
-        url.pathname.endsWith('/response')
+        url.pathname.includes('/response')
       ) {
+        c.l(url)
         const startedAt = Date.now()
         const stream = req.body as ReadableStream<{
           messages: GameMessage[]
