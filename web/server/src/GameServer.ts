@@ -75,7 +75,16 @@ export class GameServer {
         url.pathname.includes('/response')
       ) {
         const pw = url.pathname.split('/response').pop()
-        c.l(url, pw, pw === process.env.GAME_PASSWORD)
+        const passwordIsCorrect =
+          pw === process.env.GAME_PASSWORD
+
+        if (!passwordIsCorrect) {
+          return generateHTTPResponse(
+            `invalid password`,
+            400,
+          )
+        }
+
         const startedAt = Date.now()
         const stream = req.body as ReadableStream<{
           messages: GameMessage[]
