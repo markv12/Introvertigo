@@ -74,7 +74,11 @@ export class GameServer {
         req.method === 'POST' &&
         url.pathname.includes('/response')
       ) {
-        c.l(url)
+        c.l(
+          url.searchParams.get('password'),
+          url.searchParams.get('password') ===
+            process.env.GAME_PASSWORD,
+        )
         const startedAt = Date.now()
         const stream = req.body as ReadableStream<{
           messages: GameMessage[]
