@@ -68,8 +68,7 @@ public class GameRequestManager : Singleton<GameRequestManager> {
         List<GameMessage> messages = currentScenario.messages == null ? new List<GameMessage>() : currentScenario.messages.ToList();
         messages.Add(new GameMessage() { content = newMessage, role = "user" });
         GameRequest gr = new GameRequest() { messages = messages.ToArray() };
-
-        StartCoroutine(RestUtility.PostJSON("https://p.jasperstephenson.com/ld54/responseasdf", JsonUtility.ToJson(gr), (success, response) => {
+        StartCoroutine(RestUtility.PostJSON("https://p.jasperstephenson.com/ld54/response" + StartScreen.password, JsonUtility.ToJson(gr), (success, response) => {
             GPTResponse rr = JsonUtility.FromJson<GPTResponse>(response);
             currentScenario.messages = rr.messages;
             onComplete(rr);
