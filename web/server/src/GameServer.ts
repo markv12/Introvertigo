@@ -4,6 +4,15 @@ import generateScene from './generateScene'
 import getGameResponse from './getGameResponse'
 import sceneData from './sceneData'
 
+let passwords: string[] = []
+try {
+  passwords = JSON.parse(
+    process.env.GAME_PASSWORDS as string,
+  )
+} catch (e) {
+  c.error(e)
+}
+
 export class GameServer {
   id: string
   startedAt = Date.now()
@@ -74,9 +83,10 @@ export class GameServer {
         req.method === 'POST' &&
         url.pathname.includes('/response')
       ) {
-        const pw = url.pathname.split('/response').pop()
-        const passwordIsCorrect =
-          pw === process.env.GAME_PASSWORD
+        const pw = url.pathname
+          .split('/response')
+          .pop() as string
+        const passwordIsCorrect = passwords.includes(pw)
 
         if (!passwordIsCorrect) {
           return generateHTTPResponse(
@@ -84,6 +94,10 @@ export class GameServer {
             400,
           )
         }
+        c.log(
+          'gray',
+          `password is correct: ${pw?.slice(2)}`,
+        )
 
         const startedAt = Date.now()
         const stream = req.body as ReadableStream<{
